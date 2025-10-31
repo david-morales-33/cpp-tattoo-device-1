@@ -1,15 +1,17 @@
 #include <Arduino.h>
+#include <core/views/main_view.h>
 #include <infrastructure/display.h>
 
 Display display;
+MainView mainView(display);
+
+int ESTADO[8] = { -29, 3, 35, 67, 99, 131, 0, 1 };
 
 void setup() {
-    display.begin();    
+    display.begin();
 }
-
 void loop() {
-    display.clear();
-    display.drawText(0,10,u8g2_font_ncenB08_tr,"Hola, Test");
-    display.render();
-    delay(1000);
+    
+    mainView.show(ESTADO);
+    delay(500);
 }
