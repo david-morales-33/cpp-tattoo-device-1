@@ -1,4 +1,4 @@
-struct DataMain {
+struct MainData {
   int hour = 0;
   int minute = 0;
   int day = 0;
@@ -6,4 +6,4 @@ struct DataMain {
   int year = 0;
   int temp = 0;
   const char* week_day = "";
-} inf_main;
+} MainData;
