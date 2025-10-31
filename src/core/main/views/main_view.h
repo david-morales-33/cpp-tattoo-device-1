@@ -30,26 +30,30 @@ public:
         display.drawBitmap(positions[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
         display.drawBitmap(positions[4], 35, WIDTH, HEIGHT, RESET_BITS);
         display.drawBitmap(positions[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
-        
+
         // --- Recuadros principales ---
         display.drawFrame(2, 34, 28, 28, 3);
         display.drawFrame(34, 34, 28, 28, 3);
         display.drawFrame(66, 34, 28, 28, 3);
         display.drawFrame(98, 34, 28, 28, 3);
-        
+
         display.drawFrame(0, 0, 63, 31, 1);
         display.drawFrame(65, 0, 63, 31, 1);
         display.drawBox(1, 1, 61, 30);
-        
+
         // --- Fecha y hora ---
         display.setColor(0);
-        display.drawText(2, 27, "09/04/2021", u8g2_font_6x10_tf, 0);
-        display.drawText(2, 16, "17:37", u8g2_font_luRS14_tf, 0);
-        
+        display.setFont(u8g2_font_6x10_tf);
+        display.drawText(2, 27, "09/04/2021");
+        display.setFont(u8g2_font_luRS14_tf);
+        display.drawText(2, 16, "17:37");
+
         // --- Temperatura y día ---
         display.setColor(1);
-        display.drawText(86, 16, "23c", u8g2_font_luRS14_tf);
-        display.drawText(80, 27, "Monday", u8g2_font_6x10_tf);
+        display.setFont(u8g2_font_luRS14_tf);
+        display.drawText(86, 16, "23c");
+        display.setFont(u8g2_font_6x10_tf);
+        display.drawText(80, 27, "Monday");
 
         // --- Ícono de clima ---
         display.drawGlyph(68, 18, u8g2_font_open_iconic_all_2x_t, 0x0103);

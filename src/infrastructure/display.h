@@ -17,22 +17,30 @@ public:
 
     void render() { u8g2.sendBuffer(); }
 
+    void setCursor(int x, int y) { u8g2.setCursor(x, y); }
+    
+    void print(double txt, int c = 2) { u8g2.print(txt, c); };
+
     void setColor(int color) { u8g2.setDrawColor(color); }
+
+    void setFontMode(int mode) { u8g2.setFontMode(mode); }
 
     void drawFrame(int x, int y, int w, int h, int r = 0) { u8g2.drawRFrame(x, y, w, h, r); }
 
     void drawBox(int x, int y, int w, int h) { u8g2.drawBox(x, y, w, h); }
 
+    void drawLine(int x1, int y1, int x2, int y2) { u8g2.drawLine(x1, y1, x2, y2); }
+
+    void setFont(const uint8_t *font = u8g2_font_6x10_tf) { u8g2.setFont(font); }
+
+    void drawText(int x, int y, const char *text) { u8g2.drawStr(x, y, text); }
+
+    void drawTriangle(int x0, int y0, int x1, int y1, int x2, int y2) { u8g2.drawTriangle(x0, y0, x1, y1, x2, y2); }
+
     void drawBitmap(int x, int y, int width, int height, const uint8_t *bitmap, int mode = 1)
     {
         u8g2.setBitmapMode(mode);
         u8g2.drawXBMP(x, y, width, height, bitmap);
-    }
-
-    void drawText(int x, int y, const char *text, const uint8_t *font = u8g2_font_6x10_tf, int color = 1)
-    {
-        u8g2.setFont(font);
-        u8g2.drawStr(x, y, text);
     }
 
     void drawGlyph(int x, int y, const uint8_t *font, uint16_t glyph)
