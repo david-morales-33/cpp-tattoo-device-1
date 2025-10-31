@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <core/views/main_view.h>
+#include <core/main/views/main_view.h>
 #include <infrastructure/display.h>
 
 Display display;

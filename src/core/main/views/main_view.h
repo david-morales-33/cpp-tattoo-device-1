@@ -1,14 +1,14 @@
 #pragma once
 
 #include <infrastructure/display.h>
-#include <persistence/data_main.h>
+#include <persistence/main/data.h>
 #include <infrastructure/icons_size.h>
-#include <core/icons/bluethooth.h>
-#include <core/icons/device_main.h>
-#include <core/icons/properties.h>
-#include <core/icons/execute.h>
-#include <core/icons/reset.h>
-#include <core/icons/settings.h>
+#include <core/main/icons/bluethooth.h>
+#include <core/main/icons/device.h>
+#include <core/main/icons/properties.h>
+#include <core/main/icons/operation.h>
+#include <core/main/icons/reset.h>
+#include <core/main/icons/settings.h>
 
 class MainView
 {
@@ -25,9 +25,9 @@ public:
         // --- Dibujo de íconos principales ---
         display.setColor(1);
         display.drawBitmap(positions[0], 35, WIDTH, HEIGHT, BLUETOOTH_BITS);
-        display.drawBitmap(positions[1], 35, WIDTH, HEIGHT, DEVICE_MAIN_BITS);
+        display.drawBitmap(positions[1], 35, WIDTH, HEIGHT, DEVICE_BITS);
         display.drawBitmap(positions[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
-        display.drawBitmap(positions[3], 35, WIDTH, HEIGHT, EXECUTE_BITS);
+        display.drawBitmap(positions[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
         display.drawBitmap(positions[4], 35, WIDTH, HEIGHT, RESET_BITS);
         display.drawBitmap(positions[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
         
