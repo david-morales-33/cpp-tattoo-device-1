@@ -4,6 +4,7 @@
 #include <infrastructure/display.h>
 #include <core/operation/views/operation_view.h>
 #include <persistence/main/data.h>
+#include <core/properties/views/properties_view.h>
 
 Display display;
 MainView mainView(display);
@@ -20,6 +21,8 @@ LetterData data[7] = {
     {"SETTINGS", 38},
 };
 
+PropertiesView propertiesView(display);
+
 int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
 
 void setup()
@@ -31,7 +34,7 @@ void loop()
     display.firstPage();
     do
     {
-        letterView.show(ESTADO, data[0]);
+        propertiesView.show();
     } while (display.nextPage());
 
     delay(500);
