@@ -11,6 +11,10 @@ public:
     Display()
         : u8g2(U8G2_R0, LCD_CLOCK, LCD_DATA, LCD_CS, LCD_RESET) {}
 
+    void firstPage() { u8g2.firstPage(); }
+
+    uint8_t nextPage() { return u8g2.nextPage(); }
+
     void begin() { u8g2.begin(); }
 
     void clear() { u8g2.clearBuffer(); }
@@ -18,8 +22,8 @@ public:
     void render() { u8g2.sendBuffer(); }
 
     void setCursor(int x, int y) { u8g2.setCursor(x, y); }
-    
-    void print(double txt, int c = 2) { u8g2.print(txt, c); };
+
+    void print(const String &s) { u8g2.print(s); };
 
     void setColor(int color) { u8g2.setDrawColor(color); }
 

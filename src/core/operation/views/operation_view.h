@@ -135,13 +135,13 @@ private:
         if (value < 10)
         {
             display.setCursor(46, 40);
-            display.print(value);
+            display.print(String(value));
             display.drawText(93, 40, "v");
         }
         else
         {
             display.setCursor(36, 40);
-            display.print(value);
+            display.print(String(value));
             display.drawText(95, 40, "v");
         }
     }
@@ -173,12 +173,12 @@ private:
         }
         display.drawText(40, 26, "Amp--");
         display.setCursor(74, 26);
-        display.print(0.5);
+        display.print(String(0.5));
         display.drawText(99, 26, "A");
 
         display.drawText(40, 41, "Duty--");
         display.setCursor(76, 41);
-        display.print(45);
+        display.print(String(45));
         display.drawText(90, 41, "%");
     }
 
@@ -210,7 +210,7 @@ public:
 
         setIcons();
 
-        //mainWindow(9.3);
+        // mainWindow(9.3);
         infoWindow(1);
 
         display.render();
