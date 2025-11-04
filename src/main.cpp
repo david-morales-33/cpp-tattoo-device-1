@@ -8,6 +8,7 @@
 #include <core/reset/views/reset_view.h>
 #include <core/device_configuration/views/device_configuration_view.h>
 #include <core/device_configuration/views/device_configuration_selector.h>
+#include <core/device_configuration/views/device_configuration_window.h>
 #include <persistence/device_configuration/data.h>
 
 Display display;
@@ -30,6 +31,8 @@ VoltageData voltages = {{{10.5, 3.4, 7.7, 9.5},
 
 DeviceConfigurationView deviceConfView(display, voltages);
 DeviceConfigurationSelector deviceConfSelector(display, voltages);
+DeviceConfigurationWindow deviceConfigWindow(display, voltages);
+
 PropertiesView propertiesView(display);
 ResetView resetView(display);
 
@@ -44,7 +47,7 @@ void loop()
     display.firstPage();
     do
     {
-        deviceConfSelector.show(1,3);
+        deviceConfigWindow.show(0, 0, 1);
     } while (display.nextPage());
 
     delay(500);

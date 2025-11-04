@@ -7,10 +7,9 @@ class DeviceConfigurationSelector : public DeviceConfigurationView
 {
 private:
     Display &display;
-    VoltageData data;
 
 public:
-    explicit DeviceConfigurationSelector(Display &disp, VoltageData volt) : DeviceConfigurationView(disp, volt), display(disp), data(volt) {}
+    explicit DeviceConfigurationSelector(Display &disp, VoltageData volt) : DeviceConfigurationView(disp, volt), display(disp) {}
 
     void show(int dev_selector = 0, int val_selector = 0)
     {
