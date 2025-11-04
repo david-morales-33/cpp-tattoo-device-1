@@ -1,5 +1,8 @@
+#pragma once
+
 #include <infrastructure/display.h>
 #include <core/main/views/main_view.h>
+#include <persistence/main/data.h>
 
 class ResetView : public MainView
 {
@@ -10,7 +13,7 @@ private:
 public:
     explicit ResetView(Display &disp) : MainView(disp), display(disp) {};
 
-    void show(int slider[7])
+    void show(SliderData slider)
     {
         MainView::show(slider);
         display.setFontMode(1);

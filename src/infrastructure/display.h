@@ -29,6 +29,8 @@ public:
 
     void setFontMode(int mode) { u8g2.setFontMode(mode); }
 
+    void setBitmapMode(int mode = 0) { u8g2.setBitmapMode(mode); }
+
     void drawFrame(int x, int y, int w, int h, int r = 0) { u8g2.drawRFrame(x, y, w, h, r); }
 
     void drawBox(int x, int y, int w, int h) { u8g2.drawBox(x, y, w, h); }

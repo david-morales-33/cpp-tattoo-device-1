@@ -10,6 +10,7 @@
 #include <core/device_configuration/views/device_configuration_selector.h>
 #include <core/device_configuration/views/device_configuration_window.h>
 #include <persistence/device_configuration/data.h>
+#include <core/settings/views/settings_view.h>
 
 Display display;
 MainView mainView(display);
@@ -32,11 +33,12 @@ VoltageData voltages = {{{10.5, 3.4, 7.7, 9.5},
 DeviceConfigurationView deviceConfView(display, voltages);
 DeviceConfigurationSelector deviceConfSelector(display, voltages);
 DeviceConfigurationWindow deviceConfigWindow(display, voltages);
+SettingsView settingView(display, "SOUND");
 
 PropertiesView propertiesView(display);
 ResetView resetView(display);
-
-int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
+//int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
+SliderData slider;
 
 void setup()
 {
@@ -47,7 +49,7 @@ void loop()
     display.firstPage();
     do
     {
-        deviceConfigWindow.show(0, 0, 1);
+        settingView.show(slider);
     } while (display.nextPage());
 
     delay(500);

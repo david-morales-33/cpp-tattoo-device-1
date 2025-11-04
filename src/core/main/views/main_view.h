@@ -18,16 +18,16 @@ private:
 public:
     explicit MainView(Display &disp) : display(disp) {}
 
-    void show(int slider[8])
+    void show(SliderData slider)
     {
         // --- Dibujo de íconos principales ---
         display.setColor(1);
-        display.drawBitmap(slider[0], 35, WIDTH, HEIGHT, BLUETOOTH_BITS);
-        display.drawBitmap(slider[1], 35, WIDTH, HEIGHT, DEVICE_BITS);
-        display.drawBitmap(slider[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
-        display.drawBitmap(slider[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
-        display.drawBitmap(slider[4], 35, WIDTH, HEIGHT, RESET_BITS);
-        display.drawBitmap(slider[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
+        display.drawBitmap(slider.icons_slider[0], 35, WIDTH, HEIGHT, BLUETOOTH_BITS);
+        display.drawBitmap(slider.icons_slider[1], 35, WIDTH, HEIGHT, DEVICE_BITS);
+        display.drawBitmap(slider.icons_slider[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
+        display.drawBitmap(slider.icons_slider[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
+        display.drawBitmap(slider.icons_slider[4], 35, WIDTH, HEIGHT, RESET_BITS);
+        display.drawBitmap(slider.icons_slider[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
 
         // --- Recuadros principales ---
         display.drawFrame(2, 34, 28, 28, 3);
@@ -57,6 +57,6 @@ public:
         display.drawGlyph(68, 18, u8g2_font_open_iconic_all_2x_t, 0x0103);
 
         // --- Selector de íconos ---
-        display.highlightBox((slider[6] * 32), 32, 32, 32);
+        display.highlightBox((slider.icons_selector * 32), 32, 32, 32);
     }
 };

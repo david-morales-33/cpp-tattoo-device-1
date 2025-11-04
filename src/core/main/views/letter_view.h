@@ -26,7 +26,7 @@ private:
 public:
     LetterView(Display &disp) : MainView(disp), display(disp) {}
 
-    void show(int slider[], LetterData data)
+    void show(SliderData slider, LetterData data)
     {
         MainView::show(slider);
 
