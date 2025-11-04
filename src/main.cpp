@@ -12,6 +12,7 @@
 #include <core/device_configuration/views/device_configuration_window.h>
 #include <persistence/device_configuration/data.h>
 #include <core/settings/views/settings_view.h>
+#include <core/settings/views/sound_view.h>
 
 Display display;
 MainView mainView(display);
@@ -39,6 +40,7 @@ SettingsView settingView(display, "SOUND");
 PropertiesView propertiesView(display);
 ResetView resetView(display);
 ResetConfirmationView resetConfirmView(display);
+SoundView soundView(display);
 
 // int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
 SliderData slider;
@@ -52,7 +54,7 @@ void loop()
     display.firstPage();
     do
     {
-        resetConfirmView.show(slider);
+        soundView.show(slider);
     } while (display.nextPage());
 
     delay(500);
