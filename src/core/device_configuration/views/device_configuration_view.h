@@ -1,3 +1,4 @@
+#pragma once 
 #include <infrastructure/display.h>
 #include <infrastructure/icons_size.h>
 #include <core/device_configuration/icons/device.h>
@@ -68,23 +69,16 @@ private:
         display.print(String(data.voltages[selector][3]));
     }
 
-    void setValuesSelector(int selector)
-    {
-        display.setFontMode(1);
-        display.setColor(0);
-        display.drawFrame(65, ((16 * selector) + 1), 62, 14, 1); // selector 2//ini=2-->16++
-    }
 
 public:
     explicit DeviceConfigurationView(Display &disp, VoltageData volt) : display(disp), data(volt) {}
 
-    void show(int dev_selector = 0, int val_selector = 0, bool val_state = LOW)
+    void show(int dev_selector = 0)
     {
         // maquinas
         setDevices(dev_selector);
         // voltajes
         setValues(dev_selector);
-        // selector de voltajes
-        if (val_state == HIGH) setValuesSelector(val_selector);
+
     }
 };

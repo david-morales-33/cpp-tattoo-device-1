@@ -6,7 +6,8 @@
 #include <persistence/main/data.h>
 #include <core/properties/views/properties_view.h>
 #include <core/reset/views/reset_view.h>
-#include <core/device_configuration/views/configure_devices_view.h>
+#include <core/device_configuration/views/device_configuration_view.h>
+#include <core/device_configuration/views/device_configuration_selector.h>
 #include <persistence/device_configuration/data.h>
 
 Display display;
@@ -28,6 +29,7 @@ VoltageData voltages = {{{10.5, 3.4, 7.7, 9.5},
                          {2.3, 5.6, 7.9, 8.2}}};
 
 DeviceConfigurationView deviceConfView(display, voltages);
+DeviceConfigurationSelector deviceConfSelector(display, voltages);
 PropertiesView propertiesView(display);
 ResetView resetView(display);
 
@@ -42,7 +44,7 @@ void loop()
     display.firstPage();
     do
     {
-        deviceConfView.show(1, 2);
+        deviceConfSelector.show(1,3);
     } while (display.nextPage());
 
     delay(500);
