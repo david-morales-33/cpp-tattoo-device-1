@@ -6,6 +6,7 @@
 #include <persistence/main/data.h>
 #include <core/properties/views/properties_view.h>
 #include <core/reset/views/reset_view.h>
+#include <core/reset/views/reset_confirmation_view.h>
 #include <core/device_configuration/views/device_configuration_view.h>
 #include <core/device_configuration/views/device_configuration_selector.h>
 #include <core/device_configuration/views/device_configuration_window.h>
@@ -37,7 +38,9 @@ SettingsView settingView(display, "SOUND");
 
 PropertiesView propertiesView(display);
 ResetView resetView(display);
-//int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
+ResetConfirmationView resetConfirmView(display);
+
+// int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
 SliderData slider;
 
 void setup()
@@ -49,7 +52,7 @@ void loop()
     display.firstPage();
     do
     {
-        settingView.show(slider);
+        resetConfirmView.show(slider);
     } while (display.nextPage());
 
     delay(500);
