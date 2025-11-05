@@ -3,17 +3,17 @@
 #include <infrastructure/display.h>
 #include <persistence/main/data.h>
 
-class SettingsOptionsView : public SettingsView
+class SettingsOptionsView : public MainView
 {
 
 private:
     Display &display;
 
 public:
-    explicit SettingsOptionsView(Display &disp) : SettingsView(disp, "CLOCK"), display(disp) {}
+    explicit SettingsOptionsView(Display &disp) : MainView(disp), display(disp) {}
     void show(SliderData slider, int selector = 0)
     {
-        SettingsView::show(slider);
+        MainView::show(slider);
         display.setFontMode(1);
         display.setColor(0);
         display.drawBox(30, 5, 70, 54);

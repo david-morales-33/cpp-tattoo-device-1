@@ -14,6 +14,7 @@
 #include <core/settings/views/settings_view.h>
 #include <core/settings/views/sound_view.h>
 #include <core/settings/views/settings_options_view.h>
+#include <core/linked_devices/views/linked_devices_view.h>
 
 Display display;
 MainView mainView(display);
@@ -43,6 +44,7 @@ ResetView resetView(display);
 ResetConfirmationView resetConfirmView(display);
 SoundView soundView(display);
 SettingsOptionsView optionsView(display);
+LinkedDevicesView likedView(display);
 
 // int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
 SliderData slider;
@@ -56,7 +58,7 @@ void loop()
     display.firstPage();
     do
     {
-        optionsView.show(slider);
+        likedView.show();
     } while (display.nextPage());
 
     delay(500);
