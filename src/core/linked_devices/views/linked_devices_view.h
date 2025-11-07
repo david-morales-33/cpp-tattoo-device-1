@@ -31,7 +31,7 @@ public:
         display.drawText(75, 11, "DEVICES");
 
         for (int i = 0; i < 3; i++)
-            setDevices(i, test_dev[i]);
+            setDevicesToPair(i, test_dev[i]);
 
         for (int i = 0; i < 1; i++)
             setLinkedDevices(i, test_link[i]);
@@ -41,7 +41,7 @@ public:
         setSelector(selector_test);
     }
 
-    void setDevices(int position = 0, const char *txt = "NONE")
+    void setDevicesToPair(int position = 0, const char *txt = "NONE")
     { // 16++
 
         display.setFontMode(1);

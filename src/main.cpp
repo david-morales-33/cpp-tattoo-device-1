@@ -15,6 +15,7 @@
 #include <core/settings/views/sound_view.h>
 #include <core/settings/views/settings_options_view.h>
 #include <core/linked_devices/views/linked_devices_view.h>
+#include <core/linked_devices/views/linked_devices_window.h>
 
 Display display;
 MainView mainView(display);
@@ -44,7 +45,10 @@ ResetView resetView(display);
 ResetConfirmationView resetConfirmView(display);
 SoundView soundView(display);
 SettingsOptionsView optionsView(display);
-LinkedDevicesView likedView(display);
+LinkedDevicesView linkedView(display);
+
+// LinkedDevicesWindow LinkedWind(display, "PAIR DEVICE?");
+LinkedDevicesWindow LinkedWind(display, "REMOVE DEVICE?");
 
 // int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
 SliderData slider;
@@ -58,7 +62,7 @@ void loop()
     display.firstPage();
     do
     {
-        likedView.show();
+        LinkedWind.show("MACH_DEV_1");
     } while (display.nextPage());
 
     delay(500);
