@@ -22,11 +22,14 @@ public:
             menu.left();
         if (input.isPressed(RIGHT))
             menu.right();
+        if (input.isPressed(ENTER))
+            hide();
         if (state)
             menu.render();
     }
 
     void hide() { state = LOW; }
     void show() { state = HIGH; }
+    bool menuState() { return state; }
     int getSelector() { return menu.getSelector(); }
 };
