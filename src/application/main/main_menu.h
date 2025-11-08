@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 #include <infrastructure/display.h>
 #include <core/main/views/letter_view.h>
 #include <persistence/main/data.h>
@@ -10,8 +10,8 @@ private:
     Display &display;
     LetterView view;
     SliderData slider;
-    LetterData options[7] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"RESET", 38}, {"SETTINGS", 38}};
-    int selector = 0;
+    LetterData options[7] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"RESET", 50}, {"SETTINGS", 42}};
+    int selector = 1;
 
 public:
     explicit MainMenu(Display &disp) : display(disp), view(disp) {}
@@ -40,9 +40,9 @@ public:
         }
     }
 
-    void ritgh()
+    void right()
     {
-        if (selector < 6)
+        if (selector < 5)
             selector = selector + 1;
 
         if (slider.icons_selector < 3)
@@ -55,5 +55,5 @@ public:
         }
     }
 
-    int getSlider() { return selector; }
+    int getSelector() { return selector; }
 };
