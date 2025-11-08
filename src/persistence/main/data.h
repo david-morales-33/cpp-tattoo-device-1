@@ -4,6 +4,7 @@ struct SliderData
 {
   int icons_slider[6] = {-29, 3, 35, 67, 99, 131};
   int icons_selector = 0;
+  int view_selector = 1;
 };
 
 struct MainData

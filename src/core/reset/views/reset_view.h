@@ -24,13 +24,13 @@ public:
         display.setFont(u8g_font_5x8);
         display.drawText(24, 18, "ARE YOU SURE TO");
         display.drawText(38, 30, "CONTINUE?");
-        display.drawFrame(12, 36, 50, 17, 3);
-        display.drawFrame(66, 36, 50, 17, 3);
-        display.drawBox(13, 37, 48, 15);
-        display.drawBox(67, 37, 48, 15);
+        display.drawFrame(12, 38, 50, 15, 3);
+        display.drawFrame(66, 38, 50, 15, 3);
+        display.drawBox(13, 39, 48, 13);
+        display.drawBox(67, 39, 48, 13);
 
         display.setColor(0);
-        display.setFont(u8g_font_6x13);
+        display.setFont(u8g_font_6x10);
         display.drawText(16, 49, "<ENTER>");
         display.drawText(73, 49, "<BACK>");
         display.setColor(1);

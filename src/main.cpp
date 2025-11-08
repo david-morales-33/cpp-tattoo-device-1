@@ -47,8 +47,8 @@ SoundView soundView(display);
 SettingsOptionsView optionsView(display);
 LinkedDevicesView linkedView(display);
 
-// LinkedDevicesWindow LinkedWind(display, "PAIR DEVICE?");
-LinkedDevicesWindow LinkedWind(display, "REMOVE DEVICE?");
+LinkedDevicesWindow LinkedWind(display, "PAIR DEVICE?");
+// LinkedDevicesWindow LinkedWind(display, "REMOVE DEVICE?");
 
 // int ESTADO[8] = {-29, 3, 35, 67, 99, 131, 0, 1};
 SliderData slider;
@@ -62,7 +62,7 @@ void loop()
     display.firstPage();
     do
     {
-        LinkedWind.show("MACH_DEV_1");
+        resetView.show(slider);
     } while (display.nextPage());
 
     delay(500);
