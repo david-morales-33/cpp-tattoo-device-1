@@ -7,6 +7,7 @@ class LinkedDevicesView
 {
 private:
     Display &display;
+    DevicesListData devices;
 
     void setDevicesToPair(int position = 0, const char *txt = "NONE")
     { // 16++
@@ -35,8 +36,8 @@ private:
     }
 
 public:
-    explicit LinkedDevicesView(Display &disp) : display(disp) {}
-    void show(DevicesListData devices, int typ_selector = 0, int dev_selector = 0)
+    explicit LinkedDevicesView(Display &disp, DevicesListData dev) : display(disp), devices(dev) {}
+    void show(int typ_selector = 0, int dev_selector = 0)
     {
         display.setFontMode(1);
         display.setColor(1);

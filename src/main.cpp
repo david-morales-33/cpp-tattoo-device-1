@@ -33,7 +33,7 @@ DevicesData dev4("cs.a.sa.s.", "DEV_MACH_3");
 DevicesData dev5("cs.a.sr.xp.", "DEV_MACH_4");
 DevicesData dev6("cs.a.zd.xp.", "DEV_MACH_5");
 
-DevicesListData devices({dev1, dev2}, {dev4, dev5, dev6});
+DevicesListData devices({dev1, dev2}, {});
 
 LinkDevicesController menu(display, devices);
 

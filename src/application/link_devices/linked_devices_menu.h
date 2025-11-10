@@ -17,14 +17,14 @@ private:
     bool state = HIGH;
 
 public:
-    explicit LinkedDevicesMenu(Display &disp, DevicesListData dev) : display(disp), view(disp), devices(dev) {}
+    explicit LinkedDevicesMenu(Display &disp, DevicesListData dev) : display(disp), view(disp, dev), devices(dev) {}
 
     void render()
     {
         display.firstPage();
         do
         {
-            view.show(devices, typ_selector, dev_selector);
+            view.show(typ_selector, dev_selector);
         } while (display.nextPage());
     }
 

@@ -5,14 +5,14 @@ class LinkedDevicesWindow : public LinkedDevicesView
 {
 private:
     Display &display;
-    const char *title;
+    DevicesListData devices;
 
 public:
-    explicit LinkedDevicesWindow(Display &disp, const char *ttl) : LinkedDevicesView(disp), display(disp), title(ttl) {}
+    explicit LinkedDevicesWindow(Display &disp, DevicesListData dev) : LinkedDevicesView(disp, dev), display(disp), devices(dev) {}
 
-    void show(const char *device)
+    void show(int dev_selector = 0)
     {
-        LinkedDevicesView::show();
+        LinkedDevicesView::show(0, dev_selector);
 
         display.setFontMode(1);
         display.setColor(0);
@@ -20,9 +20,9 @@ public:
         display.setColor(1);
         display.drawFrame(8, 7, 112, 50);
         display.setFont(u8g_font_6x10);
-        display.drawText(24, 18, title);
+        display.drawText(24, 18, "REMOVE DEVICE?");
         display.setFont(u8g_font_5x8);
-        display.drawText(38, 30, device);
+        display.drawText(38, 30, devices.linked_devices[dev_selector].name);
         display.drawFrame(12, 38, 50, 15, 3);
         display.drawFrame(66, 38, 50, 15, 3);
         display.drawBox(13, 39, 48, 13);
