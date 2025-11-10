@@ -11,8 +11,8 @@ struct DevicesData
 struct DevicesListData
 {
     std::vector<DevicesData> linked_devices = {};
-    std::vector<DevicesData> enable_devices = {};
-    DevicesListData(std::vector<DevicesData> _linked_devices, std::vector<DevicesData> _enable_devices) : linked_devices(_linked_devices), enable_devices(_enable_devices) {}
+    std::vector<DevicesData> available_devices = {};
+    DevicesListData(std::vector<DevicesData> _linked_devices, std::vector<DevicesData> _available_devices) : linked_devices(_linked_devices), available_devices(_available_devices) {}
 };
 
 struct SelectorData

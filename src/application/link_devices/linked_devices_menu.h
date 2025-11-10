@@ -1,7 +1,6 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/linked_devices/views/linked_devices_view.h>
-#include <application/shared/selector.h>
 #include <persistence/linked_devices/data.h>
 
 class LinkedDevicesMenu
@@ -10,8 +9,11 @@ private:
     Display &display;
     LinkedDevicesView view;
     DevicesListData devices;
-    int selector = 0;
-    int selector_size = 0;
+
+    int dev_selector = 0;
+    int typ_selector = 0;
+    int element_size = 0;
+
     bool state = HIGH;
 
 public:
@@ -19,27 +21,34 @@ public:
 
     void render()
     {
-        selector_size = devices.linked_devices.size();
-
         display.firstPage();
         do
         {
-            view.show(devices, 0, selector);
+            view.show(devices, typ_selector, dev_selector);
         } while (display.nextPage());
     }
 
     void up()
     {
-        if (selector > 0)
-            selector = selector - 1;
+        if (dev_selector > 0)
+            dev_selector = dev_selector - 1;
     }
+
     void down()
     {
-        if (selector < (selector_size - 1))
-            selector = selector + 1;
+        if (dev_selector < (element_size - 1))
+            dev_selector = dev_selector + 1;
     }
+
+    void left() { typ_selector = 0; }
+    void right() { typ_selector = 1; }
     void show() { state = HIGH; }
     void hide() { state = LOW; }
+
     bool getState() { return state; }
-    int getSelector() { return selector; }
+    int getDevSelector() { return dev_selector; }
+    int getTypSelector() { return typ_selector; }
+
+    void setSelectorSize(int _element_size) { element_size = _element_size; }
+    void setDevSelector(int _dev_selector = 0) { dev_selector = _dev_selector; }
 };

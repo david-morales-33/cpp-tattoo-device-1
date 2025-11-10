@@ -50,13 +50,13 @@ public:
         display.setFontMode(1);
         display.setColor(0);
         display.setFont(u8g_font_6x10);
-        display.drawText(13, 11, "LINKED");
+        display.drawText(13, 11, "PARIED");
         display.drawText(75, 11, "DEVICES");
 
-        for (int i = 0; i < devices.linked_devices.size(); i++)
-            setDevicesToPair(i, devices.enable_devices[i].name);
+        for (int i = 0; i < devices.available_devices.size(); i++)
+            setDevicesToPair(i, devices.available_devices[i].name);
 
-        for (int i = 0; i < devices.enable_devices.size(); i++)
+        for (int i = 0; i < devices.linked_devices.size(); i++)
             setLinkedDevices(i, devices.linked_devices[i].name);
 
         setSelector(typ_selector, dev_selector);
