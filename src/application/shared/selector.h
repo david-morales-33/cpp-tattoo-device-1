@@ -1,3 +1,5 @@
+#pragma once
+
 class Selector
 {
 private:
@@ -6,15 +8,15 @@ private:
 
 public:
     explicit Selector(int elmt) : elements(elmt) {}
-    void slideUp()
-    {
-        if (selector < elements)
-            selector = selector + 1;
-    }
-    void slideDown()
+    void decrement()
     {
         if (selector > 0)
             selector = selector - 1;
+    }
+    void increment()
+    {
+        if (selector < (elements - 1))
+            selector = selector + 1;
     }
     int getSelector() { return selector; }
 };

@@ -9,6 +9,7 @@ private:
     Display &display;
     DeviceConfigurationView view;
     Selector selector;
+    bool state = HIGH;
 
 public:
     explicit ConfigureDevicesMenu(Display &disp, VoltageData volt) : display(disp), view(disp, volt), selector(2) {}
@@ -21,7 +22,10 @@ public:
             view.show(selector.getSelector());
         } while (display.nextPage());
     }
-    void up() { selector.slideUp(); }
-    void down() { selector.slideDown(); }
+    void up() { selector.decrement(); }
+    void down() { selector.increment(); }
+    void show() { state = HIGH; }
+    void hide() { state = LOW; }
+    bool getState() { return state; }
     int getSelector() { return selector.getSelector(); }
 };

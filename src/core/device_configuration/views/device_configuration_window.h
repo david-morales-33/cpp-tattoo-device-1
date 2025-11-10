@@ -7,11 +7,10 @@ class DeviceConfigurationWindow : public DeviceConfigurationSelector
 {
 private:
     Display &display;
-    VoltageData data;
 
 public:
-    explicit DeviceConfigurationWindow(Display &disp, VoltageData volt) : DeviceConfigurationSelector(disp, volt), display(disp), data(volt) {};
-    void show(int dev_selector = 0, int val_selector = 0, int uni_selector = 0)
+    explicit DeviceConfigurationWindow(Display &disp, VoltageData volt) : DeviceConfigurationSelector(disp, volt), display(disp) {};
+    void show(float value, int dev_selector = 0, int val_selector = 0, int uni_selector = 0)
     {
         DeviceConfigurationSelector::show(dev_selector, val_selector);
         display.setFontMode(1);
@@ -20,17 +19,17 @@ public:
         display.setColor(1);
         display.drawFrame(22, 7, 86, 50);
         display.setFont(u8g2_font_logisoso22_tf);
-        data.voltages[dev_selector][val_selector] < 10 ? display.setCursor(38, 43) : display.setCursor(28, 43); // 2 unidad => x=28
-        
+        value < 10 ? display.setCursor(38, 43) : display.setCursor(28, 43); // 2 unidad => x=28
+
         display.setColor(2);
-        display.print(String(data.voltages[dev_selector][val_selector]));
+        display.print(String(value));
 
         if (uni_selector == 0)
         {
             display.drawTriangle(37, 18, 53, 18, 45, 10); // unidad x_=37;x_2=53;x_3=45// decimal  =>
             display.drawTriangle(38, 46, 52, 46, 45, 53);
         }
-        else if ((uni_selector == 1) && (data.voltages[dev_selector][val_selector] < 10))
+        else if ((uni_selector == 1) && (value < 10))
         {
             display.drawTriangle(69, 18, 85, 18, 77, 10);
             display.drawTriangle(70, 46, 84, 46, 77, 53);

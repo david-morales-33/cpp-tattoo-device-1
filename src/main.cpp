@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <infrastructure/display.h>
 #include <application/main/main_menu_controller.h>
+#include <application/configure_devices/configure_devices_menu.h>
+#include <application/configure_devices/configure_devices_controller.h>
 /*
 #include <core/main/views/main_view.h>
 #include <core/main/views/letter_view.h>
@@ -20,7 +22,11 @@
 #include <core/linked_devices/views/linked_devices_window.h>
 */
 Display display;
-MainMenuConytroller menu(display);
+// MainMenuConytroller menu(display);
+VoltageData voltages = {{{10.5, 3.4, 7.7, 9.5},
+                         {2.3, 5.6, 7.9, 8.2}}};
+ConfigureDevicesController menu(display, voltages);
+// ConfigureDevicesMenu menu
 /*
 MainView mainView(display);
 
@@ -34,10 +40,8 @@ LetterData data[7] = {
     {"OPERATION", 38},
     {"RESET", 38},
     {"SETTINGS", 38},
-};
+    };
 
-VoltageData voltages = {{{10.5, 3.4, 7.7, 9.5},
-                         {2.3, 5.6, 7.9, 8.2}}};
 
 DeviceConfigurationView deviceConfView(display, voltages);
 DeviceConfigurationSelector deviceConfSelector(display, voltages);
@@ -65,6 +69,4 @@ void setup()
 void loop()
 {
     menu.execute();
-
-
 }
