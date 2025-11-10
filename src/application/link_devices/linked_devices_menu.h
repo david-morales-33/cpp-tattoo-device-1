@@ -9,17 +9,17 @@ class LinkedDevicesMenu
 private:
     Display &display;
     LinkedDevicesView view;
+    DevicesListData devices;
     int selector = 0;
-    int selector_size = NULL;
+    int selector_size = 0;
     bool state = HIGH;
 
 public:
-    explicit LinkedDevicesMenu(Display &disp) : display(disp), view(disp) {}
+    explicit LinkedDevicesMenu(Display &disp, DevicesListData dev) : display(disp), view(disp), devices(dev) {}
 
-    void render(DevicesListData devices)
+    void render()
     {
-        if (selector_size == NULL)
-            selector = devices.linked_devices.size();
+        selector_size = devices.linked_devices.size();
 
         display.firstPage();
         do

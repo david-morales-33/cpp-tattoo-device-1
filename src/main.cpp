@@ -3,6 +3,7 @@
 #include <application/main/main_menu_controller.h>
 #include <application/configure_devices/configure_devices_menu.h>
 #include <application/configure_devices/configure_devices_controller.h>
+#include <application/link_devices/link_devices_controller.h>
 /*
 #include <core/main/views/main_view.h>
 #include <core/main/views/letter_view.h>
@@ -25,7 +26,16 @@ Display display;
 // MainMenuConytroller menu(display);
 VoltageData voltages = {{{10.5, 3.4, 7.7, 9.5},
                          {2.3, 5.6, 7.9, 8.2}}};
-ConfigureDevicesController menu(display, voltages);
+
+DevicesData dev1("cs.a.sd.s.", "DEV_MACH_1");
+DevicesData dev2("cs.a.wew.s.", "DEV_MACH_2");
+DevicesData dev4("cs.a.sa.s.", "DEV_MACH_3");
+DevicesData dev5("cs.a.sr.xp.", "DEV_MACH_4");
+
+DevicesListData devices({dev1, dev2}, {dev4, dev5});
+
+LinkDevicesController menu(display, devices);
+
 // ConfigureDevicesMenu menu
 /*
 MainView mainView(display);
@@ -63,10 +73,12 @@ SliderData slider;
 */
 void setup()
 {
+
     display.begin();
     menu.begin();
 }
 void loop()
 {
+
     menu.execute();
 }
