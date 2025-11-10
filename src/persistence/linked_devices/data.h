@@ -1,10 +1,17 @@
 #pragma once
+#include <vector>
 
 struct DevicesData
 {
+    const char *mac_address_id;
     const char *name;
-    const char *address_mac;
     bool linked_state;
+};
+
+struct DevicesListData
+{
+    std::vector<DevicesData> linked_devices = {};
+    std::vector<DevicesData> enable_devices = {};
 };
 
 struct SelectorData
