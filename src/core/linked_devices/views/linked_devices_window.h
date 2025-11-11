@@ -1,3 +1,4 @@
+#pragma once
 #include <core/linked_devices/views/linked_devices_view.h>
 #include <infrastructure/display.h>
 
