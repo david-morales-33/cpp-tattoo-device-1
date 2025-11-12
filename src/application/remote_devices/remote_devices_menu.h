@@ -1,13 +1,13 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/linked_devices/views/linked_devices_view.h>
+#include <core/remote_devices/views/remote_devices_view.h>
 #include <persistence/linked_devices/data.h>
 
-class LinkedDevicesMenu
+class RemoteDevicesMenu
 {
 private:
     Display &display;
-    LinkedDevicesView view;
+    RemoteDevicesView view;
     DevicesListData devices;
 
     int dev_selector = 0;
@@ -17,7 +17,7 @@ private:
     bool state = HIGH;
 
 public:
-    explicit LinkedDevicesMenu(Display &disp, DevicesListData dev) : display(disp), view(disp, dev), devices(dev) {}
+    explicit RemoteDevicesMenu(Display &disp, DevicesListData dev) : display(disp), view(disp, dev), devices(dev) {}
 
     void render()
     {

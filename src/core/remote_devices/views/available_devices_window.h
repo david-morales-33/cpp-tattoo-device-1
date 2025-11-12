@@ -1,9 +1,11 @@
 #pragma once
-#include <core/linked_devices/views/linked_devices_view.h>
+#include <core/remote_devices/views/remote_devices_view.h>
 #include <infrastructure/display.h>
-#include <core/linked_devices/icons/pedal_device.h>
+#include <core/remote_devices/icons/pedal_device.h>
+#include <core/main/icons/device.h>
 
-class AvailableDevicesWindow : public LinkedDevicesView
+
+class AvailableDevicesWindow : public RemoteDevicesView
 {
 private:
     Display &display;
@@ -47,11 +49,11 @@ private:
     }
 
 public:
-    explicit AvailableDevicesWindow(Display &disp, DevicesListData dev_list, LinkedDevicesData dev_link) : LinkedDevicesView(disp, dev_list), display(disp), devices_linked(dev_link), devices_listed(dev_list) {}
+    explicit AvailableDevicesWindow(Display &disp, DevicesListData dev_list, LinkedDevicesData dev_link) : RemoteDevicesView(disp, dev_list), display(disp), devices_linked(dev_link), devices_listed(dev_list) {}
 
     void show(int dev_selector = 0)
     {
-        LinkedDevicesView::show(1, dev_selector);
+        RemoteDevicesView::show(1, dev_selector);
         display.setFontMode(1);
         display.setColor(0);
         display.drawBox(7, 6, 114, 52);

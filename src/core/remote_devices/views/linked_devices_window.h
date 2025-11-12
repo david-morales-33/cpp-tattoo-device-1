@@ -1,19 +1,19 @@
 #pragma once
-#include <core/linked_devices/views/linked_devices_view.h>
+#include <core/remote_devices/views/remote_devices_view.h>
 #include <infrastructure/display.h>
 
-class LinkedDevicesWindow : public LinkedDevicesView
+class LinkedDevicesWindow : public RemoteDevicesView
 {
 private:
     Display &display;
     DevicesListData devices;
 
 public:
-    explicit LinkedDevicesWindow(Display &disp, DevicesListData dev) : LinkedDevicesView(disp, dev), display(disp), devices(dev) {}
+    explicit LinkedDevicesWindow(Display &disp, DevicesListData dev) : RemoteDevicesView(disp, dev), display(disp), devices(dev) {}
 
     void show(int dev_selector = 0)
     {
-        LinkedDevicesView::show(0, dev_selector);
+        RemoteDevicesView::show(0, dev_selector);
 
         display.setFontMode(1);
         display.setColor(0);

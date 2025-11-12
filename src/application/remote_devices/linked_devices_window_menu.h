@@ -1,6 +1,6 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/linked_devices/views/linked_devices_window.h>
+#include <core/remote_devices/views/linked_devices_window.h>
 #include <persistence/linked_devices/data.h>
 
 class LinkedDevicesWindowMenu

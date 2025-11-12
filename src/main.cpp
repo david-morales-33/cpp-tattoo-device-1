@@ -3,8 +3,8 @@
 #include <application/main/main_menu_controller.h>
 #include <application/configure_devices/configure_devices_menu.h>
 #include <application/configure_devices/configure_devices_controller.h>
-#include <application/link_devices/link_devices_controller.h>
-#include <core/linked_devices/views/available_devices_window.h>
+#include <application/remote_devices/remote_devices_controller.h>
+#include <core/remote_devices/views/available_devices_window.h>
 /*
 #include <core/main/views/main_view.h>
 #include <core/main/views/letter_view.h>
@@ -34,13 +34,10 @@ DevicesData dev4("cs.a.sa.s.", "machine", "MACH_3");
 DevicesData dev5("cs.a.sr.xp.", "machine", "MACH_4");
 DevicesData dev6("cs.a.zd.xp.", "machine", "MACH_5");
 
-DevicesListData devices({dev1, dev2}, {dev4});
+DevicesListData devices({dev1, dev2}, {dev4, dev6});
 LinkedDevicesData linked({dev6}, {dev5});
 
-LinkDevicesController menu(display, devices);
-
-AvailableDevicesWindow window(display, devices, linked);
-
+RemoteDevicesController controller(display, devices, linked);
 // ConfigureDevicesMenu menu
 /*
 MainView mainView(display);
@@ -78,16 +75,11 @@ SliderData slider;
 */
 void setup()
 {
-
     display.begin();
-    menu.begin();
+    controller.begin();
 }
 void loop()
 {
 
-    display.firstPage();
-    do
-    {
-        menu.execute();
-    } while (display.nextPage());
+    controller.execute();
 }

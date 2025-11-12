@@ -3,7 +3,7 @@
 #include <persistence/linked_devices/data.h>
 #include <persistence/linked_devices/data.h>
 
-class LinkedDevicesView
+class RemoteDevicesView
 {
 private:
     Display &display;
@@ -36,7 +36,7 @@ private:
     }
 
 public:
-    explicit LinkedDevicesView(Display &disp, DevicesListData dev) : display(disp), devices(dev) {}
+    explicit RemoteDevicesView(Display &disp, DevicesListData dev) : display(disp), devices(dev) {}
     void show(int typ_selector = 0, int dev_selector = 0)
     {
         display.setFontMode(1);
