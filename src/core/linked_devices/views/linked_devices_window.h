@@ -24,15 +24,16 @@ public:
         display.drawText(24, 18, "REMOVE DEVICE?");
         display.setFont(u8g_font_5x8);
         display.drawText(38, 30, devices.linked_devices[dev_selector].name);
-        display.drawFrame(12, 38, 50, 15, 3);
-        display.drawFrame(66, 38, 50, 15, 3);
-        display.drawBox(13, 39, 48, 13);
-        display.drawBox(67, 39, 48, 13);
+
+        display.drawBox(12, 41, 50, 11);
+        display.drawBox(66, 41, 50, 11);
+        display.drawFrame(11, 40, 52, 13, 3);
+        display.drawFrame(65, 40, 52, 13, 3);
 
         display.setColor(0);
         display.setFont(u8g_font_6x10);
-        display.drawText(16, 49, "<ENTER>");
-        display.drawText(73, 49, "<BACK>");
+        display.drawText(20, 50, "<BACK>");
+        display.drawText(70, 50, "<ENTER>");
         display.setColor(1);
     }
 };

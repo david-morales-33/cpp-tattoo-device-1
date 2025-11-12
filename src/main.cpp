@@ -88,6 +88,6 @@ void loop()
     display.firstPage();
     do
     {
-        window.show();
+        menu.execute();
     } while (display.nextPage());
 }
