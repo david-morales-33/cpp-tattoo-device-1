@@ -7,9 +7,9 @@
 class RemoteDevicesInMemoryRepository : public IRemoteDevicesInterface
 {
 private:
-    RemoteDevice device_shade_linked;
-    RemoteDevice device_pedal_linked;
-    RemoteDevice device_line_linked;
+    RemoteDevice device_shade_linked = RemoteDevice{};
+    RemoteDevice device_pedal_linked = RemoteDevice{};
+    RemoteDevice device_line_linked = RemoteDevice{};
     RemoteDeviceList devices_list;
 
 public:
@@ -31,6 +31,22 @@ public:
             devices_list.addDevice(device);
         }
     }
-    void removeDevice(const char *id) override {}
-    RemoteDeviceList search() override { return devices_list; }
+    void removeDevice(const char *mac_addresss_id) override
+    {
+        const RemoteDevice *device = devices_list.getDevice(mac_addresss_id);
+
+        if (device != nullptr)
+        {
+            devices_list.removeDevice(mac_addresss_id);
+            if (device->getDeviceType() == LINE)
+                device_line_linked = RemoteDevice{};
+
+            else if (device->getDeviceType() == SHADE)
+                device_shade_linked = RemoteDevice{};
+
+            else if (device->getDeviceType() == PEDAL)
+                device_pedal_linked = RemoteDevice{};
+        }
+    }
+    const RemoteDeviceList &search() const override { return devices_list; }
 };

@@ -4,5 +4,6 @@ enum DeviceType
 {
     LINE,
     SHADE,
-    PEDAL
+    PEDAL,
+    NONE
 };
