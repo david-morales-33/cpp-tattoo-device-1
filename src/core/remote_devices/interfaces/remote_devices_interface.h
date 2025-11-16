@@ -1,0 +1,11 @@
+#include <core/remote_devices/data_transfer_objects/remote_device.h>
+#include <core/remote_devices/data_transfer_objects/remote_device_list.h>
+
+class IRemoteDevicesInterface
+{
+public:
+    virtual void save(RemoteDevice device) = 0;
+    virtual void removeDevice(const char *id) = 0;
+    virtual RemoteDeviceList search() = 0;
+    virtual ~IRemoteDevicesInterface() {}
+};
