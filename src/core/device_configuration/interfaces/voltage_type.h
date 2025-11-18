@@ -1,0 +1,6 @@
+
+
+enum VoltageType{
+    LINE,
+    SHADE
+};
