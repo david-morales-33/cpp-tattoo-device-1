@@ -1,7 +1,6 @@
 #pragma once
 #include <core/device_configuration/interfaces/voltage_type.h>
 #include <core/device_configuration/interfaces/voltage_element.h>
-#include <core/shared/interfaces/data.h>
 
 class Voltage
 {

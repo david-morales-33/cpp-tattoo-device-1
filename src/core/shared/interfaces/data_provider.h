@@ -1,8 +1,7 @@
-#include <core/shared/interfaces/data.h>
-#include <core/shared/interfaces/response.h>
+#pragma once
 
 template <typename D, typename R>
-class DataProvider
+class IDataProvider
 {
 public:
     virtual void persist(const D &data) = 0;

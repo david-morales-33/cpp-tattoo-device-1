@@ -1,10 +1,10 @@
-#pragma once 
+#pragma once
 #include <core/shared/interfaces/data_provider.h>
 #include <core/device_configuration/data_transfer_objects/voltage.h>
 #include <core/device_configuration/data_transfer_objects/voltage_list.h>
 #include <infrastructure/persistence/shared/EEPROM_manager.h>
 
-class VoltageProvider : public DataProvider<Voltage, VoltageList>
+class VoltageSettingsEepromProvider : public IDataProvider<Voltage, VoltageList>
 {
 private:
     VoltageList element_list;
@@ -13,12 +13,12 @@ private:
     int memory_address_shade_machine[4] = {50, 60, 70, 80};
 
 public:
-    explicit VoltageProvider(EEPROMManager &memory) : eeprom_manager(memory) {}
+    explicit VoltageSettingsEepromProvider(EEPROMManager &memory) : eeprom_manager(memory) {}
 
     void begin() { load(); }
     void persist(const Voltage &volt) override
     {
-        if (volt.getElement() != NONE)
+        if (volt.getElement() == NONE)
             return;
 
         int addr = (volt.getType() == LINE)

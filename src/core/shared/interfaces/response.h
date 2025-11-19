@@ -1,4 +1,0 @@
-class Response
-{
-    virtual ~Response() {}
-};
