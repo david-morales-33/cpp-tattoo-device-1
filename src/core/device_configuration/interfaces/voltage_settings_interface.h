@@ -2,8 +2,8 @@
 
 class VoltageSettingsInterface
 {
-    virtual void load() = 0;
     virtual void update(Voltage voltage) = 0;
     virtual void getLineDevices() const = 0;
     virtual void getShadeDevices() const = 0;
+    virtual ~VoltageSettingsInterface() {}
 };

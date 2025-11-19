@@ -18,5 +18,16 @@ public:
                            Voltage{VALUE_4, _type, 0}} {}
 
     const std::array<Voltage, 4> &getAll() const { return voltages; }
+
     Voltage &operator[](int index) { return voltages[index]; }
+    
+    bool updateByIndex(int index, float newValue)
+    {
+        if (index < 0 || index >= voltages.size())
+        {
+            return false;
+        }
+        voltages[index].setValue(newValue);
+        return true;
+    }
 };

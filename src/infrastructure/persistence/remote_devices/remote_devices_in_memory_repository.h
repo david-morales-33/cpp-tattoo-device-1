@@ -10,7 +10,7 @@ private:
     RemoteDevice device_shade_linked = RemoteDevice{};
     RemoteDevice device_pedal_linked = RemoteDevice{};
     RemoteDevice device_line_linked = RemoteDevice{};
-    RemoteDeviceList devices_list;
+    RemoteDeviceList devices_list;  // data base (EEPROM simulate)
 
 public:
     void save(RemoteDevice device) override

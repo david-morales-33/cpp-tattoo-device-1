@@ -2,5 +2,6 @@
 
 enum VoltageType{
     LINE,
-    SHADE
+    SHADE,
+    NONE
 };
