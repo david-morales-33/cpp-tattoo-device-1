@@ -2,8 +2,7 @@
 
 enum DeviceType
 {
-    LINE,
-    SHADE,
-    PEDAL,
-    NONE
+    LINE = 0,
+    SHADE = 1,
+    PEDAL = 2
 };

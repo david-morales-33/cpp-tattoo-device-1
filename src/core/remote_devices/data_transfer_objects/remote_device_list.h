@@ -1,44 +1,40 @@
 #pragma once
+#include <array>
 #include <vector>
-#include <algorithm>
-#include <cstring>
+#include <core/remote_devices/data_transfer_objects/remote_device.h>
 #include <core/remote_devices/data_transfer_objects/remote_device.h>
 
 class RemoteDeviceList
 {
 private:
-    std::vector<RemoteDevice> devices = {};
+    std::array<RemoteDevice, 3> devices = {
+        RemoteDevice("XXX.XXX.XXX", "XX:XX:XX:XX:XX:XX", LINE),
+        RemoteDevice("XXX.XXX.XXX", "XX:XX:XX:XX:XX:XX", SHADE),
+        RemoteDevice("XXX.XXX.XXX", "XX:XX:XX:XX:XX:XX", PEDAL)};
+
+    bool isValid(DeviceType dev_type) { return devices[dev_type].getDeviceState() == DISCONNECTED; }
 
 public:
-    const std::vector<RemoteDevice> &getDevices() const { return devices; }
+    // const std::array<RemoteDevice, 3> &getDevices() const { return devices; }
 
-    void addDevice(RemoteDevice device) { devices.push_back(device); }
-
-    void removeDevice(const char *mac_address_id)
+    std::vector<RemoteDevice> getConnectedDevices() const
     {
-        devices.erase(
-            std::remove_if(
-                devices.begin(),
-                devices.end(),
-                [mac_address_id](const RemoteDevice &it)
-                { return it.getMacAddressId() == mac_address_id; }),
-            devices.end());
+        std::vector<RemoteDevice> connected_devices = {};
+        for (int i = 0; i < devices.size(); i++)
+        {
+            if (devices[i].getDeviceState() == CONNECTED)
+                connected_devices.push_back(devices[i]);
+        }
+        return connected_devices;
     }
 
-    const RemoteDevice *getDevice(const char *mac_address_id) const
+    void connetDevice(RemoteDevice device)
     {
-        for (const auto &dev : devices)
-            if (strcmp(dev.getMacAddressId(), mac_address_id) == 0)
-                return &dev;
-        return nullptr;
-    }
-
-    bool isDeviceValid(const char *mac_addres_id) const
-    {
-        bool flag = false;
-        for (const auto &d : devices)
-            if (d.getMacAddressId() == mac_addres_id)
-                flag = true;
-        return flag;
+        if (isValid(device.getDeviceType()))
+        {
+            devices[device.getDeviceType()].setMacAddressId(device.getMacAddressId());
+            devices[device.getDeviceType()].setName(device.getName());
+            devices[device.getDeviceType()].setDeviceState(CONNECTED);
+        }
     }
 };
