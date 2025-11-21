@@ -2,7 +2,7 @@
 #include <core/remote_devices/interfaces/device_type.h>
 #include <core/remote_devices/interfaces/device_state.h>
 
-class RemoteDevice
+class Device
 {
 private:
     const char *name;
@@ -11,7 +11,7 @@ private:
     DeviceState device_state;
 
 public:
-    RemoteDevice(
+    Device(
         const char *_name,
         const char *_mac_address_id,
         DeviceType _device_type,
