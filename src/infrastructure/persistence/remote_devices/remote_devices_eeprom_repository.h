@@ -5,7 +5,7 @@
 class RemoteDevicesEepromRepository : public IRemoteDevicesRepository
 {
 private:
-    RemoteDevicesEepromProvider &provider;
+    IDataProvider<Device, std::vector<Device>> &provider;
 
 public:
     explicit RemoteDevicesEepromRepository(RemoteDevicesEepromProvider &_provider) : provider(_provider) {}

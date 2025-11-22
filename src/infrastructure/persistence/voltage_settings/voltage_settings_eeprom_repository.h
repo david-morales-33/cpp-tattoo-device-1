@@ -5,7 +5,7 @@
 class VoltageSettingsEepromRepository : public IVoltageSettingsRepository
 {
 private:
-    VoltageSettingsEepromProvider &provider;
+    IDataProvider<Voltage, VoltageList> &provider;
 
 public:
     explicit VoltageSettingsEepromRepository(VoltageSettingsEepromProvider &_provider) : provider(_provider) {}
