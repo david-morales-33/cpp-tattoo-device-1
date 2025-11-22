@@ -61,7 +61,19 @@ public:
         return true;
     }
 
-    void disconnectDevice(DeviceType type) { resolve(type).setDeviceState(DISCONNECTED); }
+    bool disconnectDevice(DeviceType type)
+    {
+        Device &slot = resolve(type);
+
+        if (slot.getDeviceState() != CONNECTED)
+            return false;
+
+        slot.setDeviceState(DISCONNECTED);
+        slot.setName("XXX.XXX.XXX");
+        slot.setMacAddressId("XX:XX:XX:XX:XX:XX");
+        return true;
+    }
 
     const Device &getDevice(DeviceType type) const { return resolve(type); }
+    Device &getDevice(DeviceType type) { return resolve(type); }
 };
