@@ -7,5 +7,5 @@ class IOperationRepository
 public:
     virtual void send(DataTransmittedRemoteDevice data) = 0;
     virtual DataReceivedRemoteDevice listen() = 0;
-
+    virtual ~IOperationRepository() = default;
 };

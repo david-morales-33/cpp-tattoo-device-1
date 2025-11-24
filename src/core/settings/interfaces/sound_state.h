@@ -1,6 +1,7 @@
-#pragma once 
+#pragma once
 
-enum SoundState {
-    ON,
-    OFF
+enum SoundState
+{
+    OFF = 0,
+    ON = 1
 };

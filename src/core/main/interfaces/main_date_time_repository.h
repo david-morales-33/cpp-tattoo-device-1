@@ -1,7 +1,7 @@
 #pragma once
-#include <core/settings/data_transfer_objects/date_time_format.h>
+#include <core/main/data_transfer_objects/date_time_format.h>
 
-class ISettingsDateTimeRepository
+class IMainDateTimeRepository
 {
 public:
     virtual void update(DateTimeFormat date) = 0;
@@ -9,5 +9,5 @@ public:
 
     virtual void remove() = 0;
 
-    virtual ~ISettingsDateTimeRepository() {}
+    virtual ~IMainDateTimeRepository() {}
 };

@@ -1,9 +1,9 @@
 #pragma once
-#include <core/settings/interfaces/settings_date_time_repository.h>
+#include <core/main/interfaces/main_date_time_repository.h>
 #include <core/shared/interfaces/data_provider.h>
-#include <core/settings/data_transfer_objects/date_time_format.h>
+#include <core/main/data_transfer_objects/date_time_format.h>
 
-class SettingsDateTimeRepositoryImpl : ISettingsDateTimeRepository
+class SettingsDateTimeRepositoryImpl : IMainDateTimeRepository
 {
 private:
     IDataProvider<DateTimeFormat, DateTimeFormat> &provider;
