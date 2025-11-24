@@ -1,8 +1,9 @@
 #pragma once
 #include <Arduino.h>
-#include "Pins.h"
+#include <infrastructure/shared/interfaces/input.h>
+#include <infrastructure/shared/pins.h>
 
-class Input
+class InputImpl: IInput
 {
 private:
     static const uint8_t BUTTON_COUNT = 6;
@@ -22,7 +23,7 @@ public:
         }
     }
 
-    bool isPressed(int pin)
+    bool isPressed(int pin) override
     {
         uint8_t index = getIndex(pin);
         if (index == 255) return false; // pin no encontrado

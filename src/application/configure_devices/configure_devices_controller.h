@@ -1,5 +1,5 @@
 #pragma once
-#include <infrastructure/input.h>
+#include <infrastructure/shared/interfaces/input.h>
 #include <infrastructure/display.h>
 #include <application/configure_devices/configure_devices_menu.h>
 #include <application/configure_devices/configure_values_menu.h>
@@ -9,7 +9,7 @@ class ConfigureDevicesController
 {
 private:
     Display &display;
-    Input input;
+    IInput &input;
     ConfigureDevicesMenu devicesMenu;
     ConfigureValuesMenu valuesMenu;
     ConfigureValuesWindow valuesWindow;
@@ -37,10 +37,8 @@ private:
     }
 
 public:
-    explicit ConfigureDevicesController(Display &disp, VoltageData volt) : 
-    display(disp), devicesMenu(disp, volt), valuesMenu(disp, volt), valuesWindow(disp, volt) {}
-
-    void begin() { input.begin(); }
+    explicit ConfigureDevicesController(Display &disp,IInput &inp, VoltageData volt) : 
+    display(disp),input(inp), devicesMenu(disp, volt), valuesMenu(disp, volt), valuesWindow(disp, volt) {}
 
     void execute()
     {

@@ -37,8 +37,8 @@ DevicesData dev6("cs.a.zd.xp.", "machine", "MACH_5");
 DevicesListData devices({dev1, dev2}, {dev4, dev6});
 LinkedDevicesData linked({dev6}, {dev5});
 
-RemoteDevicesController controller(display, devices, linked);
-// ConfigureDevicesMenu menu
+// RemoteDevicesController controller(display, devices, linked);
+//  ConfigureDevicesMenu menu
 /*
 MainView mainView(display);
 
@@ -75,11 +75,7 @@ SliderData slider;
 */
 void setup()
 {
-    display.begin();
-    controller.begin();
 }
 void loop()
 {
-
-    controller.execute();
 }

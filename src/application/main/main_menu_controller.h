@@ -1,20 +1,22 @@
 #pragma once
-#include <application/main/main_menu.h>
-#include <infrastructure/input.h>
-#include <infrastructure/display.h>
+
+#include <infrastructure/shared/interfaces/input.h>
+#include <core/main/interfaces/main_menu_controller.h>
+#include <core/main/interfaces/main_date_time_repository.h>
 
 class MainMenuConytroller
 {
 private:
-    Display &display;
-    MainMenu menu;
-    Input input;
+    IInput &input;
+    IMainMenuController &menu;
+    IMainDateTimeRepository &repository;
     bool state = HIGH;
 
 public:
-    explicit MainMenuConytroller(Display &disp) : display(disp), menu(disp) {}
-
-    void begin() { input.begin(); }
+    explicit MainMenuConytroller(
+        IInput &_input,
+        IMainMenuController &_menu,
+        IMainDateTimeRepository &_repository) : input(_input), menu(_menu), repository(_repository) {}
 
     void execute()
     {
@@ -25,7 +27,7 @@ public:
         if (input.isPressed(ENTER))
             hide();
         if (state)
-            menu.render();
+            menu.render(repository.get());
     }
 
     void hide() { state = LOW; }

@@ -2,8 +2,9 @@
 #include <infrastructure/display.h>
 #include <core/main/views/letter_view.h>
 #include <persistence/main/data.h>
+#include <core/main/interfaces/main_menu_controller.h>
 
-class MainMenu
+class MainMenu : public IMainMenuController
 {
 
 private:
@@ -16,7 +17,7 @@ private:
 public:
     explicit MainMenu(Display &disp) : display(disp), view(disp) {}
 
-    void render()
+    void render(DateTimeFormat data) override
     {
         display.firstPage();
         do
@@ -25,7 +26,7 @@ public:
         } while (display.nextPage());
     }
 
-    void left()
+    void left() override
     {
         if (selector > 0)
             selector = selector - 1;
@@ -40,7 +41,7 @@ public:
         }
     }
 
-    void right()
+    void right() override
     {
         if (selector < 5)
             selector = selector + 1;
@@ -55,5 +56,5 @@ public:
         }
     }
 
-    int getSelector() { return selector; }
+    const int getSelector() const override { return selector; }
 };

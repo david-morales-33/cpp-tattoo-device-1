@@ -1,5 +1,5 @@
 #pragma once
-#include <infrastructure/input.h>
+#include <infrastructure/shared/interfaces/input.h>
 #include <infrastructure/display.h>
 #include <application/remote_devices/remote_devices_menu.h>
 #include <application/remote_devices/linked_devices_window_menu.h>
@@ -9,7 +9,8 @@ class RemoteDevicesController
 {
 private:
     Display &display;
-    Input input;
+    IInput &input;
+
     DevicesListData devices_list;
     LinkedDevicesData devices_linked;
 
@@ -50,11 +51,10 @@ private:
     }
 
 public:
-    explicit RemoteDevicesController(Display &disp, DevicesListData dev_list, LinkedDevicesData dev_link) : display(disp), devices_list(dev_list), devices_linked(dev_link), remoteDevicesMenu(disp, dev_list), linkedDevicesWindow(disp, dev_list), availableDevicesWindow(disp, dev_list, dev_link) {}
+    explicit RemoteDevicesController(Display &disp,IInput &inp, DevicesListData dev_list, LinkedDevicesData dev_link) : display(disp), input(inp), devices_list(dev_list), devices_linked(dev_link), remoteDevicesMenu(disp, dev_list), linkedDevicesWindow(disp, dev_list), availableDevicesWindow(disp, dev_list, dev_link) {}
 
     void begin()
     {
-        input.begin();
         remoteDevicesMenu.setSelectorSize(devices_list.linked_devices.size());
     }
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <U8g2lib.h>
-#include "Pins.h"
+#include <infrastructure/shared/pins.h>
 
 class Display
 {
