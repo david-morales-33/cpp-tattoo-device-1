@@ -17,7 +17,7 @@ private:
 public:
     explicit MainMenu(Display &disp) : display(disp), view(disp) {}
 
-    void render(DateTimeFormat data) override
+    void render(const DateTimeFormat &data) override
     {
         display.firstPage();
         do

@@ -9,5 +9,5 @@ public:
     virtual void reset() = 0;
     virtual void remove(const D &data) = 0;
     virtual const R &get() const = 0;
-    virtual ~DataProvider() = default;
+    virtual ~IDataProvider() {};
 };

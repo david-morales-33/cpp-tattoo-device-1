@@ -3,7 +3,7 @@
 #include <infrastructure/shared/interfaces/input.h>
 #include <infrastructure/shared/pins.h>
 
-class InputImpl: IInput
+class InputImpl: public IInput
 {
 private:
     static const uint8_t BUTTON_COUNT = 6;

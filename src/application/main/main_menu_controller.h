@@ -4,7 +4,7 @@
 #include <core/main/interfaces/main_menu_controller.h>
 #include <core/main/interfaces/main_date_time_repository.h>
 
-class MainMenuConytroller
+class MainMenuController
 {
 private:
     IInput &input;
@@ -13,7 +13,7 @@ private:
     bool state = HIGH;
 
 public:
-    explicit MainMenuConytroller(
+    explicit MainMenuController(
         IInput &_input,
         IMainMenuController &_menu,
         IMainDateTimeRepository &_repository) : input(_input), menu(_menu), repository(_repository) {}
