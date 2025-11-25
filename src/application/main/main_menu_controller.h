@@ -1,17 +1,17 @@
 #pragma once
 
 #include <infrastructure/shared/interfaces/input.h>
-#include <core/shared/interfaces/menu_controller.h>
+#include <core/shared/interfaces/menu_controller_void.h>
 
 class MainMenuController
 {
 private:
     IInput &input;
-    IMenuController &menu;
+    IMenuControllerVoid &menu;
     bool state = HIGH;
 
 public:
-    explicit MainMenuController(IInput &_input, IMenuController &_menu) : input(_input), menu(_menu) {}
+    explicit MainMenuController(IInput &_input, IMenuControllerVoid &_menu) : input(_input), menu(_menu) {}
 
     void execute()
     {

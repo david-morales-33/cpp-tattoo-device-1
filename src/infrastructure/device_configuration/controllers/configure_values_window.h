@@ -1,7 +1,7 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/device_configuration/views/device_configuration_window.h>
-#include <application/shared/selector.h>
+#include <core/shared/data_transfer_objects/selector.h>
 
 class ConfigureValuesWindow
 {

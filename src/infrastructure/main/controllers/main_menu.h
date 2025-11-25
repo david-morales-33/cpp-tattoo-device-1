@@ -2,12 +2,13 @@
 #include <infrastructure/display.h>
 #include <core/main/views/letter_view.h>
 #include <persistence/main/data.h>
-#include <core/shared/interfaces/menu_controller.h>
+#include <core/shared/interfaces/menu_controller_void.h>
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/shared/data_transfer_objects/selector.h>
 #include <core/main/interfaces/main_date_time_repository.h>
+#include <core/shared/interfaces/menu_state.h>
 
-class MainMenu : public IMenuController
+class MainMenu : public IMenuControllerVoid
 {
 
 private:
@@ -17,6 +18,7 @@ private:
     LetterData options[7] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"RESET", 50}, {"SETTINGS", 42}};
     Slider slider;
     Selector selector = Selector(6, 1);
+    MenuState state = VISIBLE;
 
 public:
     explicit MainMenu(Display &disp, IMainDateTimeRepository &_repository) : display(disp), view(disp), repository(_repository) {}
@@ -41,6 +43,11 @@ public:
         selector.increment();
         slider.right();
     }
+
+    void hide() override { state = HIDDEN; }
+    void show() override { state = VISIBLE; }
+    
+    const MenuState getState() const override { return state; }
 
     const int getSelector() const override { return selector.getSelector(); }
 };
