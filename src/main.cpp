@@ -11,9 +11,9 @@ InputImpl input;
 MainDateTimeProviderTest provider;
 
 MainDateTimeRepositoryImpl repository(provider);
-MainMenu menu(display);
+MainMenu menu(display, repository);
 
-MainMenuController controller(input, menu, repository);
+MainMenuController controller(input, menu);
 
 void setup()
 {

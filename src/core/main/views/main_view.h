@@ -9,6 +9,7 @@
 #include <core/main/icons/operation.h>
 #include <core/main/icons/reset.h>
 #include <core/main/icons/settings.h>
+#include <core/main/data_transfer_objects/date_time_format.h>
 
 class MainView
 {
@@ -18,7 +19,7 @@ private:
 public:
     explicit MainView(Display &disp) : display(disp) {}
 
-    void show(const Slider &slider)
+    void show(const Slider &slider, const DateTimeFormat &data)
     {
         
         // --- Dibujo de íconos principales ---
@@ -43,9 +44,9 @@ public:
         // --- Fecha y hora ---
         display.setColor(0);
         display.setFont(u8g2_font_6x10_tf);
-        display.drawText(2, 27, "09/04/2021");
+        display.drawText(2, 27, data.getDate().getDate().c_str());
         display.setFont(u8g2_font_luRS14_tf);
-        display.drawText(2, 16, "17:37");
+        display.drawText(2, 16, data.getTime().getTime().c_str());
 
         // --- Temperatura y día ---
         display.setColor(1);

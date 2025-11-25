@@ -1,22 +1,17 @@
 #pragma once
 
 #include <infrastructure/shared/interfaces/input.h>
-#include <core/main/interfaces/main_menu_controller.h>
-#include <core/main/interfaces/main_date_time_repository.h>
+#include <core/shared/interfaces/menu_controller.h>
 
 class MainMenuController
 {
 private:
     IInput &input;
-    IMainMenuController &menu;
-    IMainDateTimeRepository &repository;
+    IMenuController &menu;
     bool state = HIGH;
 
 public:
-    explicit MainMenuController(
-        IInput &_input,
-        IMainMenuController &_menu,
-        IMainDateTimeRepository &_repository) : input(_input), menu(_menu), repository(_repository) {}
+    explicit MainMenuController(IInput &_input, IMenuController &_menu) : input(_input), menu(_menu) {}
 
     void execute()
     {
@@ -27,7 +22,7 @@ public:
         if (input.isPressed(ENTER))
             hide();
         if (state)
-            menu.render(repository.get());
+            menu.render();
     }
 
     void hide() { state = LOW; }

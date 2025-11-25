@@ -2,29 +2,31 @@
 #include <infrastructure/display.h>
 #include <core/main/views/letter_view.h>
 #include <persistence/main/data.h>
-#include <core/main/interfaces/main_menu_controller.h>
+#include <core/shared/interfaces/menu_controller.h>
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/shared/data_transfer_objects/selector.h>
+#include <core/main/interfaces/main_date_time_repository.h>
 
-class MainMenu : public IMainMenuController
+class MainMenu : public IMenuController
 {
 
 private:
     Display &display;
+    IMainDateTimeRepository &repository;
     LetterView view;
-    Slider slider;
     LetterData options[7] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"RESET", 50}, {"SETTINGS", 42}};
+    Slider slider;
     Selector selector = Selector(6, 1);
 
 public:
-    explicit MainMenu(Display &disp) : display(disp), view(disp) {}
+    explicit MainMenu(Display &disp, IMainDateTimeRepository &_repository) : display(disp), view(disp), repository(_repository) {}
 
-    void render(const DateTimeFormat &data) override
+    void render() override
     {
         display.firstPage();
         do
         {
-            view.show(slider, options[selector.getSelector()]);
+            view.show(slider, options[selector.getSelector()], repository.get());
         } while (display.nextPage());
     }
 

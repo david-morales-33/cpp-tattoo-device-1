@@ -6,7 +6,7 @@
 class LetterView : public MainView
 {
 private:
-    Display display;
+    Display &display;
 
     void setLetter(int posx, String text)
     {
@@ -27,9 +27,9 @@ private:
 public:
     LetterView(Display &disp) : MainView(disp), display(disp) {}
 
-    void show(const Slider &slider, LetterData data)
+    void show(const Slider &slider, const LetterData &data, const DateTimeFormat &date_time)
     {
-        MainView::show(slider);
+        MainView::show(slider, date_time);
         setLetter(data.position, data.text);
     }
 };
