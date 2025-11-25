@@ -1,4 +1,5 @@
 #include <core/main/views/main_view.h>
+#include <core/main/data_transfer_objects/slider.h>
 #include <persistence/main/data.h>
 #include <core/shared/utils/_timer_.h>
 
@@ -26,10 +27,9 @@ private:
 public:
     LetterView(Display &disp) : MainView(disp), display(disp) {}
 
-    void show(SliderData slider, LetterData data)
+    void show(const Slider &slider, LetterData data)
     {
         MainView::show(slider);
-
         setLetter(data.position, data.text);
     }
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <infrastructure/display.h>
-#include <persistence/main/data.h>
+#include <core/main/data_transfer_objects/slider.h>
 #include <infrastructure/icons_size.h>
 #include <core/main/icons/bluethooth.h>
 #include <core/main/icons/device.h>
@@ -18,16 +18,17 @@ private:
 public:
     explicit MainView(Display &disp) : display(disp) {}
 
-    void show(SliderData slider)
+    void show(const Slider &slider)
     {
+        
         // --- Dibujo de íconos principales ---
         display.setColor(1);
-        display.drawBitmap(slider.icons_slider[0], 35, WIDTH, HEIGHT, BLUETOOTH_BITS);
-        display.drawBitmap(slider.icons_slider[1], 35, WIDTH, HEIGHT, DEVICE_BITS);
-        display.drawBitmap(slider.icons_slider[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
-        display.drawBitmap(slider.icons_slider[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
-        display.drawBitmap(slider.icons_slider[4], 35, WIDTH, HEIGHT, RESET_BITS);
-        display.drawBitmap(slider.icons_slider[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
+        display.drawBitmap(slider.getIconsSlider()[0], 35, WIDTH, HEIGHT, BLUETOOTH_BITS);
+        display.drawBitmap(slider.getIconsSlider()[1], 35, WIDTH, HEIGHT, DEVICE_BITS);
+        display.drawBitmap(slider.getIconsSlider()[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
+        display.drawBitmap(slider.getIconsSlider()[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
+        display.drawBitmap(slider.getIconsSlider()[4], 35, WIDTH, HEIGHT, RESET_BITS);
+        display.drawBitmap(slider.getIconsSlider()[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
 
         // --- Recuadros principales ---
         display.drawFrame(2, 34, 28, 28, 3);
@@ -57,6 +58,6 @@ public:
         display.drawGlyph(68, 18, u8g2_font_open_iconic_all_2x_t, 0x0103);
 
         // --- Selector de íconos ---
-        display.highlightBox((slider.icons_selector * 32), 32, 32, 32);
+        display.highlightBox((slider.getIconsSelector() * 32), 32, 32, 32);
     }
 };

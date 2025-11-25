@@ -3,6 +3,8 @@
 #include <core/main/views/letter_view.h>
 #include <persistence/main/data.h>
 #include <core/main/interfaces/main_menu_controller.h>
+#include <core/main/data_transfer_objects/slider.h>
+#include <core/shared/data_transfer_objects/selector.h>
 
 class MainMenu : public IMainMenuController
 {
@@ -10,9 +12,9 @@ class MainMenu : public IMainMenuController
 private:
     Display &display;
     LetterView view;
-    SliderData slider;
+    Slider slider;
     LetterData options[7] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"RESET", 50}, {"SETTINGS", 42}};
-    int selector = 1;
+    Selector selector = Selector(6, 1);
 
 public:
     explicit MainMenu(Display &disp) : display(disp), view(disp) {}
@@ -22,39 +24,21 @@ public:
         display.firstPage();
         do
         {
-            view.show(slider, options[selector]);
+            view.show(slider, options[selector.getSelector()]);
         } while (display.nextPage());
     }
 
-    void left() override
+    void previous() override
     {
-        if (selector > 0)
-            selector = selector - 1;
-
-        if (slider.icons_selector > 0)
-            slider.icons_selector = slider.icons_selector - 1;
-        else if (slider.icons_selector == 0 && slider.view_selector > 0)
-        {
-            slider.view_selector = slider.view_selector - 1;
-            for (int i = 0; i < 6; i++)
-                slider.icons_slider[i] = slider.icons_slider[i] + 32;
-        }
+        selector.decrement();
+        slider.left();
     }
 
-    void right() override
+    void next() override
     {
-        if (selector < 5)
-            selector = selector + 1;
-
-        if (slider.icons_selector < 3)
-            slider.icons_selector = slider.icons_selector + 1;
-        else if (slider.icons_selector == 3 && slider.view_selector < 2)
-        {
-            slider.view_selector = slider.view_selector + 1;
-            for (int i = 0; i < 6; i++)
-                slider.icons_slider[i] = slider.icons_slider[i] - 32;
-        }
+        selector.increment();
+        slider.right();
     }
 
-    const int getSelector() const override { return selector; }
+    const int getSelector() const override { return selector.getSelector(); }
 };

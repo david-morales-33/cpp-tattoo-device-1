@@ -4,10 +4,10 @@ class Selector
 {
 private:
     int elements;
-    int selector = 0;
+    int selector;
 
 public:
-    explicit Selector(int elmt) : elements(elmt) {}
+    explicit Selector(int _elements, int _selector = 0) : elements(_elements), selector(_selector) {}
     void decrement()
     {
         if (selector > 0)
@@ -18,5 +18,5 @@ public:
         if (selector < (elements - 1))
             selector = selector + 1;
     }
-    int getSelector() { return selector; }
+    const int &getSelector() const { return selector; }
 };

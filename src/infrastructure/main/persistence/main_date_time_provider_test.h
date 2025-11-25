@@ -5,7 +5,7 @@
 class MainDateTimeProviderTest : public IDataProvider<DateTimeFormat, DateTimeFormat>
 {
 private:
-    DateTimeFormat date_time = DateTimeFormat(Date("24", "11", "2025"), Time("5", "15", "p.m."));
+    DateTimeFormat date_time = DateTimeFormat(Date("24", "11", "2025"), Time("5", "15"));
 
 public:
     void persist(const DateTimeFormat &data) override {}

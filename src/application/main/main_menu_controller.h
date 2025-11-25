@@ -21,9 +21,9 @@ public:
     void execute()
     {
         if (input.isPressed(LEFT))
-            menu.left();
+            menu.previous();
         if (input.isPressed(RIGHT))
-            menu.right();
+            menu.next();
         if (input.isPressed(ENTER))
             hide();
         if (state)
