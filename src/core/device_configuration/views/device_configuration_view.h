@@ -1,18 +1,19 @@
-#pragma once 
+#pragma once
 #include <infrastructure/display.h>
 #include <infrastructure/icons_size.h>
 #include <core/device_configuration/icons/device.h>
 #include <persistence/device_configuration/data.h>
+#include <core/device_configuration/data_transfer_objects/voltage_group.h>
 
 class DeviceConfigurationView
 {
 private:
     Display &display;
-    VoltageData data;
 
-    void setDevices(int selector)
+    void setDevices(const VoltageGroup &data)
     {
         int mode[2] = {2, 1};
+        int selector = data.getType() == LINE ? 0 : 1;
 
         display.setColor(1);
         display.setColor(1);
@@ -49,7 +50,7 @@ private:
         display.drawBox(1, (1 + (selector * 33)), 60, 29); // selector 1 // x=1/x=34
     }
 
-    void setValues(int selector)
+    void setValues(const VoltageGroup &data)
     {
         display.setFontMode(1);
         display.setColor(0);
@@ -60,25 +61,23 @@ private:
         display.drawText(69, 59, "VAL4");
 
         display.setCursor(100, 11);
-        display.print(String(data.voltages[selector][0]));
+        display.print(String(data.getAll()[1].getValue()));
         display.setCursor(100, 27);
-        display.print(String(data.voltages[selector][1]));
+        display.print(String(data.getAll()[2].getValue()));
         display.setCursor(100, 43);
-        display.print(String(data.voltages[selector][2]));
+        display.print(String(data.getAll()[3].getValue()));
         display.setCursor(100, 59);
-        display.print(String(data.voltages[selector][3]));
+        display.print(String(data.getAll()[4].getValue()));
     }
 
-
 public:
-    explicit DeviceConfigurationView(Display &disp, VoltageData volt) : display(disp), data(volt) {}
+    explicit DeviceConfigurationView(Display &disp) : display(disp) {}
 
-    void show(int dev_selector = 0)
+    void show(const VoltageGroup &data)
     {
         // maquinas
-        setDevices(dev_selector);
+        setDevices(data);
         // voltajes
-        setValues(dev_selector);
-
+        setValues(data);
     }
 };

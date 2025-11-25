@@ -18,6 +18,7 @@ public:
                            Voltage{VALUE_4, _type, 0.0f}} {}
 
     const std::array<Voltage, 4> &getAll() const { return voltages; }
+    const VoltageType &getType() const { return type; }
 
     Voltage &operator[](int index) { return voltages[index]; }
 

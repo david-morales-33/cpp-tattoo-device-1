@@ -1,7 +1,8 @@
 #pragma once
 
-enum VoltageType{
-    LINE,
-    SHADE,
-    NONE
+enum VoltageType
+{
+    LINE = 1,
+    SHADE = 0,
+    NONE = -1
 };

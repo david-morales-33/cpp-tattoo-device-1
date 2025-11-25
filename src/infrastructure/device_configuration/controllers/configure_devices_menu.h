@@ -2,30 +2,33 @@
 #include <infrastructure/display.h>
 #include <core/device_configuration/views/device_configuration_view.h>
 #include <core/shared/data_transfer_objects/selector.h>
+#include <core/shared/interfaces/menu_controller_void.h>
+#include <core/device_configuration/interfaces/voltage_settings_repository.h>
 
-class ConfigureDevicesMenu
+class ConfigureDevicesMenu : public IMenuControllerVoid
 {
 private:
     Display &display;
+    IVoltageSettingsRepository &repository;
     DeviceConfigurationView view;
     Selector selector;
-    bool state = HIGH;
+    MenuState state = VISIBLE;
 
 public:
-    explicit ConfigureDevicesMenu(Display &disp, VoltageData volt) : display(disp), view(disp, volt), selector(2) {}
+    explicit ConfigureDevicesMenu(Display &disp, IVoltageSettingsRepository &_repository) : display(disp), repository(_repository), view(disp), selector(2) {}
 
-    void render()
+    void render() override
     {
         display.firstPage();
         do
         {
-            view.show(selector.getSelector());
+            view.show(selector.getSelector() == 0 ? repository.getLineDevices() : repository.getShadeDevices());
         } while (display.nextPage());
     }
-    void up() { selector.decrement(); }
-    void down() { selector.increment(); }
-    void show() { state = HIGH; }
-    void hide() { state = LOW; }
-    bool getState() { return state; }
-    int getSelector() { return selector.getSelector(); }
+    void previous() override { selector.decrement(); }
+    void next() override { selector.increment(); }
+    void show() override { state = VISIBLE; }
+    void hide() override { state = HIDDEN; }
+    const MenuState getState() const override { return state; }
+    const int getSelector() const override { return selector.getSelector(); }
 };
