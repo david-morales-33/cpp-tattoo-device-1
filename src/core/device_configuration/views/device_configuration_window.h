@@ -9,10 +9,10 @@ private:
     Display &display;
 
 public:
-    explicit DeviceConfigurationWindow(Display &disp, VoltageData volt) : DeviceConfigurationSelector(disp, volt), display(disp) {};
+    explicit DeviceConfigurationWindow(Display &_display) : DeviceConfigurationSelector(_display), display(_display) {};
     void show(float value, int dev_selector = 0, int val_selector = 0, int uni_selector = 0)
     {
-        DeviceConfigurationSelector::show(dev_selector, val_selector);
+        //DeviceConfigurationSelector::show(dev_selector, val_selector);
         display.setFontMode(1);
         display.setColor(0);
         display.drawBox(22, 7, 86, 50);

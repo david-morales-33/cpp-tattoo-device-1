@@ -1,5 +1,5 @@
 #pragma once
-#include <infrastructure/display.h>
+#include <infrastructure/display.cpp>
 #include <core/main/views/letter_view.h>
 #include <persistence/main/data.h>
 #include <core/shared/interfaces/menu_controller_void.h>

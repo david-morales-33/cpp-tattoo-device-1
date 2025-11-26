@@ -1,30 +1,35 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/device_configuration/views/device_configuration_selector.h>
-#include <application/shared/selector.h>
+#include <core/shared/data_transfer_objects/selector.h>
+#include <core/shared/interfaces/menu_controller_params.h>
+#include <core/shared/interfaces/menu_state.h>
+#include <core/device_configuration/interfaces/device_configuration_repository.h>
 
-class ConfigureValuesMenu
+class ConfigureValuesMenu : public IMenuControllerParams<int>
 {
 private:
     Display &display;
+    IDeviceConfigurationRepository &repository;
     DeviceConfigurationSelector view;
     Selector val_selector;
-    bool state = LOW;
+    MenuState state = HIDDEN;
 
 public:
-    explicit ConfigureValuesMenu(Display &disp, VoltageData volt) : display(disp), view(disp, volt), val_selector(4) {}
-    void render(int dev_selector = 0)
+    explicit ConfigureValuesMenu(Display &_display, IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), view(_display), val_selector(4) {}
+    void render(const int &dev_selector = 0) override
     {
+        const VoltageGroup &devices = dev_selector == 0 ? repository.getLineDevices() : repository.getShadeDevices();
         display.firstPage();
         do
         {
-            view.show(dev_selector, val_selector.getSelector());
+            view.show(devices, val_selector.getSelector());
         } while (display.nextPage());
     }
-    void up() { val_selector.decrement(); }
-    void down() { val_selector.increment(); }
-    void show() { state = HIGH; }
-    void hide() { state = LOW; }
-    bool getState() { return state; }
-    int getSelector() { return val_selector.getSelector(); }
+    void previous() override { val_selector.decrement(); }
+    void next() override { val_selector.increment(); }
+    void show() override { state = VISIBLE; }
+    void hide() override { state = HIDDEN; }
+    const MenuState getState() const override { return state; }
+    const int getSelector() const override { return val_selector.getSelector(); }
 };

@@ -12,10 +12,10 @@ private:
 public:
     VoltageGroup(VoltageType _type)
         : type(_type), voltages{
-                           Voltage{VALUE_1, _type, 0.0f},
-                           Voltage{VALUE_2, _type, 0.0f},
-                           Voltage{VALUE_3, _type, 0.0f},
-                           Voltage{VALUE_4, _type, 0.0f}} {}
+                           Voltage{VoltageElement::VALUE_1, _type, 0.0f},
+                           Voltage{VoltageElement::VALUE_2, _type, 0.0f},
+                           Voltage{VoltageElement::VALUE_3, _type, 0.0f},
+                           Voltage{VoltageElement::VALUE_4, _type, 0.0f}} {}
 
     const std::array<Voltage, 4> &getAll() const { return voltages; }
     const VoltageType &getType() const { return type; }

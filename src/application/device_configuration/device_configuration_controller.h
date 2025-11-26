@@ -36,6 +36,10 @@ private:
     // }
 
 public:
+    explicit ConfigureDevicesController(
+        IInput &_input,
+        IMenuControllerVoid &_devices_menu,
+        IMenuControllerParams<int> &_values_menu) : input(_input), devices_menu(_devices_menu), values_menu(_values_menu) {}
     void execute()
     {
         if (devices_menu.getState() == VISIBLE)

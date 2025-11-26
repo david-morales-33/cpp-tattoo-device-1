@@ -1,6 +1,6 @@
 #pragma once
 
-enum VoltageType
+enum class VoltageType
 {
     LINE = 1,
     SHADE = 0,

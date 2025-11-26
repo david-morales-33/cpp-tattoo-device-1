@@ -4,8 +4,8 @@
 class VoltageList
 {
 private:
-    VoltageGroup line{LINE};
-    VoltageGroup shade{SHADE};
+    VoltageGroup line{VoltageType::LINE};
+    VoltageGroup shade{VoltageType::SHADE};
 
 public:
     VoltageGroup &getLine() { return line; }

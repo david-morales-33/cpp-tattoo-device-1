@@ -1,24 +1,29 @@
 #include <Arduino.h>
-#include <infrastructure/main/persistence/main_date_time_provider_test.h>
-#include <infrastructure/main/persistence/main_date_time_repository_impl.h>
-#include <infrastructure/main/controllers/main_menu.h>
+
 #include <infrastructure/shared/input_impl.h>
-#include <application/main/main_menu_controller.h>
 #include <infrastructure/display.h>
+#include <infrastructure/device_configuration/persistence/device_configuration_repository_impl.h>
+#include <infrastructure/device_configuration/persistence/device_configuration_test_provider.h>
+#include <application/device_configuration/device_configuration_controller.h>
+#include <infrastructure/device_configuration/controllers/configure_values_menu.h>
+#include <infrastructure/device_configuration/controllers/configure_devices_menu.h>
 
 Display display;
 InputImpl input;
-MainDateTimeProviderTest provider;
 
-MainDateTimeRepositoryImpl repository(provider);
-MainMenu menu(display, repository);
+DeviceConfigurationTestProvider provider;
 
-MainMenuController controller(input, menu);
+DeviceConfigurationRepositoryImpl reposirory(provider);
+
+ConfigureDevicesMenu devices_menu(display, reposirory);
+ConfigureValuesMenu values_menu(display, reposirory);
+
+ConfigureDevicesController controller(input, devices_menu, values_menu);
 
 void setup()
 {
-    input.begin();
     display.begin();
+    input.begin();
 }
 void loop()
 {

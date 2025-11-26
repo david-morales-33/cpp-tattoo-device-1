@@ -18,24 +18,24 @@ public:
     void begin() { load(); }
     void persist(const Voltage &volt) override
     {
-        if (volt.getElement() == NONE)
-            return;
+        // if (volt.getElement() == VoltageElement::NONE)
+        //     return;
 
-        int addr = (volt.getType() == LINE)
-                       ? memory_address_line_machine[volt.getElement()]
-                       : memory_address_shade_machine[volt.getElement()];
+        // int addr = (volt.getType() == VoltageType::LINE)
+        //                ? memory_address_line_machine[volt.getElement()]
+        //                : memory_address_shade_machine[volt.getElement()];
 
-        if (volt.getType() == LINE && element_list.getLine().updateByIndex(volt.getElement(), volt.getValue()))
-        {
-            eeprom_manager.writeByte(addr, 0xAA);
-            eeprom_manager.writeObject(addr + 1, volt);
-        }
+        // if (volt.getType() == VoltageType::LINE && element_list.getLine().updateByIndex(volt.getElement(), volt.getValue()))
+        // {
+        //     eeprom_manager.writeByte(addr, 0xAA);
+        //     eeprom_manager.writeObject(addr + 1, volt);
+        // }
 
-        else if (volt.getType() == SHADE && element_list.getShade().updateByIndex(volt.getElement(), volt.getValue()))
-        {
-            eeprom_manager.writeByte(addr, 0xAA);
-            eeprom_manager.writeObject(addr + 1, volt);
-        }
+        // else if (volt.getType() == VoltageType::LINE && element_list.getShade().updateByIndex(volt.getElement(), volt.getValue()))
+        // {
+        //     eeprom_manager.writeByte(addr, 0xAA);
+        //     eeprom_manager.writeObject(addr + 1, volt);
+        // }
     }
     void reset() override
     {

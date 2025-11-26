@@ -13,7 +13,7 @@ private:
     void setDevices(const VoltageGroup &data)
     {
         int mode[2] = {2, 1};
-        int selector = data.getType() == LINE ? 0 : 1;
+        int selector = data.getType() == VoltageType::LINE ? 0 : 1;
 
         display.setColor(1);
         display.setColor(1);
