@@ -9,7 +9,13 @@ private:
     VoltageList data;
 
 public:
-    void persist(const Voltage &data) override {}
+    void persist(const Voltage &_data) override
+    {
+        if (_data.getType() == VoltageType::LINE)
+            data.getLine().updateByIndex(static_cast<int>(_data.getElement()), _data.getValue());
+        else
+            data.getShade().updateByIndex(static_cast<int>(_data.getElement()), _data.getValue());
+    }
     void load() override {}
     void reset() override {}
     void remove(const Voltage &data) override {}

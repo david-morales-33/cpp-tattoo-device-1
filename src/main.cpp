@@ -7,6 +7,7 @@
 #include <application/device_configuration/device_configuration_controller.h>
 #include <infrastructure/device_configuration/controllers/configure_values_menu.h>
 #include <infrastructure/device_configuration/controllers/configure_devices_menu.h>
+#include <infrastructure/device_configuration/controllers/configure_modal.h>
 
 Display display;
 InputImpl input;
@@ -17,8 +18,9 @@ DeviceConfigurationRepositoryImpl reposirory(provider);
 
 ConfigureDevicesMenu devices_menu(display, reposirory);
 ConfigureValuesMenu values_menu(display, reposirory);
+ConfigureModal modal(display, reposirory);
 
-ConfigureDevicesController controller(input, devices_menu, values_menu);
+ConfigureDevicesController controller(input, devices_menu, values_menu, modal);
 
 void setup()
 {

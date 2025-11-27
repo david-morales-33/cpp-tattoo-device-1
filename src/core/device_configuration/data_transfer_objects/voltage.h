@@ -24,4 +24,6 @@ public:
     const float getValue() const { return value; }
 
     void setValue(float _value) { value = _value; }
+    void setElement(VoltageElement _element) { element = _element; }
+    void setType(VoltageType _type) { type = _type; }
 };
