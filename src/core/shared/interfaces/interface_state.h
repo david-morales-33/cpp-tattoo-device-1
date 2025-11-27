@@ -1,6 +1,6 @@
 #pragma once
 
-enum MenuState
+enum class InterfaceState
 {
     HIDDEN = 0,
     VISIBLE = 1

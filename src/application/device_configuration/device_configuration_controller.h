@@ -42,7 +42,7 @@ public:
         IMenuControllerParams<int> &_values_menu) : input(_input), devices_menu(_devices_menu), values_menu(_values_menu) {}
     void execute()
     {
-        if (devices_menu.getState() == VISIBLE)
+        if (devices_menu.getState() == InterfaceState::VISIBLE)
         {
             if (input.isPressed(UP))
                 devices_menu.previous();
@@ -52,7 +52,7 @@ public:
                 setEnterDevices();
             devices_menu.render();
         }
-        if (values_menu.getState() == VISIBLE)
+        if (values_menu.getState() == InterfaceState::VISIBLE)
         {
             if (input.isPressed(UP))
                 values_menu.previous();

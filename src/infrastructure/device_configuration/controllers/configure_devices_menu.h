@@ -12,7 +12,7 @@ private:
     IDeviceConfigurationRepository &repository;
     DeviceConfigurationView view;
     Selector selector;
-    MenuState state = VISIBLE;
+    InterfaceState state = InterfaceState::VISIBLE;
 
 public:
     explicit ConfigureDevicesMenu(Display &disp, IDeviceConfigurationRepository &_repository) : display(disp), repository(_repository), view(disp), selector(2) {}
@@ -27,8 +27,8 @@ public:
     }
     void previous() override { selector.decrement(); }
     void next() override { selector.increment(); }
-    void show() override { state = VISIBLE; }
-    void hide() override { state = HIDDEN; }
-    const MenuState getState() const override { return state; }
+    void show() override { state = InterfaceState::VISIBLE; }
+    void hide() override { state = InterfaceState::HIDDEN; }
+    const InterfaceState  getState() const override { return state; }
     const int getSelector() const override { return selector.getSelector(); }
 };

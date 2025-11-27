@@ -1,14 +1,16 @@
 #pragma once
 
 #include <infrastructure/shared/interfaces/input.h>
+#include <infrastructure/shared/pins.h>
 #include <core/shared/interfaces/menu_controller_void.h>
+#include <core/shared/interfaces/interface_state.h>
 
 class MainMenuController
 {
 private:
     IInput &input;
     IMenuControllerVoid &menu;
-    bool state = HIGH;
+    InterfaceState state = InterfaceState::VISIBLE;
 
 public:
     explicit MainMenuController(IInput &_input, IMenuControllerVoid &_menu) : input(_input), menu(_menu) {}
@@ -21,12 +23,12 @@ public:
             menu.next();
         if (input.isPressed(ENTER))
             hide();
-        if (state)
+        if (state == InterfaceState::VISIBLE)
             menu.render();
     }
 
-    void hide() { state = LOW; }
-    void show() { state = HIGH; }
-    bool menuState() { return state; }
+    void hide() { state = InterfaceState::HIDDEN; }
+    void show() { state = InterfaceState::VISIBLE; }
+    InterfaceState menuState() { return state; }
     int getSelector() { return menu.getSelector(); }
 };
