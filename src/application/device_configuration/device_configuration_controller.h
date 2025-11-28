@@ -12,7 +12,7 @@ private:
     IInput &input;
     IMenuControllerVoid &devices_menu;
     IMenuControllerParams<int> &values_menu;
-    IPopupController<ConfigurationSelectors> &modal;
+    IPopupController<int, ConfigurationSelectors> &modal;
 
     InterfaceState state = InterfaceState::VISIBLE;
     ConfigurationSelectors selectors;
@@ -26,7 +26,7 @@ private:
     {
         selectors.devices_selector = devices_menu.getSelector();
         selectors.values_selector = values_menu.getSelector();
-        modal.load();
+        modal.load(selectors);
         modal.show();
         values_menu.hide();
     }
@@ -34,6 +34,12 @@ private:
     {
         devices_menu.show();
         values_menu.hide();
+    }
+    void setEnterData()
+    {
+        modal.enter();
+        modal.hide();
+        values_menu.show();
     }
     void setBackModal()
     {
@@ -46,10 +52,8 @@ public:
         IInput &_input,
         IMenuControllerVoid &_devices_menu,
         IMenuControllerParams<int> &_values_menu,
-        IPopupController<ConfigurationSelectors> &_modal) : input(_input),
-                                                            devices_menu(_devices_menu),
-                                                            values_menu(_values_menu),
-                                                            modal(_modal) {}
+        IPopupController<int, ConfigurationSelectors> &_modal) : input(_input), devices_menu(_devices_menu), values_menu(_values_menu), modal(_modal) {}
+
     void execute()
     {
         if (devices_menu.getState() == InterfaceState::VISIBLE)
@@ -86,7 +90,9 @@ public:
                 modal.down();
             if (input.isPressed(BACK))
                 setBackModal();
-            modal.render(selectors);
+            if (input.isPressed(ENTER))
+                setEnterData();
+            modal.render(0);
         }
     }
     void show() { state = InterfaceState::VISIBLE; }

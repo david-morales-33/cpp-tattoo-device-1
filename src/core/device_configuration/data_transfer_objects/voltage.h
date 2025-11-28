@@ -7,7 +7,7 @@ class Voltage
 private:
     VoltageElement element;
     VoltageType type;
-    float value;
+    float value = 0.0f;
 
 public:
     Voltage(VoltageElement _element, VoltageType _type, float _value) : element(_element),

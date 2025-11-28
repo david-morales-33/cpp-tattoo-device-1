@@ -61,13 +61,13 @@ private:
         display.drawText(69, 59, "VAL4");
 
         display.setCursor(100, 11);
-        display.print(String(data.getAll()[1].getValue()));
+        display.print(String(data.getAll()[0].getValue()));
         display.setCursor(100, 27);
-        display.print(String(data.getAll()[2].getValue()));
+        display.print(String(data.getAll()[1].getValue()));
         display.setCursor(100, 43);
-        display.print(String(data.getAll()[3].getValue()));
+        display.print(String(data.getAll()[2].getValue()));
         display.setCursor(100, 59);
-        display.print(String(data.getAll()[4].getValue()));
+        display.print(String(data.getAll()[3].getValue()));
     }
 
 public:

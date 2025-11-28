@@ -5,99 +5,64 @@
 #include <core/shared/interfaces/popup_controller.h>
 #include <core/device_configuration/interfaces/device_configuration_repository.h>
 #include <core/device_configuration/data_transfer_objects/selectors.h>
+#include <core/device_configuration/data_transfer_objects/voltage_selector.h>
 
-class ConfigureModal : public IPopupController<ConfigurationSelectors>
+class ConfigureModal : public IPopupController<int, ConfigurationSelectors>
 {
 private:
     Display &display;
     IDeviceConfigurationRepository &repository;
     DeviceConfigurationModal modal;
 
-    Selector unit_selector;
+    VoltageSelector voltage_selector;
     ConfigurationSelectors selectors;
-    VoltageGroup devices = VoltageGroup();
-    Voltage voltage = Voltage();
+    VoltageGroup devices{};
+    Voltage voltage{};
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
     explicit ConfigureModal(
         Display &_display,
-        IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), modal(_display), unit_selector(2) {}
+        IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), modal(_display) {}
 
-    void render(const ConfigurationSelectors &_selectors) override
+    void render(const int &_) override
     {
-        selectors = _selectors;
         display.firstPage();
         do
         {
-            modal.show(devices, voltage.getValue(), selectors.values_selector, unit_selector.getSelector());
+            modal.show(devices, voltage.getValue(), selectors.values_selector, voltage_selector.getSelector());
         } while (display.nextPage());
     }
 
     // set =>
     void enter() override { repository.update(voltage); }
-    void load() override
+    void load(const ConfigurationSelectors &_selectors) override
     {
-        voltage.setType(devices.getAll()[selectors.values_selector].getType());
-        voltage.setElement(devices.getAll()[selectors.values_selector].getElement());
-        voltage.setValue(devices.getAll()[selectors.values_selector].getValue());
+        selectors = _selectors;
         devices = selectors.devices_selector == 0 ? repository.getLineDevices() : repository.getShadeDevices();
+        voltage = devices.getAll()[selectors.values_selector];
     }
 
     // increment =>
     void up() override
     {
-        float value = voltage.getValue();
-
-        int uni = int(value);
-        float dec = value - uni;
-        if (unit_selector.getSelector() == 0)
-        {
-            if (value <= 11)
-            {
-                uni = uni + 1;
-                voltage.setValue((uni + dec));
-            }
-        }
-        else
-        {
-            if (value < 12)
-            {
-                dec = dec + 0.1;
-                voltage.setValue((uni + dec));
-            }
-        }
+        voltage_selector.setValue(voltage.getValue());
+        voltage_selector.increment();
+        voltage.setValue(voltage_selector.getValue());
     }
 
     // Decrement =>
     void down() override
     {
-        float value = voltage.getValue();
-        int uni = int(value);
-        float dec = value - uni;
-
-        if (unit_selector.getSelector() == 0)
-        {
-            if (value > 2)
-            {
-                uni = uni - 1;
-                voltage.setValue((uni + dec));
-            }
-        }
-        else
-        {
-            if (value > 2)
-            {
-                dec = dec - 0.1;
-                voltage.setValue((uni + dec));
-            }
-        }
+        voltage_selector.setValue(voltage.getValue());
+        voltage_selector.decrement();
+        voltage.setValue(voltage_selector.getValue());
     }
 
-    void right() override { unit_selector.increment(); } // Select unid
-    void left() override { unit_selector.decrement(); }  // Select unid
+    void right() override { voltage_selector.setDecimal(); }
+    void left() override { voltage_selector.setUnit(); }
     void hide() override { state = InterfaceState::HIDDEN; }
     void show() override { state = InterfaceState::VISIBLE; }
     InterfaceState getState() const override { return state; }
-    const int &getSelector() const { return unit_selector.getSelector(); }
+    const int &getSelector() const { return voltage_selector.getSelector(); }
 };
