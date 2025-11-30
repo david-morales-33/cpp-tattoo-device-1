@@ -1,6 +1,6 @@
 #pragma once
 
-enum DeviceType
+enum class DeviceType
 {
     LINE = 0,
     SHADE = 1,

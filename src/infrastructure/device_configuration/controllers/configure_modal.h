@@ -7,7 +7,7 @@
 #include <core/device_configuration/data_transfer_objects/selectors.h>
 #include <core/device_configuration/data_transfer_objects/voltage_selector.h>
 
-class ConfigureModal : public IPopupController<int, ConfigurationSelectors>
+class ConfigureModal : public IPopupController<ConfigurationSelectors>
 {
 private:
     Display &display;
@@ -25,7 +25,7 @@ public:
         Display &_display,
         IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), modal(_display) {}
 
-    void render(const int &_) override
+    void render() override
     {
         display.firstPage();
         do

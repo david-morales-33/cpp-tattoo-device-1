@@ -3,7 +3,7 @@
 #include <core/shared/interfaces/data_provider.h>
 #include <core/remote_devices/data_transfer_objects/device.h>
 #include <core/remote_devices/data_transfer_objects/device_list.h>
-#include <infrastructure/persistence/shared/EEPROM_manager.h>
+#include <infrastructure/shared/EEPROM_manager.h>
 
 class RemoteDevicesEepromProvider : public IDataProvider<Device, std::vector<Device>>
 {

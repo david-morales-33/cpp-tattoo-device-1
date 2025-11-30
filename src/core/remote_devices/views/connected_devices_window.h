@@ -2,18 +2,21 @@
 #include <core/remote_devices/views/remote_devices_view.h>
 #include <infrastructure/display.h>
 
-class LinkedDevicesWindow : public RemoteDevicesView
+class ConnectedDevicesWindow : public RemoteDevicesView
 {
 private:
     Display &display;
-    DevicesListData devices;
 
 public:
-    explicit LinkedDevicesWindow(Display &disp, DevicesListData dev) : RemoteDevicesView(disp, dev), display(disp), devices(dev) {}
+    explicit ConnectedDevicesWindow(Display &disp) : RemoteDevicesView(disp), display(disp) {}
 
-    void show(int dev_selector = 0)
+    void show(
+        std::vector<Device> disconnected_devices,
+        std::vector<Device> connected_devices,
+        int case_device = 6,
+        int device_selector = 0)
     {
-        RemoteDevicesView::show(0, dev_selector);
+        RemoteDevicesView::show(disconnected_devices, connected_devices, case_device, device_selector);
 
         display.setFontMode(1);
         display.setColor(0);
@@ -23,7 +26,7 @@ public:
         display.setFont(u8g_font_6x10);
         display.drawText(24, 18, "REMOVE DEVICE?");
         display.setFont(u8g_font_5x8);
-        display.drawText(38, 30, devices.linked_devices[dev_selector].name);
+        display.drawText(38, 30, connected_devices[device_selector].getName());
 
         display.drawBox(12, 41, 50, 11);
         display.drawBox(66, 41, 50, 11);

@@ -13,18 +13,22 @@ private:
     IDeviceConfigurationRepository &repository;
     DeviceConfigurationSelector view;
     Selector val_selector;
+    VoltageGroup voltages{};
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
     explicit ConfigureValuesMenu(Display &_display, IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), view(_display), val_selector(4) {}
-    void render(const int &dev_selector = 0) override
+    void render() override
     {
-        const VoltageGroup &devices = dev_selector == 0 ? repository.getLineDevices() : repository.getShadeDevices();
         display.firstPage();
         do
         {
-            view.show(devices, val_selector.getSelector());
+            view.show(voltages, val_selector.getSelector());
         } while (display.nextPage());
+    }
+    void load(const int &dev_selector = 0) override
+    {
+        voltages = dev_selector == 0 ? repository.getLineDevices() : repository.getShadeDevices();
     }
     void previous() override { val_selector.decrement(); }
     void next() override { val_selector.increment(); }

@@ -15,10 +15,10 @@ public:
         const char *_name,
         const char *_mac_address_id,
         DeviceType _device_type,
-        DeviceState _device_state = DISCONNECTED) : name(_name),
-                                                    mac_address_id(_mac_address_id),
-                                                    device_type(_device_type),
-                                                    device_state(_device_state) {};
+        DeviceState _device_state = DeviceState::DISCONNECTED) : name(_name),
+                                                                 mac_address_id(_mac_address_id),
+                                                                 device_type(_device_type),
+                                                                 device_state(_device_state) {};
 
     const char *getName() const { return name; };
     const char *getMacAddressId() const { return mac_address_id; }

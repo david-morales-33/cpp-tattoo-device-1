@@ -1,15 +1,14 @@
 #pragma once
+#include <vector>
 #include <infrastructure/display.h>
-#include <persistence/linked_devices/data.h>
-#include <persistence/linked_devices/data.h>
 #include <core/remote_devices/icons/empty_box.h>
 #include <core/remote_devices/icons/empty_file.h>
+#include <core/remote_devices/data_transfer_objects/device.h>
 
 class RemoteDevicesView
 {
 private:
     Display &display;
-    DevicesListData devices;
 
     void setDevicesToPair(int position = 0, const char *txt = "NONE")
     {
@@ -36,7 +35,7 @@ private:
         display.drawFrame(((typ_selector * 65) + 2), ((16 * dev_selector) + 17), 59, 14, 1); // selector 2//ini=2-->16++
     }
 
-    void setEmptyLinkedDevices()
+    void setEmptyConnectedDevices()
     {
         display.setFontMode(1);
         display.setColor(1);
@@ -44,8 +43,8 @@ private:
         display.drawText(74, 37, "Waiting for");
         display.drawText(72, 47, "devices...");
     }
-    
-    void setEmptyAvailableDevices()
+
+    void setEmptyDisconnectedDevices()
     {
         display.setFontMode(1);
         display.setColor(1);
@@ -56,8 +55,12 @@ private:
     }
 
 public:
-    explicit RemoteDevicesView(Display &disp, DevicesListData dev) : display(disp), devices(dev) {}
-    void show(int typ_selector = 0, int dev_selector = 0)
+    explicit RemoteDevicesView(Display &disp) : display(disp) {}
+    void show(
+        std::vector<Device> disconnected_devices,
+        std::vector<Device> connected_devices,
+        int case_device = 6,
+        int device_selector = 0)
     {
         display.setFontMode(1);
         display.setColor(1);
@@ -74,15 +77,51 @@ public:
         display.drawText(13, 11, "PARIED");
         display.drawText(75, 11, "DEVICES");
 
-        //setEmptyLinkedDevices();
-        //setEmptyAvailableDevices();
+        
+        if (case_device == 1)
+        { // Elements full - set on the conneted devices
+            for (int i = 0; i < disconnected_devices.size(); i++)
+                setDevicesToPair(i, disconnected_devices[i].getName());
 
-        // for (int i = 0; i < devices.available_devices.size(); i++)
-        //     setDevicesToPair(i, devices.available_devices[i].name);
+            for (int i = 0; i < connected_devices.size(); i++)
+                setLinkedDevices(i, connected_devices[i].getName());
 
-        // for (int i = 0; i < devices.linked_devices.size(); i++)
-        //     setLinkedDevices(i, devices.linked_devices[i].name);
+            setSelector(0, device_selector);
+        }
 
-        //setSelector(typ_selector, dev_selector);
+        else if (case_device == 2)
+        { // Elements full - set on the disconneted devices
+            for (int i = 0; i < disconnected_devices.size(); i++)
+                setDevicesToPair(i, disconnected_devices[i].getName());
+
+            for (int i = 0; i < connected_devices.size(); i++)
+                setLinkedDevices(i, connected_devices[i].getName());
+
+            setSelector(1, device_selector);
+        }
+
+        else if (case_device == 3)
+        { // Only Connected Devices - set selector on the Connected devices
+            setEmptyDisconnectedDevices();
+
+            for (int i = 0; i < connected_devices.size(); i++)
+                setLinkedDevices(i, connected_devices[i].getName());
+
+            setSelector(0, device_selector);
+        }
+        else if (case_device == 4)
+        { // Only Disconnected Devices - set selector on the disconnected devices
+            setEmptyConnectedDevices();
+
+            for (int i = 0; i < disconnected_devices.size(); i++)
+                setDevicesToPair(i, disconnected_devices[i].getName());
+
+            setSelector(1, device_selector);
+        }
+        else
+        { // Emtpy elements - No selector
+            setEmptyConnectedDevices();
+            setEmptyDisconnectedDevices();
+        }
     }
 };

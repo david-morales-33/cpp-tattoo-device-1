@@ -1,95 +1,72 @@
 #pragma once
 #include <infrastructure/shared/interfaces/input.h>
 #include <infrastructure/display.h>
-#include <application/remote_devices/remote_devices_menu.h>
-#include <application/remote_devices/linked_devices_window_menu.h>
-#include <application/remote_devices/available_devices_window_menu.h>
+#include <core/shared/interfaces/menu_controller_params.h>
+#include <core/shared/interfaces/popup_controller.h>
+#include <core/shared/interfaces/view_controller.h>
+#include <core/shared/interfaces/interface_state.h>
+#include <core/shared/data_transfer_objects/selector.h>
 
 class RemoteDevicesController
 {
 private:
-    Display &display;
     IInput &input;
+    IMenuControllerParams<int> &menu_devices;
+    IPopupController<void> &modal_connected_devices;
+    IPopupController<void> &modal_disconnected_devices;
+    Selector selector;
+    InterfaceState state = InterfaceState::HIDDEN;
 
-    DevicesListData devices_list;
-    LinkedDevicesData devices_linked;
-
-    RemoteDevicesMenu remoteDevicesMenu;
-
-    LinkedDevicesWindowMenu linkedDevicesWindow;
-    AvailableDevicesWindowMenu availableDevicesWindow;
-
-    bool state = LOW;
-
-    void setLinkedDevices()
+    explicit RemoteDevicesController(
+        IInput &_input,
+        IMenuControllerParams<int> &_menu_devices,
+        IPopupController<void> &_modal_connected_devices,
+        IPopupController<void> &_modal_disconnected_devices) : input(_input),
+                                                               menu_devices(_menu_devices),
+                                                               modal_connected_devices(_modal_connected_devices),
+                                                               modal_disconnected_devices(_modal_disconnected_devices),
+                                                               selector(2) {}
+    void left()
     {
-        remoteDevicesMenu.setDevSelector(0);
-        remoteDevicesMenu.setSelectorSize(devices_list.linked_devices.size());
-        remoteDevicesMenu.left();
+        selector.decrement();
+        menu_devices.load(selector.getSelector());
     }
-    void setAvailableDevices()
+    void right()
     {
-        remoteDevicesMenu.setDevSelector(0);
-        remoteDevicesMenu.setSelectorSize(devices_list.available_devices.size());
-        remoteDevicesMenu.right();
-    }
-    void setEnterLinkedDevices()
-    {
-        remoteDevicesMenu.hide();
-        linkedDevicesWindow.show();
-    }
-    void setEnterAvailableDevices()
-    {
-        remoteDevicesMenu.hide();
-        availableDevicesWindow.show();
-    }
-    void setBack()
-    {
-        remoteDevicesMenu.show();
-        linkedDevicesWindow.hide();
-        availableDevicesWindow.hide();
+        selector.increment();
+        menu_devices.load(selector.getSelector());
     }
 
 public:
-    explicit RemoteDevicesController(Display &disp,IInput &inp, DevicesListData dev_list, LinkedDevicesData dev_link) : display(disp), input(inp), devices_list(dev_list), devices_linked(dev_link), remoteDevicesMenu(disp, dev_list), linkedDevicesWindow(disp, dev_list), availableDevicesWindow(disp, dev_list, dev_link) {}
-
-    void begin()
-    {
-        remoteDevicesMenu.setSelectorSize(devices_list.linked_devices.size());
-    }
-
     void execute()
     {
-        if (remoteDevicesMenu.getState())
-        {
+
+        if (menu_devices.getState() == InterfaceState::VISIBLE)
+        { // => devices menu
             if (input.isPressed(UP))
-                remoteDevicesMenu.up();
+                menu_devices.previous();
             if (input.isPressed(DOWN))
-                remoteDevicesMenu.down();
-            if (input.isPressed(RIGHT) && devices_list.available_devices.size() != 0)
-                setAvailableDevices();
-            if (input.isPressed(LEFT) && devices_list.linked_devices.size() != 0)
-                setLinkedDevices();
-            if (input.isPressed(ENTER))
-                remoteDevicesMenu.getTypSelector() == 0 ? setEnterLinkedDevices() : setEnterAvailableDevices();
-            
-            remoteDevicesMenu.render();
+                menu_devices.next();
+            if (input.isPressed(LEFT))
+                left();
+            if (input.isPressed(RIGHT))
+                right();
+
+            menu_devices.render();
         }
 
-        if (linkedDevicesWindow.getState())
-        {
-            if (input.isPressed(BACK))
-                setBack();
-            linkedDevicesWindow.render();
+        else if (modal_connected_devices.getState() == InterfaceState::VISIBLE)
+        { // => connected devices modal
+            modal_connected_devices.render();
         }
 
-        if (availableDevicesWindow.getState())
-        {
-            if (input.isPressed(BACK))
-                setBack();
-            availableDevicesWindow.render();
+        else if (modal_disconnected_devices.getState() == InterfaceState::VISIBLE)
+        { // => disconnected devices modal
+            modal_disconnected_devices.render();
         }
     }
-    void show() { state = HIGH; }
-    void hide() { state = LOW; }
+
+    void hide() { state = InterfaceState::HIDDEN; }
+    void show() { state = InterfaceState::VISIBLE; }
+    InterfaceState getState() { state; }
 };
