@@ -9,10 +9,10 @@ private:
 
 public:
     TimerGroup() : time_list{
-                       Time{TimeType::START_TIME},
-                       Time{TimeType::END_TIME},
-                       Time{TimeType::TOTAL_TIME},
-                       Time{TimeType::DEVICE_TIME}} {}
+                       Time{"00:00:00", TimeType::START_TIME},
+                       Time{"00:00:00", TimeType::END_TIME},
+                       Time{"00:00:00", TimeType::TOTAL_TIME},
+                       Time{"00:00:00", TimeType::DEVICE_TIME}} {}
 
     const Time &resolve(TimeType type) const
     {

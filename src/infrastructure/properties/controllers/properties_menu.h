@@ -14,6 +14,7 @@ private:
     PropertiesView view;
     Selector selector;
     InterfaceState state = InterfaceState::VISIBLE;
+    TimerGroup timer_group;
 
 public:
     explicit PropertiesMenu(
@@ -22,12 +23,15 @@ public:
                                                    view(_display),
                                                    repository(_repository),
                                                    selector(2) {}
+
+    void load() override { timer_group = repository.find(); }
+
     void render() override
     {
         display.firstPage();
         do
         {
-            view.show(selector.getSelector());
+            view.show(timer_group, selector.getSelector());
         } while (display.nextPage());
     }
     void next() override { selector.increment(); }
