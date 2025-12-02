@@ -23,6 +23,6 @@ public:
     void setSelector(int _selector)
     {
         if (_selector < (elements - 1))
-            elements = _selector;
+            selector = _selector;
     }
 };

@@ -15,7 +15,7 @@ private:
         display.setFontMode(1);
         display.setColor(1);
         display.setFont(u8g_font_5x8);
-        display.setCursor(69, ((position * 16) + 27));
+        display.setCursor(74, ((position * 15) + 27));
         display.print(txt);
     }
 
@@ -24,7 +24,7 @@ private:
         display.setFontMode(1);
         display.setColor(1);
         display.setFont(u8g_font_5x8);
-        display.setCursor(4, ((position * 16) + 27));
+        display.setCursor(6, ((position * 15) + 27));
         display.print(txt);
     }
 
@@ -32,19 +32,10 @@ private:
     {
         display.setFontMode(1);
         display.setColor(1);
-        display.drawFrame(((typ_selector * 65) + 2), ((16 * dev_selector) + 17), 59, 14, 1); // selector 2//ini=2-->16++
+        display.drawFrame(((typ_selector * 65) + 2), ((15 * dev_selector) + 17), 59, 14, 1); // selector 2//ini=2-->16++
     }
 
     void setEmptyConnectedDevices()
-    {
-        display.setFontMode(1);
-        display.setColor(1);
-        display.setFont(u8g_font_5x7);
-        display.drawText(74, 37, "Waiting for");
-        display.drawText(72, 47, "devices...");
-    }
-
-    void setEmptyDisconnectedDevices()
     {
         display.setFontMode(1);
         display.setColor(1);
@@ -52,6 +43,15 @@ private:
         // display.drawBitmap(16, 19, 28, 28, EMPTY_FILE_BITS);
         display.setFont(u8g_font_5x7);
         display.drawText(8, 57, "No devices");
+    }
+
+    void setEmptyDisconnectedDevices()
+    {
+        display.setFontMode(1);
+        display.setColor(1);
+        display.setFont(u8g_font_5x7);
+        display.drawText(70, 37, "Waiting for");
+        display.drawText(72, 47, "devices...");
     }
 
 public:
@@ -77,8 +77,7 @@ public:
         display.drawText(13, 11, "PARIED");
         display.drawText(75, 11, "DEVICES");
 
-        
-        if (case_device == 1)
+                if (case_device == 1)
         { // Elements full - set on the conneted devices
             for (int i = 0; i < disconnected_devices.size(); i++)
                 setDevicesToPair(i, disconnected_devices[i].getName());

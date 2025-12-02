@@ -5,44 +5,46 @@
 class DeviceList
 {
 private:
-    Device lineDevice = Device("XXX.XXX.XXX", "XX:XX:XX:XX:XX:XX", LINE);
-    Device shadeDevice = Device("XXX.XXX.XXX", "XX:XX:XX:XX:XX:XX", SHADE);
-    Device pedalDevice = Device("XXX.XXX.XXX", "XX:XX:XX:XX:XX:XX", PEDAL);
+    Device lineDevice = Device(DeviceType::LINE);
+    Device shadeDevice = Device(DeviceType::SHADE);
+    Device pedalDevice = Device(DeviceType::PEDAL);
 
     Device &resolve(DeviceType type)
     {
         switch (type)
         {
-        case LINE:
+        case DeviceType::LINE:
             return lineDevice;
-        case SHADE:
+        case DeviceType::SHADE:
             return shadeDevice;
-        case PEDAL:
+        case DeviceType::PEDAL:
             return pedalDevice;
         }
+        throw std::runtime_error("Invalid DeviceType");
     }
 
     const Device &resolve(DeviceType type) const
     {
         switch (type)
         {
-        case LINE:
+        case DeviceType::LINE:
             return lineDevice;
-        case SHADE:
+        case DeviceType::SHADE:
             return shadeDevice;
-        case PEDAL:
+        case DeviceType::PEDAL:
             return pedalDevice;
         }
+        throw std::runtime_error("Invalid DeviceType");
     }
 
 public:
-    std::vector<Device> getConnectedDevices() const
+    std::vector<Device> getConnectedDevices() const 
     {
         std::vector<Device> connected_devices;
         const Device *all[3] = {&lineDevice, &shadeDevice, &pedalDevice};
 
         for (auto dev : all)
-            if (dev->getDeviceState() == CONNECTED)
+            if (dev->getDeviceState() == DeviceState::CONNECTED)
                 connected_devices.push_back(*dev);
 
         return connected_devices;
@@ -52,25 +54,23 @@ public:
     {
         Device &slot = resolve(device.getDeviceType());
 
-        if (slot.getDeviceState() != DISCONNECTED)
+        if (slot.getDeviceState() != DeviceState::DISCONNECTED)
             return false;
 
         slot.setMacAddressId(device.getMacAddressId());
         slot.setName(device.getName());
-        slot.setDeviceState(CONNECTED);
+        slot.setDeviceState(DeviceState::CONNECTED);
         return true;
     }
 
     bool disconnectDevice(DeviceType type)
     {
         Device &slot = resolve(type);
-
-        if (slot.getDeviceState() != CONNECTED)
+        
+        if (slot.getDeviceState() != DeviceState::CONNECTED)
             return false;
 
-        slot.setDeviceState(DISCONNECTED);
-        slot.setName("XXX.XXX.XXX");
-        slot.setMacAddressId("XX:XX:XX:XX:XX:XX");
+        slot = Device(type);
         return true;
     }
 

@@ -2,30 +2,29 @@
 
 #include <infrastructure/shared/input_impl.h>
 #include <infrastructure/display.h>
-#include <infrastructure/device_configuration/persistence/device_configuration_repository_impl.h>
-#include <infrastructure/device_configuration/persistence/device_configuration_test_provider.h>
-#include <application/device_configuration/device_configuration_controller.h>
-#include <infrastructure/device_configuration/controllers/configure_values_menu.h>
-#include <infrastructure/device_configuration/controllers/configure_devices_menu.h>
-#include <infrastructure/device_configuration/controllers/configure_modal.h>
+#include <infrastructure/remote_devices/persistence/remote_devices_test_provider.h>
+#include <infrastructure/remote_devices/persistence/remote_devices_repository_test_impl.h>
+#include <infrastructure/remote_devices/controllers/remote_devices_menu.h>
+#include <application/remote_devices/remote_devices_controller.h>
+#include <infrastructure/remote_devices/controllers/remote_devices_connected_modal.h>
 
 Display display;
 InputImpl input;
+RemoteDevicesTestProvider provider;
+RemoteDevicesRepositoryTestImpl repository(provider);
 
-DeviceConfigurationTestProvider provider;
+RemoteDevicesMenu menu(display, repository);
+RemoteDevicesConnectedDeviceModal modal;
 
-DeviceConfigurationRepositoryImpl reposirory(provider);
-
-ConfigureDevicesMenu devices_menu(display, reposirory);
-ConfigureValuesMenu values_menu(display, reposirory);
-ConfigureModal modal(display, reposirory);
-
-ConfigureDevicesController controller(input, devices_menu, values_menu, modal);
+RemoteDevicesController controller(input, menu, modal, modal);
 
 void setup()
 {
     display.begin();
     input.begin();
+    provider.load();
+    repository.search();
+    menu.load(0);
 }
 void loop()
 {

@@ -10,5 +10,6 @@ public:
     virtual void search() = 0;
     virtual const std::vector<Device> &findConnetedDevices() const = 0;
     virtual const std::vector<Device> &findDisconnectedDevices() const = 0;
+    //virtual const std::vector<Device> &findPorts() const = 0;
     virtual ~IRemoteDevicesRepository() {}
 };

@@ -12,7 +12,7 @@ private:
     Display &display;
     IRemoteDevicesRepository &repository;
     RemoteDevicesView view;
-    InterfaceState state;
+    InterfaceState state = InterfaceState::VISIBLE;
     std::vector<Device> disconnected_devices;
     std::vector<Device> connected_devices;
     Selector selector;
@@ -31,22 +31,22 @@ public:
         disconnected_devices = repository.findDisconnectedDevices();
         connected_devices = repository.findConnetedDevices();
 
-        if (!disconnected_devices.empty() && !connected_devices.empty() && _type_selector == 0)
-        { // Elements full - set on the conneted devices
+        if (!disconnected_devices.empty() && !connected_devices.empty() && _type_selector == 0) //->
+        {                                                                                       // Elements full - set on the conneted devices
             devices_case = 1;
+            selector.setSelector(0);
             selector.setElements(connected_devices.size());
-            selector.setSelector(0);
         }
 
-        else if (!disconnected_devices.empty() && !connected_devices.empty() && _type_selector == 1)
-        { // Elements full - set on the disconneted devices
+        else if (!disconnected_devices.empty() && !connected_devices.empty() && _type_selector == 1) //->
+        {                                                                                            // Elements full - set on the disconneted devices
             devices_case = 2;
-            selector.setElements(disconnected_devices.size());
             selector.setSelector(0);
+            selector.setElements(disconnected_devices.size());
         }
 
-        else if (!connected_devices.empty())
-        { // Only Connected Devices - set selector on the Connected devices
+        else if (!connected_devices.empty()) // ->
+        {                                    // Only Connected Devices - set selector on the Connected devices
             devices_case = 3;
             selector.setElements(connected_devices.size());
             selector.setSelector(0);

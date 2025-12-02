@@ -19,6 +19,11 @@ public:
                                                                  mac_address_id(_mac_address_id),
                                                                  device_type(_device_type),
                                                                  device_state(_device_state) {};
+    Device(
+        DeviceType _device_type,
+        DeviceState _device_state = DeviceState::DISCONNECTED) : device_type(_device_type),
+                                                                 device_state(_device_state) {};
+    Device() {};
 
     const char *getName() const { return name; };
     const char *getMacAddressId() const { return mac_address_id; }

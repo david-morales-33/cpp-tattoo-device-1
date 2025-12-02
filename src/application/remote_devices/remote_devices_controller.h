@@ -12,20 +12,11 @@ class RemoteDevicesController
 private:
     IInput &input;
     IMenuControllerParams<int> &menu_devices;
-    IPopupController<void> &modal_connected_devices;
-    IPopupController<void> &modal_disconnected_devices;
+    IPopupController<Device> &modal_connected_devices;
+    IPopupController<Device> &modal_disconnected_devices;
     Selector selector;
     InterfaceState state = InterfaceState::HIDDEN;
 
-    explicit RemoteDevicesController(
-        IInput &_input,
-        IMenuControllerParams<int> &_menu_devices,
-        IPopupController<void> &_modal_connected_devices,
-        IPopupController<void> &_modal_disconnected_devices) : input(_input),
-                                                               menu_devices(_menu_devices),
-                                                               modal_connected_devices(_modal_connected_devices),
-                                                               modal_disconnected_devices(_modal_disconnected_devices),
-                                                               selector(2) {}
     void left()
     {
         selector.decrement();
@@ -38,6 +29,15 @@ private:
     }
 
 public:
+    explicit RemoteDevicesController(
+        IInput &_input,
+        IMenuControllerParams<int> &_menu_devices,
+        IPopupController<Device> &_modal_connected_devices,
+        IPopupController<Device> &_modal_disconnected_devices) : input(_input),
+                                                               menu_devices(_menu_devices),
+                                                               modal_connected_devices(_modal_connected_devices),
+                                                               modal_disconnected_devices(_modal_disconnected_devices),
+                                                               selector(2) {}
     void execute()
     {
 
@@ -68,5 +68,5 @@ public:
 
     void hide() { state = InterfaceState::HIDDEN; }
     void show() { state = InterfaceState::VISIBLE; }
-    InterfaceState getState() { state; }
+    InterfaceState getState() { return state; }
 };
