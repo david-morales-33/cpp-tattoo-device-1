@@ -5,7 +5,7 @@
 class IPropertiesTimerRepository
 {
 public:
-    virtual void save(int minutes) = 0;
+    virtual void save(const Time &time) = 0;
     virtual void setInitialTime() = 0;
     virtual void setFinalTime() = 0;
     virtual const TimerGroup &find() const = 0;

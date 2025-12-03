@@ -21,6 +21,7 @@ public:
             if (_time.getType() == type)
                 return _time;
         }
+        throw std::runtime_error("TimeType not found in TimerGroup");
     }
 
     void update(const Time &time)
@@ -30,5 +31,6 @@ public:
             if (_time.getType() == time.getType())
                 _time.setTime(time.getTime());
         }
+        throw std::runtime_error("TimeType not found in TimerGroup");
     }
 };
