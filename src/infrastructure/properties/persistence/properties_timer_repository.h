@@ -11,6 +11,10 @@ private:
     IDataProvider<Time, Time> &time_provider;
 
 public:
+    explicit PropertiesTimerRepository(
+        IDataProvider<Time, TimerGroup> &_memory_provider,
+        IDataProvider<Time, Time> &_time_provider) : memory_provider(_memory_provider), time_provider(_time_provider) {}
+        
     void save(const Time &time) override { memory_provider.persist(time); }
     void setInitialTime() override
     {

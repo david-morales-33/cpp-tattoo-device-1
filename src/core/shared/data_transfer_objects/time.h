@@ -14,8 +14,11 @@ private:
     int seconds() const { return secs % 60; }
 
 public:
-    Time(const char *_time, TimeType _type) : time(_time), type(_type) {}
-    Time(int _secs = 0) : secs(_secs) {}
+    Time(int _secs)
+        : secs(_secs), type(TimeType::NONE) {}
+
+    Time(const char *_time, TimeType _type)
+        : time(_time), secs(0), type(_type) {}
 
     const char *getTime() const { return time; }
     const TimeType getType() const { return type; }

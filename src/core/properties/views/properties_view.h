@@ -39,12 +39,13 @@ private:
         display.drawText(36, 49, "Tpro 31C Hpro 11%");
         display.drawText(36, 61, "Tact 25C Hact 11%");
     }
+
     void setClock(const TimerGroup &timer_group)
     {
-        std::string start_time = std::string("START") + timer_group.resolve(TimeType::START_TIME).getTime();
-        std::string end_time = std::string("END") + timer_group.resolve(TimeType::END_TIME).getTime();
-        std::string total_time = std::string("TOTAL") + timer_group.resolve(TimeType::TOTAL_TIME).getTime();
-        std::string device_time = std::string("DEVICE") + timer_group.resolve(TimeType::DEVICE_TIME).getTime();
+        std::string start_time = timer_group.resolve(TimeType::START_TIME).getTime();
+        std::string end_time = timer_group.resolve(TimeType::END_TIME).getTime();
+        std::string total_time = timer_group.resolve(TimeType::TOTAL_TIME).getTime();
+        std::string device_time = timer_group.resolve(TimeType::DEVICE_TIME).getTime();
 
         display.setFontMode(1);
         display.setColor(0);
@@ -53,10 +54,15 @@ private:
         display.drawText(60, 12, "TIME");
         display.setColor(1);
         display.setFont(u8g_font_5x8);
-        display.drawText(40, 25, start_time.c_str());
-        display.drawText(40, 37, end_time.c_str());
-        display.drawText(40, 49, total_time.c_str());
-        display.drawText(40, 61, device_time.c_str());
+        display.drawText(40, 25, "START");
+        display.drawText(40, 37, "END");
+        display.drawText(40, 49, "TOTAL");
+        display.drawText(40, 61, "DEVICE");
+
+        display.drawText(76, 25, start_time.c_str());
+        display.drawText(76, 37, end_time.c_str());
+        display.drawText(76, 49, total_time.c_str());
+        display.drawText(76, 61, device_time.c_str());
     }
 
 public:
@@ -64,7 +70,7 @@ public:
 
     void show(const TimerGroup &timer_group, int position = 0)
     {
-        setElements();
+        setElements(position);
         position == 0 ? setTemperature() : setClock(timer_group);
     }
 };

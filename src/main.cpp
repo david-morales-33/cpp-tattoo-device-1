@@ -1,30 +1,24 @@
 #include <Arduino.h>
-
 #include <infrastructure/shared/input_impl.h>
 #include <infrastructure/display.h>
-#include <infrastructure/remote_devices/persistence/remote_devices_test_provider.h>
-#include <infrastructure/remote_devices/persistence/remote_devices_repository_test_impl.h>
-#include <infrastructure/remote_devices/controllers/remote_devices_menu.h>
-#include <application/remote_devices/remote_devices_controller.h>
-#include <infrastructure/remote_devices/controllers/remote_devices_connected_modal.h>
+#include <infrastructure/properties/persistence/properties_memory_provider.h>
+#include <infrastructure/properties/persistence/properties_timer_test_provider.h>
+#include <infrastructure/properties/persistence/properties_timer_repository.h>
+#include <infrastructure/properties/controllers/properties_menu.h>
+#include <application/properties/properties_controller.h>
 
 Display display;
 InputImpl input;
-RemoteDevicesTestProvider provider;
-RemoteDevicesRepositoryTestImpl repository(provider);
-
-RemoteDevicesMenu menu(display, repository);
-RemoteDevicesConnectedDeviceModal modal;
-
-RemoteDevicesController controller(input, menu, modal, modal);
+PropertiesMemoryProvider memory_provider;
+PropertiesTimerTestProvider time_provider;
+PropertiesTimerRepository repository(memory_provider, time_provider);
+PropertiesMenu menu(display, repository);
+PropertiesController controller(input, menu);
 
 void setup()
 {
     display.begin();
     input.begin();
-    provider.load();
-    repository.search();
-    menu.load(0);
 }
 void loop()
 {
