@@ -5,10 +5,10 @@ template <typename D>
 class IPopupController
 {
 public:
-    virtual void left() = 0;
-    virtual void right() = 0;
-    virtual void up() = 0;
-    virtual void down() = 0;
+    virtual void left() {}
+    virtual void right() {}
+    virtual void up() {}
+    virtual void down() {}
     virtual void enter() = 0;
     virtual void hide() = 0;
     virtual void show() = 0;

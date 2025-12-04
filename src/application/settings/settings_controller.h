@@ -3,6 +3,8 @@
 #include <infrastructure/shared/interfaces/input.h>
 #include <infrastructure/shared/pins.h>
 #include <core/shared/interfaces/interface_state.h>
+#include <core/shared/interfaces/popup_controller.h>
+#include <core/settings/interfaces/sound_state.h>
 
 class SettingsController
 {
@@ -10,7 +12,7 @@ private:
     IInput &input;
     IMenuControllerVoid &main_menu;
     IMenuControllerVoid &date_time_menu;
-    IMenuControllerVoid &sound_menu;
+    IPopupController<SoundState> &sound_modal;
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
@@ -18,10 +20,10 @@ public:
         IInput &_input,
         IMenuControllerVoid &_main_menu,
         IMenuControllerVoid &_date_time_menu,
-        IMenuControllerVoid &_sound_menu) : input(_input),
-                                            main_menu(_main_menu),
-                                            date_time_menu(_date_time_menu),
-                                            sound_menu(_sound_menu)
+        IPopupController<SoundState> &_sound_modal) : input(_input),
+                                                      main_menu(_main_menu),
+                                                      date_time_menu(_date_time_menu),
+                                                      sound_modal(_sound_modal)
     {
     }
     void execute()
@@ -46,15 +48,20 @@ public:
                 setMainView();
             date_time_menu.render();
         }
-        else if (sound_menu.getState() == InterfaceState::VISIBLE && main_menu.getSelector() == 1)
+        else if (sound_modal.getState() == InterfaceState::VISIBLE && main_menu.getSelector() == 1)
         {
             if (input.isPressed(LEFT))
-                sound_menu.next();
+                sound_modal.left();
             if (input.isPressed(RIGHT))
-                sound_menu.next();
+                sound_modal.right();
             if (input.isPressed(BACK))
                 setMainView();
-            sound_menu.render();
+            if (input.isPressed(ENTER))
+            {
+                sound_modal.enter();
+                setMainView();
+            }
+            sound_modal.render();
         }
     }
 
@@ -66,11 +73,11 @@ private:
     void setSoundView()
     {
         main_menu.hide();
-        sound_menu.show();
+        sound_modal.show();
     }
     void setMainView()
     {
-        sound_menu.hide();
+        sound_modal.hide();
         date_time_menu.hide();
         main_menu.show();
     }
