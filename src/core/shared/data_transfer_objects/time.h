@@ -14,6 +14,7 @@ private:
     int seconds() const { return secs % 60; }
 
 public:
+    Time() {}
     Time(int _secs)
         : secs(_secs), type(TimeType::NONE) {}
 

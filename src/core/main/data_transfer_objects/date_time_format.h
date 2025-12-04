@@ -10,7 +10,8 @@ private:
     Time time;
 
 public:
-    explicit DateTimeFormat(Date _date, Time _time) : date(_date), time(_time) {}
+    DateTimeFormat() {}
+    DateTimeFormat(Date _date, Time _time) : date(_date), time(_time) {}
     Time &getTime() { return time; }
     Date &getDate() { return date; }
     const Time &getTime() const { return time; }

@@ -4,7 +4,6 @@
 class IMenuController
 {
 public:
-    virtual void load() {}
     virtual void next() = 0;
     virtual void previous() = 0;
     virtual void hide() = 0;

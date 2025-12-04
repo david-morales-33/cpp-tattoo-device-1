@@ -1,25 +1,26 @@
 #pragma once
-#include <core/shared/interfaces/menu_controller_void.h>
+#include <core/shared/interfaces/menu_controller_params.h>
 #include <infrastructure/shared/interfaces/input.h>
 #include <infrastructure/shared/pins.h>
 #include <core/shared/interfaces/interface_state.h>
 #include <core/shared/interfaces/popup_controller.h>
 #include <core/settings/interfaces/sound_state.h>
+#include <core/main/data_transfer_objects/slider.h>
 
 class SettingsController
 {
 private:
     IInput &input;
-    IMenuControllerVoid &main_menu;
-    IMenuControllerVoid &date_time_menu;
+    IMenuControllerParams<Slider> &main_menu;
+    IMenuControllerParams<Slider> &date_time_menu;
     IPopupController<SoundState> &sound_modal;
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
     explicit SettingsController(
         IInput &_input,
-        IMenuControllerVoid &_main_menu,
-        IMenuControllerVoid &_date_time_menu,
+        IMenuControllerParams<Slider> &_main_menu,
+        IMenuControllerParams<Slider> &_date_time_menu,
         IPopupController<SoundState> &_sound_modal) : input(_input),
                                                       main_menu(_main_menu),
                                                       date_time_menu(_date_time_menu),

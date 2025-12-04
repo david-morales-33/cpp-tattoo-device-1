@@ -10,7 +10,7 @@ private:
     Display &display;
 
 public:
-    explicit SettingSoundView(Display &disp) : SettingsView(disp, "SOUND"), display(disp) {}
+    explicit SettingSoundView(Display &disp) : SettingsView(disp), display(disp) {}
 
     void show(const Slider &slider, const DateTimeFormat &data, SoundState state)
     {

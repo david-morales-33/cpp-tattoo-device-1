@@ -12,7 +12,9 @@ private:
     Display &display;
 
 public:
-    explicit SettingsView(Display &disp, const char *txt) : MainView(disp), display(disp)}{}
+    explicit SettingsView(Display &disp) : MainView(disp), display(disp)
+    {
+    }
 
     void show(const Slider &slider, const DateTimeFormat &data, int selector = 0)
     {
