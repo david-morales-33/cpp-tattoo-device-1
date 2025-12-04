@@ -1,7 +1,8 @@
 #pragma once
 #include <core/settings/views/settings_view.h>
+#include <core/main/data_transfer_objects/slider.h>
+#include <core/main/data_transfer_objects/date_time_format.h>
 #include <infrastructure/display.h>
-#include <persistence/main/data.h>
 
 class SettingsOptionsView : public MainView
 {
@@ -11,9 +12,9 @@ private:
 
 public:
     explicit SettingsOptionsView(Display &disp) : MainView(disp), display(disp) {}
-    void show(SliderData slider, int selector = 0)
+    void show(const Slider &slider, const DateTimeFormat &data, int selector = 0)
     {
-        MainView::show(slider);
+        MainView::show(slider, data);
         display.setFontMode(1);
         display.setColor(0);
         display.drawBox(30, 5, 70, 54);

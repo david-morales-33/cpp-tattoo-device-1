@@ -46,7 +46,7 @@ public:
         display.setFont(u8g2_font_6x10_tf);
         display.drawText(2, 27, data.getDate().getDate().c_str());
         display.setFont(u8g2_font_luRS14_tf);
-        display.drawText(2, 16, data.getTime().getTime().c_str());
+        display.drawText(2, 16, data.getTime().getFormat().c_str());
 
         // --- Temperatura y día ---
         display.setColor(1);
