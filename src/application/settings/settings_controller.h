@@ -71,6 +71,7 @@ private:
     void setMainView()
     {
         sound_menu.hide();
+        date_time_menu.hide();
         main_menu.show();
     }
 };

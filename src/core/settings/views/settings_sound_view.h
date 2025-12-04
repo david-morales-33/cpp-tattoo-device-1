@@ -4,13 +4,13 @@
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/settings/interfaces/sound_state.h>
 
-class SoundView : public SettingsView
+class SettingSoundView : public SettingsView
 {
 private:
     Display &display;
 
 public:
-    explicit SoundView(Display &disp) : SettingsView(disp, "SOUND"), display(disp) {}
+    explicit SettingSoundView(Display &disp) : SettingsView(disp, "SOUND"), display(disp) {}
 
     void show(const Slider &slider, const DateTimeFormat &data, SoundState state)
     {

@@ -4,14 +4,14 @@
 #include <core/main/data_transfer_objects/date_time_format.h>
 #include <infrastructure/display.h>
 
-class SettingsOptionsView : public MainView
+class SettingsDateTimeView : public MainView
 {
 
 private:
     Display &display;
 
 public:
-    explicit SettingsOptionsView(Display &disp) : MainView(disp), display(disp) {}
+    explicit SettingsDateTimeView(Display &disp) : MainView(disp), display(disp) {}
     void show(const Slider &slider, const DateTimeFormat &data, int selector = 0)
     {
         MainView::show(slider, data);
