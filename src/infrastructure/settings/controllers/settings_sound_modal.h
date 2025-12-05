@@ -1,6 +1,5 @@
 #pragma once
 #include <core/shared/interfaces/popup_controller.h>
-#include <core/shared/data_transfer_objects/selector.h>
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/main/interfaces/main_date_time_repository.h>
 #include <core/settings/interfaces/settings_sound_repository.h>
@@ -14,7 +13,6 @@ private:
     IMainDateTimeRepository &main_repository;
     ISettingsSoundRepository &settings_repository;
     SettingSoundView view;
-    Selector selector;
     SoundState sound_state;
     InterfaceState state = InterfaceState::HIDDEN;
     Slider slider;
@@ -48,20 +46,8 @@ public:
         date_time = main_repository.get();
     }
     InterfaceState getState() const override { return state; }
-    const int &getSelector() const override { return selector.getSelector(); }
+    const int &getSelector() const override { return sound_state == SoundState::ON ? 1 : 0; }
 
 private:
-    void switchSoundState()
-    {
-        if (sound_state == SoundState::OFF)
-        {
-            sound_state = SoundState::ON;
-            selector.setSelector(1);
-        }
-        else
-        {
-            sound_state = SoundState::OFF;
-            selector.setSelector(0);
-        }
-    }
+    void switchSoundState() { sound_state == SoundState::OFF ? sound_state = SoundState::ON : sound_state = SoundState::OFF; }
 };
