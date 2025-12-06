@@ -1,10 +1,11 @@
 #pragma once
+
 #include <core/shared/interfaces/popup_controller.h>
 #include <core/remote_devices/data_transfer_objects/device.h>
 #include <infrastructure/display.h>
 #include <core/remote_devices/interfaces/remote_devices_repository.h>
 
-class RemoteDevicesConnectedDeviceModal : public IPopupController<Device>
+class RemoteDevicesDisconnectedDevicesModal : public IPopupController<Device>
 {
 private:
     Display &display;
@@ -13,7 +14,7 @@ private:
     int selector = 0;
 
 public:
-    explicit RemoteDevicesConnectedDeviceModal(
+    explicit RemoteDevicesDisconnectedDevicesModal(
         Display &_display,
         IRemoteDevicesRepository &_repository) : display(_display), repository(_repository) {}
     void left() override {}

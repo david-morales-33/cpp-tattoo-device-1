@@ -1,7 +1,6 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/device_configuration/views/device_configuration_selector.h>
-#include <persistence/device_configuration/data.h>
 
 class DeviceConfigurationModal : public DeviceConfigurationSelector
 {

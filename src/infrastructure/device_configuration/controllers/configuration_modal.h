@@ -7,7 +7,7 @@
 #include <core/device_configuration/data_transfer_objects/selectors.h>
 #include <core/device_configuration/data_transfer_objects/voltage_selector.h>
 
-class ConfigureModal : public IPopupController<ConfigurationSelectors>
+class ConfigurationModal : public IPopupController<ConfigurationSelectors>
 {
 private:
     Display &display;
@@ -21,7 +21,7 @@ private:
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
-    explicit ConfigureModal(
+    explicit ConfigurationModal(
         Display &_display,
         IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), modal(_display) {}
 

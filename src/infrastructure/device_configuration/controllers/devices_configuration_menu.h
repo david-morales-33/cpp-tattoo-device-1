@@ -5,7 +5,7 @@
 #include <core/shared/interfaces/menu_controller_void.h>
 #include <core/device_configuration/interfaces/device_configuration_repository.h>
 
-class ConfigureDevicesMenu : public IMenuControllerVoid
+class DevicesConfigurationMenu : public IMenuControllerVoid
 {
 private:
     Display &display;
@@ -15,7 +15,7 @@ private:
     InterfaceState state = InterfaceState::VISIBLE;
 
 public:
-    explicit ConfigureDevicesMenu(Display &disp, IDeviceConfigurationRepository &_repository) : display(disp), repository(_repository), view(disp), selector(2) {}
+    explicit DevicesConfigurationMenu(Display &disp, IDeviceConfigurationRepository &_repository) : display(disp), repository(_repository), view(disp), selector(2) {}
 
     void render() override
     {

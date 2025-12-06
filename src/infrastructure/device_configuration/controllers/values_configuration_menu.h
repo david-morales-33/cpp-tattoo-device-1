@@ -6,7 +6,7 @@
 #include <core/shared/interfaces/interface_state.h>
 #include <core/device_configuration/interfaces/device_configuration_repository.h>
 
-class ConfigureValuesMenu : public IMenuControllerParams<int>
+class ValuesConfigurationMenu : public IMenuControllerParams<int>
 {
 private:
     Display &display;
@@ -17,7 +17,7 @@ private:
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
-    explicit ConfigureValuesMenu(Display &_display, IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), view(_display), val_selector(4) {}
+    explicit ValuesConfigurationMenu(Display &_display, IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), view(_display), val_selector(4) {}
     void render() override
     {
         display.firstPage();
