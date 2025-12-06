@@ -24,5 +24,5 @@ public:
     TimePeriod getPeriod() { return prd; }
     const char *getHour() { return hour; }
     const char *getMinute() { return minute; }
-    std::string getTime() const { return time; }
+    std::string getFormat() const { return time; }
 };

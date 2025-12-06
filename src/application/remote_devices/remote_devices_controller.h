@@ -6,6 +6,7 @@
 #include <core/shared/interfaces/view_controller.h>
 #include <core/shared/interfaces/interface_state.h>
 #include <core/shared/data_transfer_objects/selector.h>
+#include <core/remote_devices/data_transfer_objects/device.h>
 
 class RemoteDevicesController
 {

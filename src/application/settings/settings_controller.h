@@ -13,7 +13,7 @@ private:
     IInput &input;
     IMenuControllerParams<Slider> &main_menu;
     IMenuControllerParams<Slider> &date_time_menu;
-    IPopupController<SoundState> &sound_modal;
+    IPopupController<Slider> &sound_modal;
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
@@ -21,7 +21,7 @@ public:
         IInput &_input,
         IMenuControllerParams<Slider> &_main_menu,
         IMenuControllerParams<Slider> &_date_time_menu,
-        IPopupController<SoundState> &_sound_modal) : input(_input),
+        IPopupController<Slider> &_sound_modal) : input(_input),
                                                       main_menu(_main_menu),
                                                       date_time_menu(_date_time_menu),
                                                       sound_modal(_sound_modal)

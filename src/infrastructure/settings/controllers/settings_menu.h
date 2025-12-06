@@ -15,7 +15,7 @@ private:
     Selector selector;
     Slider slider;
     DateTimeFormat date_time;
-    InterfaceState state = InterfaceState::HIDDEN;
+    InterfaceState state = InterfaceState::VISIBLE;
 
 public:
     explicit SettingsMenu(

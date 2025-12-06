@@ -11,6 +11,7 @@ private:
 
 public:
     DateTimeFormat(DateFormat _date, TimeFormat _time) : date(_date), time(_time) {}
+    DateTimeFormat() {}
     TimeFormat &getTime() { return time; }
     DateFormat &getDate() { return date; }
     const TimeFormat &getTime() const { return time; }

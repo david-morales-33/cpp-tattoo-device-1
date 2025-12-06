@@ -17,6 +17,7 @@ private:
     InterfaceState state = InterfaceState::HIDDEN;
     Slider slider;
     DateTimeFormat date_time;
+    mutable int selector = 0;
 
 public:
     explicit SettingsSoundModal(
@@ -46,7 +47,7 @@ public:
         date_time = main_repository.get();
     }
     InterfaceState getState() const override { return state; }
-    const int &getSelector() const override { return sound_state == SoundState::ON ? 1 : 0; }
+    const int &getSelector() const override { return sound_state == SoundState::ON ? (selector = 1) : (selector = 0); }
 
 private:
     void switchSoundState() { sound_state == SoundState::OFF ? sound_state = SoundState::ON : sound_state = SoundState::OFF; }
