@@ -9,5 +9,5 @@ private:
 
 public:
     void begin() { input_buttons.begin(); }
-    InputImpl &get_input() { return input_buttons; }
+    InputImpl &get_input_buttons() { return input_buttons; }
 };

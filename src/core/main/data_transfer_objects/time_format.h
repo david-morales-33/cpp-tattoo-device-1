@@ -16,7 +16,7 @@ public:
                const char *_minutes,
                TimePeriod _prd) : hour(_hour), minute(_minutes), prd(_prd)
     {
-        time = std::string(hour) + ":" + std::string(_minutes) + (_prd == TimePeriod::AM ? "AM" : "PP");
+        time = std::string(hour) + ":" + std::string(_minutes);
     }
 
     TimeFormat() : time() {}
