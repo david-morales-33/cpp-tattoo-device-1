@@ -35,15 +35,17 @@ public:
         IMenuControllerParams<int> &_menu_devices,
         IPopupController<Device> &_modal_connected_devices,
         IPopupController<Device> &_modal_disconnected_devices) : input(_input),
-                                                               menu_devices(_menu_devices),
-                                                               modal_connected_devices(_modal_connected_devices),
-                                                               modal_disconnected_devices(_modal_disconnected_devices),
-                                                               selector(2) {}
+                                                                 menu_devices(_menu_devices),
+                                                                 modal_connected_devices(_modal_connected_devices),
+                                                                 modal_disconnected_devices(_modal_disconnected_devices),
+                                                                 selector(2) {}
     void execute()
     {
 
         if (menu_devices.getState() == InterfaceState::VISIBLE)
         { // => devices menu
+            if (input.isPressed(BACK))
+                hide();
             if (input.isPressed(UP))
                 menu_devices.previous();
             if (input.isPressed(DOWN))

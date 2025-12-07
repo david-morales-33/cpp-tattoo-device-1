@@ -29,6 +29,6 @@ public:
 
     void hide() { state = InterfaceState::HIDDEN; }
     void show() { state = InterfaceState::VISIBLE; }
-    InterfaceState menuState() { return state; }
+    InterfaceState getState() { return state; }
     int getSelector() { return menu.getSelector(); }
 };

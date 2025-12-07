@@ -20,6 +20,8 @@ public:
         IMenuControllerVoid &_menu) : input(_input), menu(_menu) {}
     void execute()
     {
+        if (input.isPressed(BACK))
+            hide();
         if (input.isPressed(UP))
             menu.previous();
         if (input.isPressed(DOWN))

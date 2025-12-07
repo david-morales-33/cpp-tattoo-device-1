@@ -14,7 +14,7 @@ private:
     IMenuControllerParams<int> &values_menu;
     IPopupController<ConfigurationSelectors> &modal;
 
-    InterfaceState state = InterfaceState::VISIBLE;
+    InterfaceState state = InterfaceState::HIDDEN;
     ConfigurationSelectors selectors;
 
     void setEnterDevices()
@@ -59,6 +59,8 @@ public:
     {
         if (devices_menu.getState() == InterfaceState::VISIBLE)
         {
+            if (input.isPressed(BACK))
+                hide();
             if (input.isPressed(UP))
                 devices_menu.previous();
             if (input.isPressed(DOWN))
