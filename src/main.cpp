@@ -7,6 +7,7 @@
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
 
+
 static Display display;
 static InputsContainer inputs;
 

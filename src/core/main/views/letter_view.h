@@ -1,6 +1,5 @@
 #include <core/main/views/main_view.h>
 #include <core/main/data_transfer_objects/slider.h>
-#include <core/shared/utils/_timer_.h>
 #include <core/main/data_transfer_objects/modal_data.h>
 #include <string>
 
