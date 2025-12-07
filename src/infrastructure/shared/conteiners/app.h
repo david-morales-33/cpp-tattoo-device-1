@@ -18,22 +18,19 @@ public:
         if (option == 0 && resolve_state_controller(option))
         {
             controllers.get_remote_devices_controller().execute();
-            if (!resolve_state_controller(option))
-                exit_event();
+            end_process(option);
         }
 
         else if (option == 1 && resolve_state_controller(option))
         {
             controllers.get_configuration_controller().execute();
-            if (!resolve_state_controller(option))
-                exit_event();
+            end_process(option);
         }
 
         else if (option == 2 && resolve_state_controller(option))
         {
             controllers.get_properties_controller().execute();
-            if (!resolve_state_controller(option))
-                exit_event();
+            end_process(option);  
         }
 
         else if (option == 3 && false)
@@ -48,23 +45,25 @@ public:
         else
         {
             controllers.get_main_controller().execute();
-
             if (controllers.get_main_controller().getState() == InterfaceState::HIDDEN)
                 entry_event(option);
         }
     }
 
 private:
+    void exit_event() { controllers.get_main_controller().show(); }
+
     void entry_event(int option)
     {
         if (option == 0)
             controllers.get_remote_devices_controller().show();
+
         else if (option == 1)
             controllers.get_configuration_controller().show();
+
         else if (option == 2)
             controllers.get_properties_controller().show();
     }
-    void exit_event() { controllers.get_main_controller().show(); }
 
     bool resolve_state_controller(int option)
     {
@@ -93,5 +92,11 @@ private:
             return false;
             break;
         }
+    }
+
+    void end_process(int option)
+    {
+        if (!resolve_state_controller(option))
+            exit_event();
     }
 };

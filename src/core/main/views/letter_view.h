@@ -1,14 +1,15 @@
 #include <core/main/views/main_view.h>
 #include <core/main/data_transfer_objects/slider.h>
-#include <persistence/main/data.h>
 #include <core/shared/utils/_timer_.h>
+#include <core/main/data_transfer_objects/modal_data.h>
+#include <string>
 
 class LetterView : public MainView
 {
 private:
     Display &display;
 
-    void setLetter(int posx, String text)
+    void setLetter(int posx, const char *text)
     {
         display.setFontMode(1);
         display.setColor(1);
@@ -27,9 +28,9 @@ private:
 public:
     LetterView(Display &disp) : MainView(disp), display(disp) {}
 
-    void show(const Slider &slider, const LetterData &data, const DateTimeFormat &date_time)
+    void show(const Slider &slider, const ModalData &data, const DateTimeFormat &date_time)
     {
         MainView::show(slider, date_time);
-        setLetter(data.position, data.text);
+        setLetter(data.getPosition(), data.getText());
     }
 };
