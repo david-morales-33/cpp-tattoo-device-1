@@ -12,7 +12,7 @@ private:
     Display &display;
     IMainDateTimeRepository &main_repository;
     ISettingsSoundRepository &settings_repository;
-    SettingSoundView view;
+    SettingsSoundView view;
     SoundState sound_state;
     InterfaceState state = InterfaceState::HIDDEN;
     Slider slider;
