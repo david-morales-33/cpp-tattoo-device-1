@@ -10,11 +10,11 @@ private:
     Display &display;
 
 public:
-    explicit SettingSoundView(Display &disp) : SettingsView(disp), display(disp) {}
+    explicit SettingSoundView(Display &_display) : SettingsView(_display), display(_display) {}
 
-    void show(const Slider &slider, const DateTimeFormat &data, SoundState state)
+    void show(int selector = 0, SoundState state = SoundState::ON)
     {
-        SettingsView::show(slider, data);
+        SettingsView::show(selector);
         display.setFontMode(1);
         display.setColor(0);
         display.drawBox(33, 18, 62, 28);

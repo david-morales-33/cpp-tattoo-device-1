@@ -36,7 +36,7 @@ public:
         display.firstPage();
         do
         {
-            view.show(slider, date_time, selector.getSelector());
+            view.show(selector.getSelector());
         } while (display.nextPage());
     }
     void next() override { selector.increment(); }

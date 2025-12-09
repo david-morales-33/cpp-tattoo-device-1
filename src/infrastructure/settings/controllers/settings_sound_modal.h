@@ -32,7 +32,7 @@ public:
         display.firstPage();
         do
         {
-            view.show(slider, date_time, sound_state);
+            view.show();
         } while (display.nextPage());
     }
     void left() override { switchSoundState(); }

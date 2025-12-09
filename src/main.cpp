@@ -7,7 +7,7 @@
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
 #include <core/main/data_transfer_objects/slider.h>
-#include <core/settings/views/settings_view_new.h>
+#include <core/settings/views/settings_sound_view.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -20,8 +20,7 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-Slider slider;
-SettingsViewNew view(display);
+SettingSoundView view(display);
 void setup()
 {
     display.begin();
@@ -32,6 +31,6 @@ void loop()
     display.firstPage();
     do
     {
-        view.show();
+        view.show(0, SoundState::OFF);
     } while (display.nextPage());
 }

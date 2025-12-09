@@ -5,34 +5,47 @@
 #include <core/settings/icons/sound.h>
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/main/data_transfer_objects/date_time_format.h>
+#include <core/settings/icons/sound.h>
+#include <core/settings/icons/clock.h>
+#include <core/settings/icons/calendar.h>
 
-class SettingsView : public MainView
+class SettingsView
 {
 private:
     Display &display;
 
 public:
-    explicit SettingsView(Display &disp) : MainView(disp), display(disp)
+    explicit SettingsView(Display &_display ) : display(_display)
     {
     }
 
-    void show(const Slider &slider, const DateTimeFormat &data, int selector = 0)
+    void show(int selector = 0)
     {
-        MainView::show(slider, data);
+        display.setColor(1);
         display.setFontMode(1);
-        display.setColor(0);
-        display.drawBox(32, 5, 66, 54);
-        display.setColor(1);
-        display.drawFrame(31, 5, 66, 54);
-        display.drawFrame(36, 30, 24, 24, 3);
-        display.drawFrame(68, 30, 24, 24, 3);
-        display.setColor(1);
-        display.setBitmapMode(1);
+        display.drawLine(0, 16, 128, 16);
+        display.drawLine(60, 16, 60, 64);
+
+        display.drawFrame(0, 0, 128, 64, 3);
+        display.drawBox(1, 1, 126, 14);
+
         display.setFont(u8g2_font_courB10_tf);
-        selector == 0 ? display.drawText(42, 21, "CLOCK") : display.drawText(42, 21, "SOUND");
-        display.drawBitmap(38, 32, 20, 20, SETTING_CLOCK_BITS);
-        display.drawBitmap(70, 32, 20, 20, SOUND_BITS);
-        display.setColor(2);
-        display.drawBox(((selector * 32) + 34), 28, 28, 28); // primer valor 34/66
+        display.setColor(0);
+        display.setCursor(60, 12);
+
+        display.drawText(30, 12, "SETTINGS");
+        display.setColor(1);
+        display.setFont(u8g_font_5x7);
+        display.drawText(10, 27, "SOUND");
+        display.drawText(10, 38, "CLOCK");
+        display.drawText(10, 49, "DATE");
+        display.drawText(10, 60, "RESET");
+
+        display.drawFrame(2, ((selector * 11) + 18), 57, 11, 2);
+
+        display.drawText(64, 27, "ON");
+        display.drawText(63, 38, "05:06 PM");
+        display.drawText(63, 49, "07/12/2025");
+        display.drawText(64, 60, "ALL");
     }
 };

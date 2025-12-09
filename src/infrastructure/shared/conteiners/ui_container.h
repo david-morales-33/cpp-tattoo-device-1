@@ -11,7 +11,6 @@
 #include <infrastructure/remote_devices/controllers/remote_devices_disconnected_modal.h>
 #include <infrastructure/settings/controllers/settings_menu.h>
 #include <infrastructure/settings/controllers/settings_sound_modal.h>
-#include <infrastructure/settings/controllers/settings_date_time_menu.h>
 
 class UIContainer
 {
@@ -30,7 +29,6 @@ private:
 
     SettingsMenu settings_menu;
     SettingsSoundModal settings_sound_modal;
-    SettingsDateTimeMenu settings_date_time_menu;
 
 public:
     explicit UIContainer(Display &display, RepositoriesContainer &repositories) : main_menu(display, repositories.get_main_repository()),
@@ -42,8 +40,7 @@ public:
                                                                                   remote_devices_connected_modal(display, repositories.get_remote_devices_repository()),
                                                                                   remote_devices_disconnected_modal(display, repositories.get_remote_devices_repository()),
                                                                                   settings_menu(display, repositories.get_main_repository()),
-                                                                                  settings_sound_modal(display, repositories.get_main_repository(), repositories.get_settings_sound_repository()),
-                                                                                  settings_date_time_menu(display, repositories.get_main_repository())
+                                                                                  settings_sound_modal(display, repositories.get_main_repository(), repositories.get_settings_sound_repository())
     {
     }
 
@@ -57,5 +54,4 @@ public:
     RemoteDevicesDisconnectedDevicesModal &get_remote_devices_disconnected_modal() { return remote_devices_disconnected_modal; }
     SettingsMenu &get_settings_menu() { return settings_menu; }
     SettingsSoundModal &get_settings_sound_modal() { return settings_sound_modal; }
-    SettingsDateTimeMenu &get_settings_date_time_menu() { return settings_date_time_menu; }
 };
