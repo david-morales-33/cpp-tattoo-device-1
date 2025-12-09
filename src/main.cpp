@@ -7,7 +7,7 @@
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
 #include <core/main/data_transfer_objects/slider.h>
-#include <core/settings/views/settings_reset_view.h>
+#include <core/settings/views/settings_reset_confirmation_view.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -20,7 +20,7 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-SettingsResetView view(display);
+SettingsResetConfirmationView view(display);
 void setup()
 {
     display.begin();

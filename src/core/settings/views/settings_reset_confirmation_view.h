@@ -1,21 +1,19 @@
 #pragma once
-
 #include <infrastructure/display.h>
-#include <core/main/views/main_view.h>
-#include <persistence/main/data.h>
+#include <core/settings/views/settings_view.h>
 
-class ResetConfirmationView : public MainView
+class SettingsResetConfirmationView : public SettingsView
 {
 
 private:
     Display &display;
 
 public:
-    explicit ResetConfirmationView(Display &disp) : MainView(disp), display(disp) {};
+    explicit SettingsResetConfirmationView(Display &_display) : SettingsView(_display), display(_display) {};
 
-    void show(SliderData slider)
+    void show(int selector = 0)
     {
-        MainView::show(slider);
+        SettingsView::show(selector);
         display.setFontMode(1);
         display.setColor(0);
         display.setFont(u8g2_font_courB08_tf);
