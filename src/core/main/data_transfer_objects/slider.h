@@ -14,26 +14,45 @@ public:
     {
         if (icons_selector > 0)
             icons_selector = icons_selector - 1;
+
         else if (icons_selector == 0 && view_selector > 0)
         {
             view_selector = view_selector - 1;
-            for (int i = 0; i < 6; i++)
-                icons_slider[i] = icons_slider[i] + 32;
+            leftSlide();
         }
     }
     void right()
     {
         if (icons_selector < 3)
             icons_selector = icons_selector + 1;
+
         else if (icons_selector == 3 && view_selector < 2)
         {
             view_selector = view_selector + 1;
-            for (int i = 0; i < 6; i++)
-                icons_slider[i] = icons_slider[i] - 32;
+            righSlide();
         }
+    }
+
+    void setOnSettings()
+    {
+        icons_selector = 3;
+        view_selector = 2;
+        righSlide();
     }
 
     const std::vector<int> &getIconsSlider() const { return icons_slider; }
     const int getIconsSelector() const { return icons_selector; }
     const int getViewSelector() const { return view_selector; }
+
+private:
+    void leftSlide()
+    {
+        for (int i = 0; i < 6; i++)
+            icons_slider[i] = icons_slider[i] + 32;
+    }
+    void righSlide()
+    {
+        for (int i = 0; i < 6; i++)
+            icons_slider[i] = icons_slider[i] - 32;
+    }
 };

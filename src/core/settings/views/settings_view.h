@@ -28,11 +28,11 @@ public:
         display.drawFrame(68, 30, 24, 24, 3);
         display.setColor(1);
         display.setBitmapMode(1);
+        display.setFont(u8g2_font_courB10_tf);
         selector == 0 ? display.drawText(42, 21, "CLOCK") : display.drawText(42, 21, "SOUND");
         display.drawBitmap(38, 32, 20, 20, SETTING_CLOCK_BITS);
         display.drawBitmap(70, 32, 20, 20, SOUND_BITS);
         display.setColor(2);
-        display.setFont(u8g2_font_courB10_tf);
         display.drawBox(((selector * 32) + 34), 28, 28, 28); // primer valor 34/66
     }
 };

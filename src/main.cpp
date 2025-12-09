@@ -6,7 +6,8 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
-
+#include <core/main/data_transfer_objects/slider.h>
+#include <core/settings/views/settings_view_new.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -19,9 +20,18 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
+Slider slider;
+SettingsViewNew view(display);
 void setup()
 {
     display.begin();
     inputs.begin();
 }
-void loop() { app.run(); }
+void loop()
+{
+    display.firstPage();
+    do
+    {
+        view.show();
+    } while (display.nextPage());
+}
