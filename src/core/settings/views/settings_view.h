@@ -45,7 +45,7 @@ public:
 
         display.drawText(68, 27, "PEDAL DEV F");
         display.drawText(68, 38, "PEDAL DEV R");
-        // display.drawText(68, 49, "07/12/2025");
+        display.drawText(68, 49, "BOOT");
         // display.drawText(68, 60, "ALL");
     }
 };

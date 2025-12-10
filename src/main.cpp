@@ -6,8 +6,7 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
-#include <core/main/data_transfer_objects/slider.h>
-#include <core/settings/views/settings_clock_modal.h>
+#include <core/settings/views/pedal_modal.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -20,7 +19,8 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-SettingsClockModal view(display);
+PedalModal modal(display);
+
 void setup()
 {
     display.begin();
@@ -31,7 +31,7 @@ void loop()
     display.firstPage();
     do
     {
-        view.show(0, 0, 0);
+       modal.show();
     } while (display.nextPage());
     // app.run();
 }
