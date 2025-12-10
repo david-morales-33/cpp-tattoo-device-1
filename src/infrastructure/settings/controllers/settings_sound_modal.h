@@ -3,16 +3,16 @@
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/main/interfaces/main_date_time_repository.h>
 #include <core/settings/interfaces/settings_sound_repository.h>
-#include <core/settings/views/settings_sound_view.h>
+#include <core/settings/views/settings_sound_modal.h>
 #include <infrastructure/display.h>
 
-class SettingsSoundModal : public IPopupController<Slider>
+class SettingsSoundModalImpl : public IPopupController<Slider>
 {
 private:
     Display &display;
     IMainDateTimeRepository &main_repository;
     ISettingsSoundRepository &settings_repository;
-    SettingsSoundView view;
+    SettingsSoundModal view;
     SoundState sound_state;
     InterfaceState state = InterfaceState::HIDDEN;
     Slider slider;
@@ -20,7 +20,7 @@ private:
     mutable int selector = 0;
 
 public:
-    explicit SettingsSoundModal(
+    explicit SettingsSoundModalImpl(
         Display &_display,
         IMainDateTimeRepository &_main_repository,
         ISettingsSoundRepository &_settings_repository) : display(_display),

@@ -4,13 +4,13 @@
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/settings/interfaces/sound_state.h>
 
-class SettingsSoundView : public SettingsView
+class SettingsSoundModal : public SettingsView
 {
 private:
     Display &display;
 
 public:
-    explicit SettingsSoundView(Display &_display) : SettingsView(_display), display(_display) {}
+    explicit SettingsSoundModal(Display &_display) : SettingsView(_display), display(_display) {}
 
     void show(int selector = 0, SoundState state = SoundState::ON)
     {
