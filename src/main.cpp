@@ -7,7 +7,7 @@
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
 #include <core/main/data_transfer_objects/slider.h>
-#include <core/settings/views/settings_reset_confirmation_view.h>
+#include <core/settings/views/settings_date_modal.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -20,7 +20,7 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-SettingsResetConfirmationView view(display);
+SettingsDateModal view(display);
 void setup()
 {
     display.begin();
@@ -31,6 +31,7 @@ void loop()
     display.firstPage();
     do
     {
-        view.show();
+        view.show(0, 0);
     } while (display.nextPage());
+    // app.run();
 }

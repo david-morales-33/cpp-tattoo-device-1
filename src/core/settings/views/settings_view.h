@@ -19,7 +19,7 @@ public:
     {
     }
 
-    void show(int side_selector = 0, int value_selector)
+    void show(int side_selector = 0, int value_selector = 0)
     {
         display.setColor(1);
         display.setFontMode(1);
