@@ -15,11 +15,11 @@ private:
     Display &display;
 
 public:
-    explicit SettingsView(Display &_display ) : display(_display)
+    explicit SettingsView(Display &_display) : display(_display)
     {
     }
 
-    void show(int selector = 0)
+    void show(int side_selector = 0, int value_selector)
     {
         display.setColor(1);
         display.setFontMode(1);
@@ -41,11 +41,11 @@ public:
         display.drawText(10, 49, "DATE");
         display.drawText(10, 60, "RESET");
 
-        display.drawFrame(2, ((selector * 11) + 18), 57, 11, 2);
+        display.drawFrame(((side_selector * 60) + 2), ((value_selector * 11) + 18), 57, 11, 2);
 
-        display.drawText(64, 27, "ON");
-        display.drawText(63, 38, "05:06 PM");
-        display.drawText(63, 49, "07/12/2025");
-        display.drawText(64, 60, "ALL");
+        display.drawText(68, 27, "PEDAL DEV F");
+        display.drawText(68, 38, "PEDAL DEV R");
+        // display.drawText(68, 49, "07/12/2025");
+        // display.drawText(68, 60, "ALL");
     }
 };
