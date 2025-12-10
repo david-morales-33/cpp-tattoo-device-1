@@ -10,7 +10,6 @@
 #include <infrastructure/remote_devices/controllers/remote_devices_connected_modal.h>
 #include <infrastructure/remote_devices/controllers/remote_devices_disconnected_modal.h>
 #include <infrastructure/settings/controllers/settings_menu.h>
-#include <infrastructure/settings/controllers/settings_sound_modal.h>
 
 class UIContainer
 {

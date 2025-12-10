@@ -2,14 +2,14 @@
 #include <infrastructure/display.h>
 #include <core/settings/views/settings_view.h>
 
-class SettingsResetConfirmationView : public SettingsView
+class ResetConfirmationModal : public SettingsView
 {
 
 private:
     Display &display;
 
 public:
-    explicit SettingsResetConfirmationView(Display &_display) : SettingsView(_display), display(_display) {};
+    explicit ResetConfirmationModal(Display &_display) : SettingsView(_display), display(_display) {};
 
     void show(int selector = 0)
     {

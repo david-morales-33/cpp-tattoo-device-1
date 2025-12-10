@@ -1,16 +1,16 @@
 #pragma once
 #include <core/settings/views/settings_view.h>
 
-class SettingsDateModal : public SettingsView
+class ClockModal : public SettingsView
 {
 
 private:
     Display &display;
 
 public:
-    explicit SettingsDateModal(Display &_display) : SettingsView(_display), display(_display) {}
+    explicit ClockModal(Display &_display) : SettingsView(_display), display(_display) {}
 
-    void show(int side_selector = 0, int value_selector = 0, int date_selector = 0)
+    void show(int side_selector = 0, int value_selector = 0, int clock_selector = 0)
     {
         SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);
@@ -29,28 +29,30 @@ public:
         display.setFont(u8g2_font_logisoso16_tf);
 
         display.setCursor(15, 40);
-        display.print("10");
+        display.print("05");
 
         display.setCursor(44, 40);
         display.print("12");
 
-        display.setCursor(74, 40);
-        display.print("2025");
+        // display.setCursor(74, 40);
+        // display.print("a.m.");
+        display.setCursor(77, 38);
+        display.print("p.m.");
 
         display.setFontMode(1);
         display.setColor(1);
-        
-        if (date_selector == 0)
+
+        if (clock_selector == 0)
         {
             display.drawTriangle(17, 18, 33, 18, 25, 10); // unidad x_=37;x_2=53;x_3=45// decimal  =>
             display.drawTriangle(18, 46, 32, 46, 25, 53);
         }
-        else if (date_selector == 1)
+        else if (clock_selector == 1)
         {
             display.drawTriangle(47, 18, 63, 18, 55, 10); // unidad x_=37;x_2=53;x_3=45// decimal  =>
             display.drawTriangle(48, 46, 62, 46, 55, 53);
         }
-        else if (date_selector == 2)
+        else if (clock_selector == 2)
         {
             display.drawTriangle(86, 18, 102, 18, 94, 10); // unidad x_=37;x_2=53;x_3=45// decimal  =>
             display.drawTriangle(87, 46, 101, 46, 94, 53);
