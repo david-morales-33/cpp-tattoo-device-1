@@ -2,6 +2,6 @@
 
 enum class RemoteDeviceActivation
 {
-    PEDAL = 0,
+    PULSES = 0,
     NO_PEDAL = 1
 };
