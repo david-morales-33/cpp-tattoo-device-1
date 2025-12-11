@@ -11,9 +11,9 @@ private:
 public:
     explicit ResetModal(Display &_display) : SettingsView(_display), display(_display) {};
 
-    void show(int selector = 0)
+    void show(int side_selector, int value_selector)
     {
-        SettingsView::show(selector);
+        SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);
         display.setColor(0);
         display.drawBox(7, 6, 114, 52);

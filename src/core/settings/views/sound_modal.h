@@ -12,9 +12,9 @@ private:
 public:
     explicit SoundModal(Display &_display) : SettingsView(_display), display(_display) {}
 
-    void show(int selector = 0, SoundState state = SoundState::ON)
+    void show(int side_selector = 0, int value_selector = 0, SoundState state = SoundState::ON)
     {
-        SettingsView::show(selector);
+        SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);
         display.setColor(0);
         display.drawBox(33, 18, 62, 28);

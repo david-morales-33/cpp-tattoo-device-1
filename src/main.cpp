@@ -7,6 +7,7 @@
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
 #include <core/settings/views/pedal_modal.h>
+#include <infrastructure/settings/controllers/settings_reset_modal.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -19,19 +20,23 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-PedalModal modal(display);
-
+SettingsResetModal modal(display);
 void setup()
 {
     display.begin();
     inputs.begin();
+    SettingsSelectors selectors;
+    selectors.side_selector = 1;
+    selectors.value_selector = 1;
+    modal.load(selectors);
 }
 void loop()
 {
-    display.firstPage();
-    do
-    {
-       modal.show();
-    } while (display.nextPage());
+    modal.render();
+    // display.firstPage();
+    // do
+    // {
+    //    modal.show();
+    // } while (display.nextPage());
     // app.run();
 }
