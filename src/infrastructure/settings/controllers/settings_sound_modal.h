@@ -1,50 +1,50 @@
 #pragma once
 #include <core/shared/interfaces/popup_controller.h>
-#include <core/main/data_transfer_objects/slider.h>
-#include <core/main/interfaces/main_date_time_repository.h>
 #include <core/settings/interfaces/settings_sound_repository.h>
 #include <core/settings/views/sound_modal.h>
 #include <infrastructure/display.h>
 #include <core/settings/data_transfer_objects/settings_selectors.h>
+#include <core/shared/data_transfer_objects/selector.h>
 
 class SettingsSoundModal : public IPopupController<SettingsSelectors>
 {
 private:
     Display &display;
-    ISettingsSoundRepository &settings_repository;
+    ISettingsSoundRepository &repository;
     SoundModal view;
-    SoundState sound_state;
     InterfaceState state = InterfaceState::HIDDEN;
     SettingsSelectors selectors;
-    mutable int selector = 0;
+    Selector selector;
+    SoundState sound_state_list[2] = {SoundState::OFF, SoundState::ON};
 
 public:
     explicit SettingsSoundModal(
         Display &_display,
-        ISettingsSoundRepository &_settings_repository) : display(_display),
-                                                          view(_display),
-                                                          settings_repository(_settings_repository) {}
+        ISettingsSoundRepository &_repository) : display(_display),
+                                                 repository(_repository),
+                                                 view(_display),
+                                                 selector(2) {}
     void render() override
     {
         display.firstPage();
         do
         {
-            view.show(selectors.side_selector, selectors.value_selector, sound_state);
+            view.show(selectors.side_selector, selectors.value_selector, sound_state_list[selector.getSelector()]);
         } while (display.nextPage());
     }
-    void left() override { switchSoundState(); }
-    void right() override { switchSoundState(); }
-    void enter() override { settings_repository.update(sound_state); }
+    void left() override { switchSelector(); }
+    void right() override { switchSelector(); }
+    void enter() override { repository.update(sound_state_list[selector.getSelector()]); }
     void hide() override { state = InterfaceState::HIDDEN; }
     void show() override { state = InterfaceState::VISIBLE; }
     void load(const SettingsSelectors &_selectors) override
     {
         selectors = _selectors;
-        sound_state = settings_repository.get();
+        repository.get() == SoundState::OFF ? selector.setSelector(0) : selector.setSelector(1);
     }
     InterfaceState getState() const override { return state; }
-    const int &getSelector() const override { return sound_state == SoundState::ON ? (selector = 1) : (selector = 0); }
+    const int &getSelector() const override { return selector.getSelector(); }
 
 private:
-    void switchSoundState() { sound_state == SoundState::OFF ? sound_state = SoundState::ON : sound_state = SoundState::OFF; }
+    void switchSelector() { selector.getSelector() == 0 ? selector.setSelector(1) : selector.setSelector(0); }
 };
