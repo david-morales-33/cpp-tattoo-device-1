@@ -24,7 +24,7 @@ public:
         display.setColor(1);
         display.setFontMode(1);
         display.drawLine(0, 16, 128, 16);
-        display.drawLine(60, 16, 60, 64);
+        display.drawLine(64, 16, 64, 64);
 
         display.drawFrame(0, 0, 128, 64, 3);
         display.drawBox(1, 1, 126, 14);
@@ -36,16 +36,16 @@ public:
         display.drawText(30, 12, "SETTINGS");
         display.setColor(1);
         display.setFont(u8g_font_5x7);
-        display.drawText(10, 27, "SOUND");
-        display.drawText(10, 38, "CLOCK");
-        display.drawText(10, 49, "DATE");
-        display.drawText(10, 60, "RESET");
+        display.drawText(6, 27, "SOUND");
+        display.drawText(6, 38, "CLOCK");
+        display.drawText(6, 49, "DATE");
+        display.drawText(6, 60, "RESET");
 
-        display.drawFrame(((side_selector * 60) + 2), ((value_selector * 11) + 18), 57, 11, 2);
+        display.drawFrame(((side_selector * 64) + 2), ((value_selector * 11) + 18), 60, 11, 2);
 
-        display.drawText(68, 27, "PEDAL DEV F");
-        display.drawText(68, 38, "PEDAL DEV R");
-        display.drawText(68, 49, "BOOT");
+        display.drawText(70, 27, "PEDAL DEV F");
+        display.drawText(70, 38, "PEDAL DEV R");
+        display.drawText(70, 49, "BOOT");
         // display.drawText(68, 60, "ALL");
     }
 };

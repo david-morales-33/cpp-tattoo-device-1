@@ -1,6 +1,7 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/settings/views/settings_view.h>
+#include <core/settings/interfaces/reset_options.h> 
 
 class ResetModal : public SettingsView
 {
@@ -11,26 +12,17 @@ private:
 public:
     explicit ResetModal(Display &_display) : SettingsView(_display), display(_display) {};
 
-    void show(int side_selector, int value_selector)
+    void show(int side_selector, int value_selector, ResetOptions options)
     {
         SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);
         display.setColor(0);
-        display.drawBox(7, 6, 114, 52);
+        display.drawBox(20, 18, 84, 28);
         display.setColor(1);
-        display.drawFrame(8, 7, 112, 50);
-        display.setFont(u8g_font_5x8);
-        display.drawText(24, 18, "ARE YOU SURE TO");
-        display.drawText(38, 30, "CONTINUE?");
-        display.drawFrame(12, 38, 50, 15, 3);
-        display.drawFrame(66, 38, 50, 15, 3);
-        display.drawBox(13, 39, 48, 13);
-        display.drawBox(67, 39, 48, 13);
-
-        display.setColor(0);
-        display.setFont(u8g_font_6x10);
-        display.drawText(16, 49, "<ENTER>");
-        display.drawText(73, 49, "<BACK>");
-        display.setColor(1);
+        display.drawFrame(20, 18, 84, 28);
+        display.drawTriangle(24, 32, 30, 26, 30, 38);
+        display.drawTriangle(100, 32, 94, 26, 94, 38);
+        display.setFont(u8g_font_6x12);
+        options == ResetOptions::DEVICES ? display.drawText(42, 36, "DEVICES") : display.drawText(54, 36, "ALL");
     }
 };
