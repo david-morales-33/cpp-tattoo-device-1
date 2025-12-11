@@ -4,13 +4,13 @@
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/settings/interfaces/remote_device_activation.h>
 
-class DevicesPhysicalActivationModal : public SettingsView
+class DevicesRemoteActivationModal : public SettingsView
 {
 private:
     Display &display;
 
 public:
-    explicit DevicesPhysicalActivationModal(Display &_display) : SettingsView(_display), display(_display) {}
+    explicit DevicesRemoteActivationModal(Display &_display) : SettingsView(_display), display(_display) {}
 
     void show(int side_selector = 0, int value_selector = 0,RemoteDeviceActivation activation )
     {
