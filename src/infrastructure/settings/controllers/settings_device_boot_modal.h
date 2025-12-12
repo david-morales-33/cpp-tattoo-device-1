@@ -42,7 +42,19 @@ public:
     void enter() override { repository.update(boot_list[selector.getSelector()]); }
     void hide() override { state = InterfaceState::HIDDEN; }
     void show() override { state = InterfaceState::VISIBLE; }
-    void load(const SettingsSelectors &_selectors) override { selectors = _selectors; }
+    void load(const SettingsSelectors &_selectors) override
+    {
+        selectors = _selectors;
+        resolveSelector(repository.get());
+    }
     InterfaceState getState() const override { return state; }
     const int &getSelector() const override { return selector.getSelector(); }
+
+private:
+    void resolveSelector(DeviceBoot boot)
+    {
+        boot == DeviceBoot::CUSTOM_RAMP ? selector.setSelector(0) : boot == DeviceBoot::INSTANT_POWER ? selector.setSelector(1)
+                                                                : boot == DeviceBoot::LINEAR_RAMP     ? selector.setSelector(2)
+                                                                                                      : selector.setSelector(3);
+    }
 };
