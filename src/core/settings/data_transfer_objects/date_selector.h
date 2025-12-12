@@ -2,7 +2,7 @@
 #include <core/shared/data_transfer_objects/selector.h>
 #include <string>
 
-class ClockSelector
+class DateSelector
 {
 private:
     int day = 1;
