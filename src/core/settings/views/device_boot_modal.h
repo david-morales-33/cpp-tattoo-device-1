@@ -2,6 +2,7 @@
 #include <infrastructure/display.h>
 #include <core/settings/views/settings_view.h>
 #include <core/settings/interfaces/device_boot.h>
+#include <core/settings/data_transfer_objects/boot_selector.h>
 
 class DeviceBootModal : public SettingsView
 {
@@ -12,7 +13,7 @@ private:
 public:
     explicit DeviceBootModal(Display &_display) : SettingsView(_display), display(_display) {};
 
-    void show(int side_selector = 0, int value_selector = 0, DeviceBoot boot=DeviceBoot::INSTANT_POWER)
+    void show(int side_selector = 0, int value_selector = 0, const BootSelector &boot_selector)
     {
         SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);
@@ -23,9 +24,9 @@ public:
         display.drawTriangle(24, 32, 30, 26, 30, 38);
         display.drawTriangle(100, 32, 94, 26, 94, 38);
         display.setFont(u8g_font_6x12);
-        boot == DeviceBoot::INSTANT_POWER ? display.drawText(42, 36, "INSTANT") :
-        boot == DeviceBoot::SOFT_START ? display.drawText(52, 36, "SOFT") :
-        boot == DeviceBoot::LINEAR_RAMP ? display.drawText(46, 36, "LINEAR") :
+        boot_selector.getBoot() == DeviceBoot::INSTANT_POWER ? display.drawText(42, 36, "INSTANT") :
+        boot_selector.getBoot() == DeviceBoot::SOFT_START ? display.drawText(52, 36, "SOFT") :
+        boot_selector.getBoot() == DeviceBoot::LINEAR_RAMP ? display.drawText(46, 36, "LINEAR") :
         display.drawText(45, 36, "CUSTOM");
     }
 };
