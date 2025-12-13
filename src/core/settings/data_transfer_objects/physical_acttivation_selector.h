@@ -13,7 +13,7 @@ private:
     Selector selector = Selector(3);
 
 public:
-    PhysicalDeviceActivation getBoot() const { return activation_list[selector.getSelector()]; }
+    PhysicalDeviceActivation getActivation() const { return activation_list[selector.getSelector()]; }
     int getSelector() const { return selector.getSelector(); }
 
     void left() { selector.getSelector() == 0 ? selector.setSelector(2) : selector.decrement(); }

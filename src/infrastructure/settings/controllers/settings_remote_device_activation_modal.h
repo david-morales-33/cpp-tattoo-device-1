@@ -1,12 +1,9 @@
 #pragma once
 #include <core/shared/interfaces/popup_controller.h>
-#include <core/main/data_transfer_objects/slider.h>
-#include <core/main/interfaces/main_date_time_repository.h>
 #include <core/settings/interfaces/settings_device_activation_repository.h>
 #include <core/settings/data_transfer_objects/settings_selectors.h>
 #include <core/settings/views/device_remote_activation_modal.h>
-#include <core/settings/interfaces/remote_device_activation.h>
-#include <core/shared/data_transfer_objects/selector.h>
+#include <core/settings/data_transfer_objects/remote_activation_selector.h>
 #include <infrastructure/display.h>
 
 class SettingsRemoteDeviceActivationModal : public IPopupController<SettingsSelectors>
@@ -17,16 +14,14 @@ private:
     DevicesRemoteActivationModal view;
     InterfaceState state = InterfaceState::HIDDEN;
     SettingsSelectors selectors;
-    Selector selector;
-    RemoteDeviceActivation activation_list[2] = {RemoteDeviceActivation::NO_PEDAL, RemoteDeviceActivation::PULSES};
+    RemoteActivationSelector activation_selector;
 
 public:
     explicit SettingsRemoteDeviceActivationModal(
         Display &_display,
         ISettingsDeviceActivationRepository &_repository) : display(_display),
                                                             repository(_repository),
-                                                            view(_display),
-                                                            selector(2)
+                                                            view(_display)
     {
     }
     void render() override
@@ -34,18 +29,19 @@ public:
         display.firstPage();
         do
         {
-            view.show(selectors.side_selector, selectors.value_selector, activation_list[selector.getSelector()]);
+            view.show(selectors.side_selector, selectors.value_selector, activation_selector);
         } while (display.nextPage());
     }
-    void left() override { switchActivation(); }
-    void right() override { switchActivation(); }
-    void enter() override { repository.updateRemoteDeviceActivation(activation_list[selector.getSelector()]); }
+    void left() override { activation_selector.switchActivation(); }
+    void right() override { activation_selector.switchActivation(); }
+    void enter() override { repository.updateRemoteDeviceActivation(activation_selector.getActivation()); }
     void hide() override { state = InterfaceState::HIDDEN; }
     void show() override { state = InterfaceState::VISIBLE; }
-    void load(const SettingsSelectors &_selectors) override { selectors = _selectors; }
+    void load(const SettingsSelectors &_selectors) override
+    {
+        selectors = _selectors;
+        activation_selector.setSelector(repository.getRemoteDeviceActivation());
+    }
     InterfaceState getState() const override { return state; }
-    const int &getSelector() const override { return selector.getSelector(); }
-
-private:
-    void switchActivation() { selector.getSelector() == 0 ? selector.setSelector(1) : selector.setSelector(0); }
+    const int &getSelector() const override { return activation_selector.getSelector(); }
 };

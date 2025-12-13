@@ -1,8 +1,8 @@
 #pragma once
 #include <core/settings/views/settings_view.h>
 #include <infrastructure/display.h>
-#include <core/main/data_transfer_objects/slider.h>
 #include <core/settings/interfaces/remote_device_activation.h>
+#include <core/settings/data_transfer_objects/remote_activation_selector.h>
 
 class DevicesRemoteActivationModal : public SettingsView
 {
@@ -12,7 +12,7 @@ private:
 public:
     explicit DevicesRemoteActivationModal(Display &_display) : SettingsView(_display), display(_display) {}
 
-    void show(int side_selector = 0, int value_selector = 0,RemoteDeviceActivation activation )
+    void show(int side_selector = 0, int value_selector = 0, const RemoteActivationSelector &activation_selector)
     {
         SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);
@@ -23,7 +23,7 @@ public:
         display.drawTriangle(24, 32, 30, 26, 30, 38);
         display.drawTriangle(100, 32, 94, 26, 94, 38);
         display.setFont(u8g_font_6x12);
-        activation ==RemoteDeviceActivation::NO_PEDAL ?display.drawText(38, 36, "NO PEDAL")://
-        display.drawText(45, 36, "PULSES");
+        activation_selector.getActivation() == RemoteDeviceActivation::NO_PEDAL ? display.drawText(38, 36, "NO PEDAL") : //
+            display.drawText(45, 36, "PULSES");
     }
 };

@@ -37,10 +37,14 @@ public:
     }
     void left() override { activation_selector.left(); }
     void right() override { activation_selector.right(); }
-    void enter() override { repository.updatePhysicalDeviceActivation(activation_selector.getBoot()); }
+    void enter() override { repository.updatePhysicalDeviceActivation(activation_selector.getActivation()); }
     void hide() override { state = InterfaceState::HIDDEN; }
     void show() override { state = InterfaceState::VISIBLE; }
-    void load(const SettingsSelectors &_selectors) override { selectors = _selectors; }
+    void load(const SettingsSelectors &_selectors) override
+    {
+        selectors = _selectors;
+        activation_selector.setSelector(repository.getPhysicalDeviceActivation());
+    }
     InterfaceState getState() const override { return state; }
     const int &getSelector() const override { return activation_selector.getSelector(); }
 };
