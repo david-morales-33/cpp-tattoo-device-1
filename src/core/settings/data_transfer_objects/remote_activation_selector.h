@@ -9,7 +9,7 @@ private:
         RemoteDeviceActivation::NO_PEDAL,
         RemoteDeviceActivation::PULSES};
 
-    Selector selector = Selector(3);
+    Selector selector = Selector(2);
 
 public:
     RemoteDeviceActivation getActivation() const { return activation_list[selector.getSelector()]; }
