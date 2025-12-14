@@ -2,7 +2,7 @@
 #include <core/shared/interfaces/data_provider.h>
 #include <core/settings/interfaces/physical_device_activation.h>
 
-class SettingsRemoteActivationTestProvider : public IDataProvider<PhysicalDeviceActivation, PhysicalDeviceActivation>
+class SettingsPhysicalActivationTestProvider : public IDataProvider<PhysicalDeviceActivation, PhysicalDeviceActivation>
 {
 private:
     PhysicalDeviceActivation physical_activation = PhysicalDeviceActivation::PULSES;
