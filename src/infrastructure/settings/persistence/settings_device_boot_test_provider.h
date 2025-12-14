@@ -2,7 +2,7 @@
 #include <core/shared/interfaces/data_provider.h>
 #include <core/settings/interfaces/device_boot.h>
 
-class SettingsBootTestProvider : public IDataProvider<DeviceBoot, DeviceBoot>
+class SettingsDeviceBootTestProvider : public IDataProvider<DeviceBoot, DeviceBoot>
 {
 private:
     DeviceBoot boot = DeviceBoot::INSTANT_POWER;
