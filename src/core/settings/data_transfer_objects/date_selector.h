@@ -58,7 +58,7 @@ public:
     std::string getYearFormated() const { return std::to_string(year); }
     std::string getDateFormated() const { return getDayFormated() + "/" + getMonthFormated() + "/" + getYearFormated(); }
 
-    int getSelector() const { return selector.getSelector(); }
+    const int &getSelector() const { return selector.getSelector(); }
     void left() { selector.decrement(); }
     void right() { selector.increment(); }
 

@@ -14,7 +14,7 @@ private:
 public:
     explicit DevicesPhysicalActivationModal(Display &_display) : SettingsView(_display), display(_display) {}
 
-    void show(int side_selector = 0, int value_selector = 0, PhysicalActivationSelector activation_selector)
+    void show(int side_selector , int value_selector , PhysicalActivationSelector activation_selector)
     {
         SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);
@@ -25,8 +25,8 @@ public:
         display.drawTriangle(24, 32, 30, 26, 30, 38);
         display.drawTriangle(100, 32, 94, 26, 94, 38);
         display.setFont(u8g_font_6x12);
-        activation_selector.getBoot() ==PhysicalDeviceActivation::CONTINUOUS ? display.drawText(33, 36, "CONTINUOUS") : //
-        activation_selector.getBoot() ==PhysicalDeviceActivation::NO_PEDAL ?display.drawText(38, 36, "NO PEDAL")://
+        activation_selector.getActivation()==PhysicalDeviceActivation::CONTINUOUS ? display.drawText(33, 36, "CONTINUOUS") : //
+        activation_selector.getActivation() ==PhysicalDeviceActivation::NO_PEDAL ?display.drawText(38, 36, "NO PEDAL")://
         display.drawText(45, 36, "PULSES");
     }
 };

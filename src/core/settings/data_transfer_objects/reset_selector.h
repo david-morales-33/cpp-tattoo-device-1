@@ -13,7 +13,7 @@ private:
 
 public:
     ResetOptions getReset() const { return activation_list[selector.getSelector()]; }
-    int getSelector() const { return selector.getSelector(); }
+    const int &getSelector() const { return selector.getSelector(); }
 
     void switchReset() { selector.getSelector() == 0 ? selector.setSelector(1) : selector.setSelector(0); }
     void setSelector(ResetOptions reset) { reset == ResetOptions::ALL ? selector.setSelector(0) : selector.setSelector(1); }

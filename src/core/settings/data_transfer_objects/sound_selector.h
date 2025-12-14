@@ -11,7 +11,7 @@ private:
 
 public:
     SoundState getSound() const { return activation_list[selector.getSelector()]; }
-    int getSelector() const { return selector.getSelector(); }
+    const int &getSelector() const { return selector.getSelector(); }
 
     void switchSound() { selector.getSelector() == 0 ? selector.setSelector(1) : selector.setSelector(0); }
     void setSelector(SoundState sound) { sound == SoundState::OFF ? selector.setSelector(0) : selector.setSelector(1); }

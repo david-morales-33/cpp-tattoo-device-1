@@ -13,7 +13,7 @@ private:
 public:
     explicit DeviceBootModal(Display &_display) : SettingsView(_display), display(_display) {};
 
-    void show(int side_selector = 0, int value_selector = 0, const BootSelector &boot_selector)
+    void show(int side_selector , int value_selector , const BootSelector &boot_selector)
     {
         SettingsView::show(side_selector, value_selector);
         display.setFontMode(1);

@@ -18,8 +18,6 @@ static UIContainer ui(display, repositories);
 static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
-
-DeviceBootModal modal(display);
 void setup()
 {
     display.begin();
@@ -27,10 +25,5 @@ void setup()
 }
 void loop()
 {
-    display.firstPage();
-    do
-    {
-        modal.show(1, 1, DeviceBoot::LINEAR_RAMP);
-    } while (display.nextPage());
-    // app.run();
+    app.run();
 }

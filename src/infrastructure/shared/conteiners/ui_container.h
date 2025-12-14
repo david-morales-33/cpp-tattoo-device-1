@@ -10,6 +10,13 @@
 #include <infrastructure/remote_devices/controllers/remote_devices_connected_modal.h>
 #include <infrastructure/remote_devices/controllers/remote_devices_disconnected_modal.h>
 #include <infrastructure/settings/controllers/settings_menu.h>
+#include <infrastructure/settings/controllers/settings_sound_modal.h>
+#include <infrastructure/settings/controllers/settings_clock_modal.h>
+#include <infrastructure/settings/controllers/settings_date_modal.h>
+#include <infrastructure/settings/controllers/settings_device_boot_modal.h>
+#include <infrastructure/settings/controllers/settings_reset_modal.h>
+#include <infrastructure/settings/controllers/settings_physical_device_activation_modal.h>
+#include <infrastructure/settings/controllers/settings_remote_device_activation_modal.h>
 
 class UIContainer
 {
@@ -27,6 +34,12 @@ private:
     RemoteDevicesDisconnectedDevicesModal remote_devices_disconnected_modal;
 
     SettingsMenu settings_menu;
+    SettingsSoundModal sound_modal;
+    SettingsClockModal clock_modal;
+    SettingsDateModal date_modal;
+    SettingsDeviceBootModal device_boot_modal;
+    SettingsPhysicalDeviceActivationModal remote_activation_modal;
+    SettingsRemoteDeviceActivationModal physical_activation_modal;
 
 public:
     explicit UIContainer(Display &display, RepositoriesContainer &repositories) : main_menu(display, repositories.get_main_repository()),
@@ -37,7 +50,14 @@ public:
                                                                                   remote_devices_menu(display, repositories.get_remote_devices_repository()),
                                                                                   remote_devices_connected_modal(display, repositories.get_remote_devices_repository()),
                                                                                   remote_devices_disconnected_modal(display, repositories.get_remote_devices_repository()),
-                                                                                  settings_menu(display, repositories.get_main_repository())
+                                                                                  settings_menu(display, repositories.get_main_repository()),
+                                                                                  sound_modal(display, repositories.get_settings_sound_repository()),
+                                                                                  clock_modal(display, repositories.get_main_repository()),
+                                                                                  date_modal(display, repositories.get_main_repository()),
+                                                                                  device_boot_modal(display, repositories.get_settings_device_boot_repository()),
+                                                                                  remote_activation_modal(display, repositories.get_settings_device_activation_repository()),
+                                                                                  physical_activation_modal(display, repositories.get_settings_device_activation_repository())
+
     {
     }
 

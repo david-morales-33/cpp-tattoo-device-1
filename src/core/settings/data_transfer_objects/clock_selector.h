@@ -26,7 +26,7 @@ public:
     int getHours() { return hour; }
     int getMinutes() { return minutes; }
     TimePeriod getPeriod() { return period; }
-    int getSelector() const { return selector.getSelector(); }
+    const int &getSelector() const { return selector.getSelector(); }
 
     std::string getTimeFormated() { return (getHoursFormated() + ":" + getMinutesFormated() + " " + getPeriodFormated()); }
 

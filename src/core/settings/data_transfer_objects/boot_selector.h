@@ -14,7 +14,7 @@ private:
 
 public:
     DeviceBoot getBoot() const { return boot_list[selector.getSelector()]; }
-    int getSelector() const { return selector.getSelector(); }
+    const int &getSelector() const { return selector.getSelector(); }
 
     void left() { selector.getSelector() == 0 ? selector.setSelector(3) : selector.decrement(); }
     void right() { selector.getSelector() == 3 ? selector.setSelector(0) : selector.increment(); }

@@ -13,7 +13,7 @@ private:
 
 public:
     RemoteDeviceActivation getActivation() const { return activation_list[selector.getSelector()]; }
-    int getSelector() const { return selector.getSelector(); }
+    const int &getSelector() const { return selector.getSelector(); }
 
     void switchActivation() { selector.getSelector() == 0 ? selector.setSelector(1) : selector.setSelector(0); }
     void setSelector(RemoteDeviceActivation boot)

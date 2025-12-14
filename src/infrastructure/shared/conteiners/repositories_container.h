@@ -16,7 +16,7 @@ private:
     PropertiesTimerRepository properties_repository;
     DeviceConfigurationRepositoryImpl devices_configuration;
     SettingsSoundRepositoryImpl settings_sound_repository;
-    SettingsDeviceBootTestProvider settings_device_boot_repository;
+    SettingsDeviceBootRepositoryImpl settings_device_boot_repository;
     SettingsDeviceActivationRepositoryImpl settings_device_activation_repository;
 
 public:
@@ -39,6 +39,6 @@ public:
     PropertiesTimerRepository &get_properties_repository() { return properties_repository; }
     DeviceConfigurationRepositoryImpl &get_devices_configuration() { return devices_configuration; }
     SettingsSoundRepositoryImpl &get_settings_sound_repository() { return settings_sound_repository; }
-    SettingsDeviceBootTestProvider &get_settings_device_boot_repository() { return settings_device_boot_repository; }
+    SettingsDeviceBootRepositoryImpl &get_settings_device_boot_repository() { return settings_device_boot_repository; }
     SettingsDeviceActivationRepositoryImpl &get_settings_device_activation_repository() { return settings_device_activation_repository; }
 };
