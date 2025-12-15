@@ -22,7 +22,7 @@ public:
     void setElements(int _elements) { elements = _elements; }
     void setSelector(int _selector)
     {
-        if (_selector < (elements - 1) && _selector >= 0)
+        if (_selector < elements )
             selector = _selector;
     }
 };

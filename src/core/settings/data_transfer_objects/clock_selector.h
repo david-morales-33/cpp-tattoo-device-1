@@ -68,6 +68,7 @@ public:
                 hourDecrementer();
             }
             break;
+
         default:
             switchPeriod();
             break;
@@ -78,7 +79,7 @@ public:
     void right() { selector.increment(); }
 
 private:
-    void switchPeriod() { period == TimePeriod::AM ? TimePeriod::PM : TimePeriod::AM; }
+    void switchPeriod() { period = period == TimePeriod::AM ? TimePeriod::PM : TimePeriod::AM; }
 
     void hourIncrementer() { hour < 12 ? hour++ : hour = 1; }
     void hourDecrementer() { hour > 1 ? hour-- : hour = 12; }

@@ -21,11 +21,11 @@ public:
     {
         switch (selector.getSelector())
         {
-        case 1:
+        case 0:
             if (day <= daysInMonth(month, year))
                 day++;
             break;
-        case 2:
+        case 1:
             if (month <= 12)
                 month++;
             break;
@@ -39,11 +39,11 @@ public:
     {
         switch (selector.getSelector())
         {
-        case 1:
+        case 0:
             if (day > 1)
                 day--;
             break;
-        case 2:
+        case 1:
             if (month > 1)
                 month--;
             break;

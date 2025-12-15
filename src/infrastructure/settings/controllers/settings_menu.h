@@ -13,23 +13,30 @@ private:
     Selector side_selector;
     Selector value_selector;
     InterfaceState state = InterfaceState::VISIBLE;
+    int selector = 0;
 
 public:
     explicit SettingsMenu(Display &_display) : display(_display),
                                                view(_display),
                                                side_selector(2),
                                                value_selector(4)
+
     {
     }
 
-    void load(const int &value_selector) override { side_selector.setSelector(value_selector); }
+    void load(const int &_side_selector) override
+    {
+        selector = _side_selector;
+        value_selector.setSelector(0);
+        selector == 1 ? value_selector.setElements(3) : value_selector.setElements(4);
+    }
 
     void render() override
     {
         display.firstPage();
         do
         {
-            view.show(side_selector.getSelector(), value_selector.getSelector());
+            view.show(selector, value_selector.getSelector());
         } while (display.nextPage());
     }
     void next() override { value_selector.increment(); }

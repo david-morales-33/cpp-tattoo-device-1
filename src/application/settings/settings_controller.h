@@ -26,23 +26,24 @@ private:
 
     Selector selector;
     InterfaceState state = InterfaceState::HIDDEN;
+    SettingsSelectors selectors_list;
 
 public:
     explicit SettingsController(
         IInput &_input,
         IMenuControllerParams<int> &_menu,
         IPopupController<SettingsSelectors> &_sound_modal,
-        IPopupController<SettingsSelectors> &_reset_modal,
         IPopupController<SettingsSelectors> &_clock_modal,
         IPopupController<SettingsSelectors> &_date_modal,
+        IPopupController<SettingsSelectors> &_reset_modal,
         IPopupController<SettingsSelectors> &_pedal_dev_f_modal,
         IPopupController<SettingsSelectors> &_pedal_dev_r_modal,
         IPopupController<SettingsSelectors> &_device_boot_modal) : input(_input),
                                                                    menu(_menu),
                                                                    sound_modal(_sound_modal),
-                                                                   reset_modal(_reset_modal),
                                                                    clock_modal(_clock_modal),
                                                                    date_modal(_date_modal),
+                                                                   reset_modal(_reset_modal),
                                                                    pedal_dev_f_modal(_pedal_dev_f_modal),
                                                                    pedal_dev_r_modal(_pedal_dev_r_modal),
                                                                    device_boot_modal(_device_boot_modal),
@@ -52,6 +53,9 @@ public:
     {
         if (menu.getState() == InterfaceState::VISIBLE)
         {
+            selectors_list.side_selector = selector.getSelector();
+            selectors_list.value_selector = menu.getSelector();
+
             if (input.isPressed(UP))
                 menu.previous();
             if (input.isPressed(DOWN))
@@ -62,34 +66,101 @@ public:
                 right();
             if (input.isPressed(ENTER))
                 enterResolve(selector.getSelector(), menu.getSelector());
+
             menu.render();
         }
+
         else if (sound_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 0 && selector.getSelector() == 0)
         {
+            if (input.isPressed(BACK))
+                resolveBack(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(ENTER))
+                resolveSave(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(LEFT))
+                sound_modal.left();
+            if (input.isPressed(RIGHT))
+                sound_modal.right();
             sound_modal.render();
         }
         else if (clock_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 1 && selector.getSelector() == 0)
         {
+            if (input.isPressed(BACK))
+                resolveBack(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(ENTER))
+                resolveSave(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(LEFT))
+                clock_modal.left();
+            if (input.isPressed(RIGHT))
+                clock_modal.right();
+            if (input.isPressed(UP))
+                clock_modal.up();
+            if (input.isPressed(DOWN))
+                clock_modal.down();
+
             clock_modal.render();
         }
         else if (date_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 2 && selector.getSelector() == 0)
         {
+            if (input.isPressed(BACK))
+                resolveBack(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(ENTER))
+                resolveSave(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(LEFT))
+                date_modal.left();
+            if (input.isPressed(RIGHT))
+                date_modal.right();
+            if (input.isPressed(UP))
+                date_modal.up();
+            if (input.isPressed(DOWN))
+                date_modal.down();
             date_modal.render();
         }
         else if (reset_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 3 && selector.getSelector() == 0)
         {
+            if (input.isPressed(BACK))
+                resolveBack(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(ENTER))
+                resolveSave(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(LEFT))
+                reset_modal.left();
+            if (input.isPressed(RIGHT))
+                reset_modal.right();
             reset_modal.render();
         }
         else if (pedal_dev_f_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 0 && selector.getSelector() == 1)
         {
+            if (input.isPressed(BACK))
+                resolveBack(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(ENTER))
+                resolveSave(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(LEFT))
+                pedal_dev_f_modal.left();
+            if (input.isPressed(RIGHT))
+                pedal_dev_f_modal.right();
             pedal_dev_f_modal.render();
         }
         else if (pedal_dev_r_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 1 && selector.getSelector() == 1)
         {
+            if (input.isPressed(BACK))
+                resolveBack(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(ENTER))
+                resolveSave(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(LEFT))
+                pedal_dev_r_modal.left();
+            if (input.isPressed(RIGHT))
+                pedal_dev_r_modal.right();
             pedal_dev_r_modal.render();
         }
         else if (device_boot_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 2 && selector.getSelector() == 1)
         {
+            if (input.isPressed(BACK))
+                resolveBack(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(ENTER))
+                resolveSave(selector.getSelector(), menu.getSelector());
+            if (input.isPressed(LEFT))
+                device_boot_modal.left();
+            if (input.isPressed(RIGHT))
+                device_boot_modal.right();
             device_boot_modal.render();
         }
     }
@@ -110,20 +181,71 @@ private:
     }
     void enterResolve(int side_selector, int value_selector)
     {
-        menu.hide();
         if (side_selector == 0 && value_selector == 0)
-            sound_modal.show();
+            enterExecuter(sound_modal);
         else if (side_selector == 0 && value_selector == 1)
-            clock_modal.show();
+            enterExecuter(clock_modal);
         else if (side_selector == 0 && value_selector == 2)
-            date_modal.show();
+            enterExecuter(date_modal);
         else if (side_selector == 0 && value_selector == 3)
-            reset_modal.show();
+            enterExecuter(reset_modal);
         else if (side_selector == 1 && value_selector == 0)
-            pedal_dev_f_modal.show();
+            enterExecuter(pedal_dev_f_modal);
         else if (side_selector == 1 && value_selector == 1)
-            pedal_dev_r_modal.show();
+            enterExecuter(pedal_dev_r_modal);
         else if (side_selector == 1 && value_selector == 2)
-            device_boot_modal.show();
+            enterExecuter(device_boot_modal);
+    }
+
+    void resolveBack(int side_selector, int value_selector)
+    {
+        if (side_selector == 0 && value_selector == 0)
+            backExecuter(sound_modal);
+        else if (side_selector == 0 && value_selector == 1)
+            backExecuter(clock_modal);
+        else if (side_selector == 0 && value_selector == 2)
+            backExecuter(date_modal);
+        else if (side_selector == 0 && value_selector == 3)
+            backExecuter(reset_modal);
+        else if (side_selector == 1 && value_selector == 0)
+            backExecuter(pedal_dev_f_modal);
+        else if (side_selector == 1 && value_selector == 1)
+            backExecuter(pedal_dev_r_modal);
+        else if (side_selector == 1 && value_selector == 2)
+            backExecuter(device_boot_modal);
+    }
+    void resolveSave(int side_selector, int value_selector)
+    {
+        if (side_selector == 0 && value_selector == 0)
+            saveExecuter(sound_modal);
+        else if (side_selector == 0 && value_selector == 1)
+            saveExecuter(clock_modal);
+        else if (side_selector == 0 && value_selector == 2)
+            saveExecuter(date_modal);
+        else if (side_selector == 0 && value_selector == 3)
+            saveExecuter(reset_modal);
+        else if (side_selector == 1 && value_selector == 0)
+            saveExecuter(pedal_dev_f_modal);
+        else if (side_selector == 1 && value_selector == 1)
+            saveExecuter(pedal_dev_r_modal);
+        else if (side_selector == 1 && value_selector == 2)
+            saveExecuter(device_boot_modal);
+    }
+    void enterExecuter(IPopupController<SettingsSelectors> &interface)
+    {
+        menu.hide();
+        interface.load(selectors_list);
+        interface.show();
+    }
+    void backExecuter(IPopupController<SettingsSelectors> &interface)
+    {
+        menu.show();
+        interface.hide();
+    }
+    void saveExecuter(IPopupController<SettingsSelectors> &interface)
+    {
+        interface.enter();
+        menu.show();
+        interface.hide();
     }
 };

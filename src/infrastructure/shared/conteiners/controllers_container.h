@@ -50,4 +50,5 @@ public:
     RemoteDevicesController &get_remote_devices_controller() { return remote_devices_controller; }
     ConfigureDevicesController &get_configuration_controller() { return configuration_controller; }
     PropertiesController &get_properties_controller() { return properties_controller; }
+    SettingsController &get_settings_controller() { return settings_controller; }
 };
