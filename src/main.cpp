@@ -25,6 +25,5 @@ void setup()
 }
 void loop()
 {
-    // app.run();
-    controllers.get_settings_controller().execute();
+    app.run();
 }

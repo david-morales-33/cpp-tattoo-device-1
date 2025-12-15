@@ -30,7 +30,7 @@ public:
         else if (option == 2 && resolve_state_controller(option))
         {
             controllers.get_properties_controller().execute();
-            end_process(option);  
+            end_process(option);
         }
 
         else if (option == 3 && false)
@@ -39,8 +39,10 @@ public:
         else if (option == 4 && false)
         {
         }
-        else if (option == 5 && false)
+        else if (option == 5 && resolve_state_controller(option))
         {
+            controllers.get_settings_controller().execute();
+            end_process(option);
         }
         else
         {
@@ -63,6 +65,9 @@ private:
 
         else if (option == 2)
             controllers.get_properties_controller().show();
+
+        else if (option == 5)
+            controllers.get_settings_controller().show();
     }
 
     bool resolve_state_controller(int option)
@@ -85,9 +90,8 @@ private:
             return false;
             break;
         case 5:
-            return false;
+            return controllers.get_settings_controller().getState() == InterfaceState::VISIBLE;
             break;
-
         default:
             return false;
             break;

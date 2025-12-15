@@ -56,6 +56,8 @@ public:
             selectors_list.side_selector = selector.getSelector();
             selectors_list.value_selector = menu.getSelector();
 
+            if (input.isPressed(BACK))
+                hide();
             if (input.isPressed(UP))
                 menu.previous();
             if (input.isPressed(DOWN))
