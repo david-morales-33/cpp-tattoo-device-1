@@ -40,6 +40,7 @@ private:
     {
         modal.enter();
         modal.hide();
+        values_menu.load(devices_menu.getSelector());
         values_menu.show();
     }
     void setBackModal()
@@ -65,7 +66,7 @@ public:
                 devices_menu.previous();
             if (input.isPressed(DOWN))
                 devices_menu.next();
-            if (input.isPressed(ENTER))
+            if (input.isPressed(ENTER) || input.isPressed(RIGHT))
                 setEnterDevices();
             devices_menu.render();
         }
@@ -77,7 +78,7 @@ public:
                 values_menu.next();
             if (input.isPressed(ENTER))
                 setEnterModal();
-            if (input.isPressed(BACK))
+            if (input.isPressed(BACK) || input.isPressed(LEFT))
                 setBackValues();
             values_menu.render();
         }

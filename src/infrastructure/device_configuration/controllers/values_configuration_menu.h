@@ -13,7 +13,7 @@ private:
     IDeviceConfigurationRepository &repository;
     DeviceConfigurationSelector view;
     Selector selector;
-    VoltageGroup voltages{};
+    VoltageGroup voltages;
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
@@ -26,10 +26,7 @@ public:
             view.show(voltages, selector.getSelector());
         } while (display.nextPage());
     }
-    void load(const int &dev_selector = 0) override
-    {
-        voltages = dev_selector == 0 ? repository.getLineDevices() : repository.getShadeDevices();
-    }
+    void load(const int &dev_selector = 0) override { voltages = dev_selector == 0 ? repository.getLineDevices() : repository.getShadeDevices(); }
     void previous() override { selector.decrement(); }
     void next() override { selector.increment(); }
     void show() override { state = InterfaceState::VISIBLE; }
