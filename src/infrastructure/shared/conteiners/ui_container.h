@@ -50,7 +50,7 @@ public:
                                                                                   remote_devices_menu(display, repositories.get_remote_devices_repository()),
                                                                                   remote_devices_connected_modal(display, repositories.get_remote_devices_repository()),
                                                                                   remote_devices_disconnected_modal(display, repositories.get_remote_devices_repository()),
-                                                                                  settings_menu(display, repositories.get_main_repository()),
+                                                                                  settings_menu(display),
                                                                                   sound_modal(display, repositories.get_settings_sound_repository()),
                                                                                   clock_modal(display, repositories.get_main_repository()),
                                                                                   date_modal(display, repositories.get_main_repository()),

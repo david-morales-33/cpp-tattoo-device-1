@@ -2,47 +2,40 @@
 #include <core/shared/interfaces/menu_controller_params.h>
 #include <core/shared/data_transfer_objects/selector.h>
 #include <core/settings/views/settings_view.h>
-#include <core/main/data_transfer_objects/slider.h>
-#include <core/main/interfaces/main_date_time_repository.h>
+#include <core/settings/data_transfer_objects/settings_selectors.h>
 #include <infrastructure/display.h>
 
-class SettingsMenu : public IMenuControllerParams<Slider>
+class SettingsMenu : public IMenuControllerParams<int>
 {
 private:
     Display &display;
-    IMainDateTimeRepository &repository;
     SettingsView view;
-    Selector selector;
-    Slider slider;
-    DateTimeFormat date_time;
+    Selector side_selector;
+    Selector value_selector;
     InterfaceState state = InterfaceState::VISIBLE;
 
 public:
-    explicit SettingsMenu(
-        Display &_display,
-        IMainDateTimeRepository &_repository) : display(_display),
-                                                view(_display),
-                                                repository(_repository),
-                                                selector(2) {}
-
-    void load(const Slider &_slider) override
+    explicit SettingsMenu(Display &_display) : display(_display),
+                                               view(_display),
+                                               side_selector(2),
+                                               value_selector(4)
     {
-        slider = _slider;
-        date_time = repository.get();
     }
+
+    void load(const int &value_selector) override { side_selector.setSelector(value_selector); }
 
     void render() override
     {
         display.firstPage();
         do
         {
-            view.show(selector.getSelector());
+            view.show(side_selector.getSelector(), value_selector.getSelector());
         } while (display.nextPage());
     }
-    void next() override { selector.increment(); }
-    void previous() override { selector.decrement(); }
+    void next() override { value_selector.increment(); }
+    void previous() override { value_selector.decrement(); }
     void hide() override { state = InterfaceState::HIDDEN; }
     void show() override { state = InterfaceState::VISIBLE; }
     const InterfaceState getState() const override { return state; }
-    const int getSelector() const override { return selector.getSelector(); }
+    const int getSelector() const override { return value_selector.getSelector(); }
 };

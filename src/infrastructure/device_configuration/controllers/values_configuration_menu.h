@@ -12,28 +12,28 @@ private:
     Display &display;
     IDeviceConfigurationRepository &repository;
     DeviceConfigurationSelector view;
-    Selector val_selector;
+    Selector selector;
     VoltageGroup voltages{};
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
-    explicit ValuesConfigurationMenu(Display &_display, IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), view(_display), val_selector(4) {}
+    explicit ValuesConfigurationMenu(Display &_display, IDeviceConfigurationRepository &_repository) : display(_display), repository(_repository), view(_display), selector(4) {}
     void render() override
     {
         display.firstPage();
         do
         {
-            view.show(voltages, val_selector.getSelector());
+            view.show(voltages, selector.getSelector());
         } while (display.nextPage());
     }
     void load(const int &dev_selector = 0) override
     {
         voltages = dev_selector == 0 ? repository.getLineDevices() : repository.getShadeDevices();
     }
-    void previous() override { val_selector.decrement(); }
-    void next() override { val_selector.increment(); }
+    void previous() override { selector.decrement(); }
+    void next() override { selector.increment(); }
     void show() override { state = InterfaceState::VISIBLE; }
     void hide() override { state = InterfaceState::HIDDEN; }
     const InterfaceState getState() const override { return state; }
-    const int getSelector() const override { return val_selector.getSelector(); }
+    const int getSelector() const override { return selector.getSelector(); }
 };
