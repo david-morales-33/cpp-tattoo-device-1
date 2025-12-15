@@ -18,7 +18,7 @@ private:
     IMainDateTimeRepository &repository;
     MainView main_view;
     LetterView modal_view;
-    ModalData modal_data[6] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"RESET", 50}, {"SETTINGS", 42}};
+    ModalData modal_data[6] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"PERFORMANCE", 33}, {"SETTINGS", 42}};
     Slider slider;
     Selector selector;
     InterfaceState state = InterfaceState::VISIBLE;

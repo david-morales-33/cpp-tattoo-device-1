@@ -9,6 +9,7 @@
 #include <core/main/icons/operation.h>
 #include <core/main/icons/reset.h>
 #include <core/main/icons/settings.h>
+#include <core/main/icons/performance.h>
 #include <core/main/data_transfer_objects/date_time_format.h>
 
 class MainView
@@ -28,7 +29,7 @@ public:
         display.drawBitmap(slider.getIconsSlider()[1], 35, WIDTH, HEIGHT, DEVICE_BITS);
         display.drawBitmap(slider.getIconsSlider()[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
         display.drawBitmap(slider.getIconsSlider()[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
-        display.drawBitmap(slider.getIconsSlider()[4], 35, WIDTH, HEIGHT, RESET_BITS);
+        display.drawBitmap(slider.getIconsSlider()[4], 35, WIDTH, HEIGHT, PERFORMANCE_BITS);
         display.drawBitmap(slider.getIconsSlider()[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
 
         // --- Recuadros principales ---
