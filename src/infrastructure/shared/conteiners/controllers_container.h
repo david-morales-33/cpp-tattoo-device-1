@@ -5,6 +5,7 @@
 #include <application/remote_devices/remote_devices_controller.h>
 #include <application/device_configuration/device_configuration_controller.h>
 #include <application/properties/properties_controller.h>
+#include <application/settings/settings_controller.h>
 
 class ControllersContainer
 {
@@ -13,6 +14,7 @@ private:
     RemoteDevicesController remote_devices_controller;
     ConfigureDevicesController configuration_controller;
     PropertiesController properties_controller;
+    SettingsController settings_controller;
 
 public:
     explicit ControllersContainer(InputsContainer &inputs, UIContainer &ui) : main_controller(
@@ -30,7 +32,17 @@ public:
                                                                                   ui.get_configuration_modal()),
                                                                               properties_controller(
                                                                                   inputs.get_input_buttons(),
-                                                                                  ui.get_properties_menu())
+                                                                                  ui.get_properties_menu()),
+                                                                              settings_controller(
+                                                                                  inputs.get_input_buttons(),
+                                                                                  ui.get_settings_menu(),
+                                                                                  ui.get_sound_modal(),
+                                                                                  ui.get_clock_modal(),
+                                                                                  ui.get_date_modal(),
+                                                                                  ui.get_reset_modal(),
+                                                                                  ui.get_physical_activation_modal(),
+                                                                                  ui.get_remote_activation_modal(),
+                                                                                  ui.get_device_boot_modal())
     {
     }
 

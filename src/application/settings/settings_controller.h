@@ -7,18 +7,23 @@
 #include <core/settings/interfaces/sound_state.h>
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/shared/data_transfer_objects/selector.h>
+#include <core/settings/data_transfer_objects/settings_selectors.h>
 
 class SettingsController
 {
 private:
     IInput &input;
     IMenuControllerParams<int> &menu;
-    IPopupController<void> &sound_modal;
-    IPopupController<void> &reset_modal;
-    IPopupController<void> &clock_modal;
-    IPopupController<void> &date_modal;
-    IPopupController<void> &pedal_dev_f_modal;
-    IPopupController<void> &pedal_dev_r_modal;
+
+    IPopupController<SettingsSelectors> &sound_modal;
+    IPopupController<SettingsSelectors> &clock_modal;
+    IPopupController<SettingsSelectors> &date_modal;
+    IPopupController<SettingsSelectors> &reset_modal;
+
+    IPopupController<SettingsSelectors> &pedal_dev_f_modal;
+    IPopupController<SettingsSelectors> &pedal_dev_r_modal;
+    IPopupController<SettingsSelectors> &device_boot_modal;
+
     Selector selector;
     InterfaceState state = InterfaceState::HIDDEN;
 
@@ -26,21 +31,22 @@ public:
     explicit SettingsController(
         IInput &_input,
         IMenuControllerParams<int> &_menu,
-        IPopupController<void> &_sound_modal,
-        IPopupController<void> &_reset_modal,
-        IPopupController<void> &_clock_modal,
-        IPopupController<void> &_date_modal,
-        IPopupController<void> &_pedal_dev_f_modal,
-        IPopupController<void> &_pedal_dev_r_modal,
-        Selector selector) : input(_input),
-                             menu(_menu),
-                             sound_modal(_sound_modal),
-                             reset_modal(_reset_modal),
-                             clock_modal(_clock_modal),
-                             date_modal(_date_modal),
-                             pedal_dev_f_modal(_pedal_dev_f_modal),
-                             pedal_dev_r_modal(_pedal_dev_r_modal),
-                             selector(2) {}
+        IPopupController<SettingsSelectors> &_sound_modal,
+        IPopupController<SettingsSelectors> &_reset_modal,
+        IPopupController<SettingsSelectors> &_clock_modal,
+        IPopupController<SettingsSelectors> &_date_modal,
+        IPopupController<SettingsSelectors> &_pedal_dev_f_modal,
+        IPopupController<SettingsSelectors> &_pedal_dev_r_modal,
+        IPopupController<SettingsSelectors> &_device_boot_modal) : input(_input),
+                                                                   menu(_menu),
+                                                                   sound_modal(_sound_modal),
+                                                                   reset_modal(_reset_modal),
+                                                                   clock_modal(_clock_modal),
+                                                                   date_modal(_date_modal),
+                                                                   pedal_dev_f_modal(_pedal_dev_f_modal),
+                                                                   pedal_dev_r_modal(_pedal_dev_r_modal),
+                                                                   device_boot_modal(_device_boot_modal),
+                                                                   selector(2) {}
 
     void execute()
     {
@@ -82,6 +88,10 @@ public:
         {
             pedal_dev_r_modal.render();
         }
+        else if (device_boot_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 2 && selector.getSelector() == 1)
+        {
+            device_boot_modal.render();
+        }
     }
     void show() { state = InterfaceState::VISIBLE; }
     void hide() { state = InterfaceState::HIDDEN; }
@@ -113,5 +123,7 @@ private:
             pedal_dev_f_modal.show();
         else if (side_selector == 1 && value_selector == 1)
             pedal_dev_r_modal.show();
+        else if (side_selector == 1 && value_selector == 2)
+            device_boot_modal.show();
     }
 };

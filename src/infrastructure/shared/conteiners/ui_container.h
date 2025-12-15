@@ -37,9 +37,10 @@ private:
     SettingsSoundModal sound_modal;
     SettingsClockModal clock_modal;
     SettingsDateModal date_modal;
+    SettingsResetModal reset_modal;
     SettingsDeviceBootModal device_boot_modal;
-    SettingsPhysicalDeviceActivationModal remote_activation_modal;
-    SettingsRemoteDeviceActivationModal physical_activation_modal;
+    SettingsPhysicalDeviceActivationModal physical_activation_modal;
+    SettingsRemoteDeviceActivationModal remote_activation_modal;
 
 public:
     explicit UIContainer(Display &display, RepositoriesContainer &repositories) : main_menu(display, repositories.get_main_repository()),
@@ -54,6 +55,7 @@ public:
                                                                                   sound_modal(display, repositories.get_settings_sound_repository()),
                                                                                   clock_modal(display, repositories.get_main_repository()),
                                                                                   date_modal(display, repositories.get_main_repository()),
+                                                                                  reset_modal(display),
                                                                                   device_boot_modal(display, repositories.get_settings_device_boot_repository()),
                                                                                   remote_activation_modal(display, repositories.get_settings_device_activation_repository()),
                                                                                   physical_activation_modal(display, repositories.get_settings_device_activation_repository())
@@ -70,4 +72,11 @@ public:
     RemoteDevicesConnectedDeviceModal &get_remote_devices_connected_modal() { return remote_devices_connected_modal; }
     RemoteDevicesDisconnectedDevicesModal &get_remote_devices_disconnected_modal() { return remote_devices_disconnected_modal; }
     SettingsMenu &get_settings_menu() { return settings_menu; }
+    SettingsSoundModal &get_sound_modal() { return sound_modal; }
+    SettingsClockModal &get_clock_modal() { return clock_modal; }
+    SettingsDateModal &get_date_modal() { return date_modal; }
+    SettingsResetModal &get_reset_modal() { return reset_modal; }
+    SettingsDeviceBootModal &get_device_boot_modal() { return device_boot_modal; }
+    SettingsPhysicalDeviceActivationModal &get_remote_activation_modal() { return physical_activation_modal; }
+    SettingsRemoteDeviceActivationModal &get_physical_activation_modal() { return remote_activation_modal; }
 };
