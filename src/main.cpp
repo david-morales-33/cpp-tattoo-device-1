@@ -6,7 +6,7 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
-#include <core/presets/view/presets_selector.h>
+#include <core/presets/view/presets_voltages_modal.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -19,7 +19,7 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-PresetsSelector view(display);
+PresetsVoltagesModal view(display);
 
 void setup()
 {
@@ -31,7 +31,7 @@ void loop()
     display.firstPage();
     do
     {
-        view.show();
+        view.show(repositories.get_devices_configuration().getLineDevices());
     } while (display.nextPage());
         // app.run();
 }
