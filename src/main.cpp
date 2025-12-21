@@ -6,7 +6,7 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
-#include <core/operation/views/operation_menu_modal.h>
+#include <core/presets/view/presets_selector.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -18,8 +18,9 @@ static UIContainer ui(display, repositories);
 static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
-OperationMenuModal menu(display);
-Slider slider;
+
+PresetsSelector view(display);
+
 void setup()
 {
     display.begin();
@@ -30,7 +31,7 @@ void loop()
     display.firstPage();
     do
     {
-        menu.show(slider, repositories.get_main_repository().get());
+        view.show();
     } while (display.nextPage());
         // app.run();
 }
