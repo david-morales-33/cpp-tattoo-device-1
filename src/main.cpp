@@ -6,8 +6,8 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
-#include <core/presets/view/presets_device_boot_modal.h>
-#include <core/presets/data_transfer_objects/boot_selector.h>
+#include <core/presets/view/presets_device_activation_modal.h>
+#include <core/presets/data_transfer_objects/activation_selector.h>
 
 
 static Display display;
@@ -21,7 +21,7 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-PresetsDeviceBootModal view(display);
+PresetsDeviceActivationModal view(display);
 
 void setup()
 {
@@ -30,7 +30,7 @@ void setup()
 }
 void loop()
 {
-    BootSelector selector;
+    ActivationSelector selector;
     display.firstPage();
     do
     {
