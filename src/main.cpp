@@ -6,7 +6,7 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
-#include <core/settings/views/device_boot_modal.h>
+#include <core/operation/views/operation_menu_modal.h>
 
 static Display display;
 static InputsContainer inputs;
@@ -18,6 +18,8 @@ static UIContainer ui(display, repositories);
 static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
+OperationMenuModal menu(display);
+Slider slider;
 void setup()
 {
     display.begin();
@@ -25,5 +27,10 @@ void setup()
 }
 void loop()
 {
-    app.run();
+    display.firstPage();
+    do
+    {
+        menu.show(slider, repositories.get_main_repository().get());
+    } while (display.nextPage());
+        // app.run();
 }
