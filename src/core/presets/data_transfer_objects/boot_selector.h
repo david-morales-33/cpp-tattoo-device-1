@@ -1,6 +1,6 @@
 #pragma once
 #include <core/shared/data_transfer_objects/selector.h>
-#include <core/settings/interfaces/device_boot.h>
+#include <core/presets/interfaces/device_boot.h>
 class BootSelector
 {
 private:

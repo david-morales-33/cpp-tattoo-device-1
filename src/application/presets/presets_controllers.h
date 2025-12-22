@@ -160,7 +160,7 @@ private:
             modal_values.show();
         }
     }
-    void resolveBack(int option = 0)
+    void resolveBack(int option)
     {
         if (option == 0)
         {

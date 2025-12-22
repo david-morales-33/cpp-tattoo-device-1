@@ -9,7 +9,6 @@
 #include <core/presets/view/presets_device_activation_modal.h>
 #include <core/presets/data_transfer_objects/activation_selector.h>
 
-
 static Display display;
 static InputsContainer inputs;
 
@@ -21,8 +20,6 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-PresetsDeviceActivationModal view(display);
-
 void setup()
 {
     display.begin();
@@ -30,11 +27,6 @@ void setup()
 }
 void loop()
 {
-    ActivationSelector selector;
-    display.firstPage();
-    do
-    {
-        view.show(selector);
-    } while (display.nextPage());
-        // app.run();
+
+    // app.run();
 }

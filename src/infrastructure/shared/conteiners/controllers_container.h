@@ -12,7 +12,7 @@ class ControllersContainer
 private:
     MainMenuController main_controller;
     RemoteDevicesController remote_devices_controller;
-    ConfigureDevicesController configuration_controller;
+    // ConfigureDevicesController configuration_controller;
     PropertiesController properties_controller;
     SettingsController settings_controller;
 
@@ -25,11 +25,11 @@ public:
                                                                                   ui.get_remote_devices_menu(),
                                                                                   ui.get_remote_devices_connected_modal(),
                                                                                   ui.get_remote_devices_disconnected_modal()),
-                                                                              configuration_controller(
+                                                                              /*configuration_controller(
                                                                                   inputs.get_input_buttons(),
                                                                                   ui.get_devices_configuration_menu(),
                                                                                   ui.get_values_configuration_menu(),
-                                                                                  ui.get_configuration_modal()),
+                                                                                  ui.get_configuration_modal()),*/
                                                                               properties_controller(
                                                                                   inputs.get_input_buttons(),
                                                                                   ui.get_properties_menu()),
@@ -48,7 +48,7 @@ public:
 
     MainMenuController &get_main_controller() { return main_controller; }
     RemoteDevicesController &get_remote_devices_controller() { return remote_devices_controller; }
-    ConfigureDevicesController &get_configuration_controller() { return configuration_controller; }
+    // ConfigureDevicesController &get_configuration_controller() { return configuration_controller; }
     PropertiesController &get_properties_controller() { return properties_controller; }
     SettingsController &get_settings_controller() { return settings_controller; }
 };
