@@ -18,7 +18,7 @@ public:
     Presets &getPresetsLineMachine() { return presets_line_machine; }
     Presets &getPresetsShadeMachine() { return presets_shade_machine; }
 
-    bool saveVoltage(DeviceVoltagePresets voltage)
+    bool updateDeviceVoltage(DeviceVoltagePresets voltage)
     {
         return presets_list[getIndex(voltage.getType())]->getVoltageList().updateVoltage(voltage);
     }

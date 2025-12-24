@@ -25,7 +25,7 @@ public:
     void load() { data = voltage_provider.get(); }
     void updateVoltage(DeviceVoltagePresets voltage) override
     {
-        if (data.saveVoltage(voltage))
+        if (data.updateDeviceVoltage(voltage))
             voltage_provider.persist(voltage);
     }
     void updateDeviceBoot(DeviceBootPresets boot) override
