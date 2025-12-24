@@ -1,8 +1,7 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <infrastructure/icons_size.h>
-#include <core/device_configuration/icons/device.h>
-#include <core/device_configuration/data_transfer_objects/voltage_group.h>
+#include <core/presets/icons/device.h>
 
 class PresetsView
 {

@@ -3,7 +3,6 @@
 #include <infrastructure/shared/conteiners/inputs_conteiner.h>
 #include <application/main/main_menu_controller.h>
 #include <application/remote_devices/remote_devices_controller.h>
-#include <application/device_configuration/device_configuration_controller.h>
 #include <application/properties/properties_controller.h>
 #include <application/settings/settings_controller.h>
 

@@ -9,7 +9,7 @@ private:
     PresetsList data;
 
 public:
-    void persist(const DeviceVoltagePresets &device_voltage) override { data.updateVoltage(device_voltage); }
+    void persist(const DeviceVoltagePresets &device_voltage) override { data.updateDeviceVoltage(device_voltage); }
     void load() override {}
     void reset() override {}
     void remove(const DeviceVoltagePresets &device_voltage) override {}
