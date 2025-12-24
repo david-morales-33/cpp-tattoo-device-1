@@ -3,15 +3,15 @@
 #include <core/presets/data_transfer_objects/presets_list.h>
 #include <core/presets/data_transfer_objects/voltage.h>
 
-class PresetsBootTestProvider : public IDataProvider<DeviceBootPresets, PresetsList>
+class PresetsBootTestProvider : public IDataProvider<DeviceActivationPresets, PresetsList>
 {
 private:
     PresetsList data;
 
 public:
-    void persist(const DeviceBootPresets &device_boot) override { data.updateDeviceBoot(device_boot); }
+    void persist(const DeviceActivationPresets &device_activation) override { data.updateDeviceActivation(device_activation); }
     void load() override {}
     void reset() override {}
-    void remove(const DeviceBootPresets &device_boot) override {}
+    void remove(const DeviceActivationPresets &device_activation) override {}
     const PresetsList &get() const override { return data; }
 };
