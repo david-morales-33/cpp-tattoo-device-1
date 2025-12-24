@@ -1,11 +1,15 @@
 #pragma once
-#include <core/presets/data_transfer_objects/voltage.h>
+#include <core/presets/data_transfer_objects/device_boot_presets.h>
+#include <core/presets/data_transfer_objects/device_activation_presets.h>
+#include <core/presets/data_transfer_objects/device_voltage_presets.h>
 #include <core/presets/data_transfer_objects/presets_list.h>
 
 class IPresetsRepository
 {
 public:
-    virtual void update(Voltage voltage) = 0;
+    virtual void updateVoltage(DeviceVoltagePresets voltage) = 0;
+    virtual void updateDeviceBoot(DeviceBootPresets boot) = 0;
+    virtual void updateDeviceActivation(DeviceActivationPresets activation) = 0;
     virtual const PresetsList &getPresets() const = 0;
     virtual ~IPresetsRepository() = default;
 };

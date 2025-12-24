@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <core/presets/data_transfer_objects/voltage.h>
+#include <core/presets/data_transfer_objects/voltage_list.h>
 #include <core/shared/interfaces/machine_type.h>
 #include <core/presets/interfaces/device_boot.h>
 #include <core/presets/interfaces/device_activation.h>
@@ -11,39 +12,39 @@ private:
     MachineType type;
     DeviceBoot boot;
     DeviceActivation activation;
-    std::array<Voltage, 4> voltages;
+    VoltageList voltage_list;
 
 public:
-    Presets(MachineType _type,
-            DeviceBoot _boot,
-            DeviceActivation _activation)
-        : type(_type), boot(_boot), activation(_activation), voltages{
-                                                                 Voltage{VoltageElement::VALUE_1, _type, 0.0f},
-                                                                 Voltage{VoltageElement::VALUE_2, _type, 0.0f},
-                                                                 Voltage{VoltageElement::VALUE_3, _type, 0.0f},
-                                                                 Voltage{VoltageElement::VALUE_4, _type, 0.0f}} {}
+    Presets(
+        MachineType _type,
+        DeviceBoot _boot,
+        DeviceActivation _activation,
+        VoltageList _voltage_list)
+        : type(_type),
+          boot(_boot),
+          activation(_activation),
+          voltage_list(_voltage_list) {}
+
     Presets(MachineType _type)
-        : type(_type), voltages{
-                           Voltage{VoltageElement::VALUE_1, _type, 0.0f},
-                           Voltage{VoltageElement::VALUE_2, _type, 0.0f},
-                           Voltage{VoltageElement::VALUE_3, _type, 0.0f},
-                           Voltage{VoltageElement::VALUE_4, _type, 0.0f}} {}
+        : type(_type), voltage_list(_type) {}
 
     MachineType getType() const { return type; }
     DeviceBoot getBoot() const { return boot; }
     DeviceActivation getActivation() const { return activation; }
-    const std::array<Voltage, 4> &getVoltages() const { return voltages; }
+    VoltageList &getVoltageList() { return voltage_list; }
 
-    void setType(MachineType _type) { type = type; }
-    void setBoot(DeviceBoot _boot) { boot = _boot; }
-    void setActivation(DeviceActivation _activation) { activation = _activation; }
-    bool updateVoltageByIndex(int index, float newValue)
+    bool setBoot(DeviceBoot _boot)
     {
-        if (index < 0 || index >= voltages.size())
-        {
+        if (boot == _boot)
             return false;
-        }
-        voltages[index].setValue(newValue);
+        boot = _boot;
+        return true;
+    }
+    bool setActivation(DeviceActivation _activation)
+    {
+        if (activation == _activation)
+            return false;
+        activation = _activation;
         return true;
     }
 };

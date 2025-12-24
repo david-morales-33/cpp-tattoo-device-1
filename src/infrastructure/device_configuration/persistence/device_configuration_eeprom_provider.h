@@ -2,7 +2,7 @@
 #include <core/shared/interfaces/data_provider.h>
 #include <core/device_configuration/data_transfer_objects/voltage.h>
 #include <core/device_configuration/data_transfer_objects/voltage_list.h>
-#include <infrastructure/persistence/shared/EEPROM_manager.h>
+#include <infrastructure/shared/EEPROM_manager.h>
 
 class VoltageSettingsEepromProvider : public IDataProvider<Voltage, VoltageList>
 {
