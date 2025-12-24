@@ -1,6 +1,7 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/presets/view/presets_selector.h>
+#include <core/presets/data_transfer_objects/voltage_list.h>
 
 class PresetsVoltagesModal : public PresetsSelector
 {
@@ -10,7 +11,7 @@ private:
 public:
     explicit PresetsVoltagesModal(Display &_display) : PresetsSelector(_display), display(_display) {}
 
-    void show(const VoltageGroup &data, int devices_selector = 0, int option_selector = 0, int value_selector = 0)
+    void show(const VoltageList &data, int devices_selector = 0, int option_selector = 0, int value_selector = 0)
     {
         PresetsSelector::show(devices_selector, option_selector);
         display.setFontMode(1);
@@ -28,13 +29,13 @@ public:
         display.setCursor(100, 11);
         
         display.setCursor(67, 16);
-        display.print(String(data.getAll()[0].getValue()));
+        display.print(String(data.getData()[0].getValue()));
         display.setCursor(67, 29);
-        display.print(String(data.getAll()[1].getValue()));
+        display.print(String(data.getData()[1].getValue()));
         display.setCursor(67, 40);
-        display.print(String(data.getAll()[2].getValue()));
+        display.print(String(data.getData()[2].getValue()));
         display.setCursor(67, 52);
-        display.print(String(data.getAll()[3].getValue()));
+        display.print(String(data.getData()[3].getValue()));
 
         display.drawFrame(28, ((value_selector * 12) + 7), 70, 12, 2);
     }

@@ -8,7 +8,7 @@ class VoltageList
 private:
     std::array<Voltage, 4> data;
 public:
-    VoltageList(MachineType _type)
+    VoltageList()
         : data{
               Voltage{VoltageElement::VALUE_1, 0.0f},
               Voltage{VoltageElement::VALUE_2, 0.0f},

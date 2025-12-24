@@ -15,8 +15,8 @@ public:
     PresetsList(Presets _presets_line_machine,
                 Presets _presets_shade_machine) : presets_line_machine(_presets_line_machine), presets_shade_machine(_presets_shade_machine) {}
 
-    Presets &getPresetsLineMachine() { return presets_line_machine; }
-    Presets &getPresetsShadeMachine() { return presets_shade_machine; }
+    const Presets &getPresetsLineMachine() const { return presets_line_machine; }
+    const Presets &getPresetsShadeMachine() const { return presets_shade_machine; }
 
     bool updateDeviceVoltage(DeviceVoltagePresets voltage)
     {

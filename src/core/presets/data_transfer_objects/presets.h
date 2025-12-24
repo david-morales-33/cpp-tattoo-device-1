@@ -26,11 +26,12 @@ public:
           voltage_list(_voltage_list) {}
 
     Presets(MachineType _type)
-        : type(_type), voltage_list(_type) {}
+        : type(_type), voltage_list() {}
 
     MachineType getType() const { return type; }
     DeviceBoot getBoot() const { return boot; }
     DeviceActivation getActivation() const { return activation; }
+    const VoltageList &getVoltageList()const { return voltage_list; }
     VoltageList &getVoltageList() { return voltage_list; }
 
     bool setBoot(DeviceBoot _boot)
