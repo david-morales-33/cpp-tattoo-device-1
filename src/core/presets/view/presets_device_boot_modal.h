@@ -1,7 +1,6 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/presets/view/presets_selector.h>
-#include <core/settings/interfaces/device_boot.h>
 #include <core/presets/data_transfer_objects/boot_selector.h>
 
 class PresetsDeviceBootModal : public PresetsSelector
