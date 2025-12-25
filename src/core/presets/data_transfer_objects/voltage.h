@@ -9,6 +9,7 @@ private:
     float value = 0.0f;
 
 public:
+    Voltage() : value(0.0f) {}
     Voltage(VoltageElement _element, float _value) : element(_element),
                                                      value(_value) {}
 

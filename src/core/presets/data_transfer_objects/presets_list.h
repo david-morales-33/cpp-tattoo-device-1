@@ -17,6 +17,7 @@ public:
 
     const Presets &getPresetsLineMachine() const { return presets_line_machine; }
     const Presets &getPresetsShadeMachine() const { return presets_shade_machine; }
+    Presets *const (&getPresetsList() const)[2] { return presets_list; }
 
     bool updateDeviceVoltage(DeviceVoltagePresets voltage)
     {
