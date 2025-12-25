@@ -31,7 +31,8 @@ public:
     void load(const PresetsSelectors &_selectors) override
     {
         selectors = _selectors;
-        selectors.devices_selector == 0 ? voltages_list = repository.getPresets().getPresetsLineMachine().getVoltageList() : voltages_list = repository.getPresets().getPresetsShadeMachine().getVoltageList();
+        Presets *device_presets = repository.getPresets().getPresetsList()[_selectors.devices_selector];
+        voltages_list = device_presets->getVoltageList();
     }
     void previous() override { selector.decrement(); }
     void next() override { selector.increment(); }
