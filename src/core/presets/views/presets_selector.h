@@ -1,6 +1,6 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/presets/view/presets_view.h>
+#include <core/presets/views/presets_view.h>
 
 class PresetsSelector : public PresetsView
 {
@@ -8,7 +8,7 @@ private:
     Display &display;
 
 public:
-    explicit PresetsSelector(Display &disp) : PresetsView(disp), display(disp) {}
+    explicit PresetsSelector(Display &_display) : PresetsView(_display), display(_display) {}
 
     void show(int device_selector = 0, int option_selector = 0)
     {

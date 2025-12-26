@@ -9,7 +9,7 @@ public:
     virtual void right() {}
     virtual void up() {}
     virtual void down() {}
-    virtual void enter() = 0;
+    virtual void enter() {}
     virtual void hide() = 0;
     virtual void show() = 0;
     virtual void load(const D &data) {};

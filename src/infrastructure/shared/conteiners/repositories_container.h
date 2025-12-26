@@ -6,6 +6,7 @@
 #include <infrastructure/settings/persistence/settings_sound_repository_impl.h>
 #include <infrastructure/settings/persistence/settings_device_boot_repository_impl.h>
 #include <infrastructure/settings/persistence/settings_device_activation_repository_impl.h>
+#include <infrastructure/presets/persitence/presets_repository_impl.h>
 
 class RepositoriesContainer
 {
@@ -16,6 +17,7 @@ private:
     SettingsSoundRepositoryImpl settings_sound_repository;
     SettingsDeviceBootRepositoryImpl settings_device_boot_repository;
     SettingsDeviceActivationRepositoryImpl settings_device_activation_repository;
+    PresetsRepositoryImpl presets_repository;
 
 public:
     explicit RepositoriesContainer(ProvidersContainerTest &providers_container) : main_repository(providers_container.get_main_provider()),
@@ -27,7 +29,11 @@ public:
                                                                                   settings_device_boot_repository(providers_container.get_settings_device_boot_provider()),
                                                                                   settings_device_activation_repository(
                                                                                       providers_container.get_settings_remote_activation_provider(),
-                                                                                      providers_container.get_settings_physical_activation_provider())
+                                                                                      providers_container.get_settings_physical_activation_provider()),
+                                                                                  presets_repository(
+                                                                                      providers_container.get_presets_device_boot_provider(),
+                                                                                      providers_container.get_presets_device_activation_provider(),
+                                                                                      providers_container.get_presets_device_voltages_provider())
 
     {
     }
@@ -37,4 +43,5 @@ public:
     SettingsSoundRepositoryImpl &get_settings_sound_repository() { return settings_sound_repository; }
     SettingsDeviceBootRepositoryImpl &get_settings_device_boot_repository() { return settings_device_boot_repository; }
     SettingsDeviceActivationRepositoryImpl &get_settings_device_activation_repository() { return settings_device_activation_repository; }
+    PresetsRepositoryImpl &get_presets_repository() { return presets_repository; }
 };

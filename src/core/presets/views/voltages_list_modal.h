@@ -1,15 +1,15 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/presets/view/presets_selector.h>
+#include <core/presets/views/presets_selector.h>
 #include <core/presets/data_transfer_objects/voltage_list.h>
 
-class PresetsVoltagesModal : public PresetsSelector
+class VoltagesListModal : public PresetsSelector
 {
 private:
     Display &display;
 
 public:
-    explicit PresetsVoltagesModal(Display &_display) : PresetsSelector(_display), display(_display) {}
+    explicit VoltagesListModal(Display &_display) : PresetsSelector(_display), display(_display) {}
 
     void show(const VoltageList &data, int devices_selector = 0, int option_selector = 0, int value_selector = 0)
     {

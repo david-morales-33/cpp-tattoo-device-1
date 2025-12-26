@@ -1,16 +1,16 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/presets/view/presets_selector.h>
+#include <core/presets/views/presets_selector.h>
 #include <core/presets/data_transfer_objects/boot_selector.h>
 
-class PresetsDeviceBootModal : public PresetsSelector
+class DeviceBootModal : public PresetsSelector
 {
 
 private:
     Display &display;
 
 public:
-    explicit PresetsDeviceBootModal(Display &_display) : PresetsSelector(_display), display(_display) {};
+    explicit DeviceBootModal(Display &_display) : PresetsSelector(_display), display(_display) {};
 
     void show(const BootSelector &boot_selector, int device_selector = 0, int option_selector = 0)
     {

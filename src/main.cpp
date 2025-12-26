@@ -6,7 +6,6 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/controllers_container.h>
 #include <infrastructure/shared/conteiners/app.h>
-#include <core/presets/view/presets_device_activation_modal.h>
 #include <core/presets/data_transfer_objects/activation_selector.h>
 
 static Display display;
@@ -27,6 +26,5 @@ void setup()
 }
 void loop()
 {
-
-    // app.run();
+    app.run();
 }

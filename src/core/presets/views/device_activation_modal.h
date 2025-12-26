@@ -1,17 +1,17 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/presets/view/presets_selector.h>
+#include <core/presets/views/presets_selector.h>
 #include <core/presets/interfaces/device_activation.h>
 #include <core/presets/data_transfer_objects/activation_selector.h>
 
-class PresetsDeviceActivationModal : public PresetsSelector
+class DeviceActivationModal : public PresetsSelector
 {
 
 private:
     Display &display;
 
 public:
-    explicit PresetsDeviceActivationModal(Display &_display) : PresetsSelector(_display), display(_display) {};
+    explicit DeviceActivationModal(Display &_display) : PresetsSelector(_display), display(_display) {};
 
     void show(const ActivationSelector &activation_selector, int device_selector = 0, int option_selector = 0)
     {

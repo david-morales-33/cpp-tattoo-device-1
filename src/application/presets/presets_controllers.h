@@ -22,12 +22,28 @@ private:
     PresetsSelectors selectors;
 
 public:
+    explicit PresetsController(
+        IInput &_input,
+        IMenuControllerVoid &_devices_menu,
+        IMenuControllerParams<int> &_options_menu,
+        IPopupController<PresetsSelectors> &_modal_values,
+        IPopupController<PresetsSelectors> &_modal_voltage_selector,
+        IPopupController<PresetsSelectors> &_modal_boot_selector,
+        IPopupController<PresetsSelectors> &_modal_activation_selector) : input(_input),
+                                                                          devices_menu(_devices_menu),
+                                                                          options_menu(_options_menu),
+                                                                          modal_values(_modal_values),
+                                                                          modal_voltage_selector(_modal_voltage_selector),
+                                                                          modal_boot_selector(_modal_boot_selector),
+                                                                          modal_activation_selector(_modal_activation_selector)
+    {
+    }
     void execute()
     {
         if (devices_menu.getState() == InterfaceState::VISIBLE)
         {
-            // if (input.isPressed(BACK))
-            //     resolveBack(0);
+            if (input.isPressed(BACK))
+                resolveBack(0);
             if (input.isPressed(UP))
                 devices_menu.previous();
             if (input.isPressed(DOWN))
@@ -137,6 +153,7 @@ private:
         }
         else if (option == 2)
         {
+            selectors.voltage_selector = modal_values.getSelector();
             modal_voltage_selector.load(selectors);
             modal_values.hide();
             modal_voltage_selector.show();
@@ -156,6 +173,7 @@ private:
         else if (option == 5)
         {
             modal_voltage_selector.enter();
+            modal_values.load(selectors);
             modal_voltage_selector.hide();
             modal_values.show();
         }

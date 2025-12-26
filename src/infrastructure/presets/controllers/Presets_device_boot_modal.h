@@ -2,22 +2,22 @@
 #include <core/shared/interfaces/popup_controller.h>
 #include <infrastructure/display.h>
 #include <core/presets/data_transfer_objects/selectors.h>
-#include <core/presets/view/presets_device_boot_modal.h>
+#include <core/presets/views/device_boot_modal.h>
 #include <core/presets/interfaces/presets_repository.h>
 #include <core/presets/data_transfer_objects/device_boot_presets.h>
 
-class DeviceBootModal : public IPopupController<PresetsSelectors>
+class PresetsDeviceBootModal : public IPopupController<PresetsSelectors>
 {
 private:
     Display &display;
     IPresetsRepository &repository;
-    PresetsDeviceBootModal view;
+    DeviceBootModal view;
     InterfaceState state = InterfaceState::HIDDEN;
     PresetsSelectors selectors;
     BootSelector boot_selector;
 
 public:
-    explicit DeviceBootModal(
+    explicit PresetsDeviceBootModal(
         Display &_display,
         IPresetsRepository &_repository) : display(_display),
                                            repository(_repository),

@@ -5,15 +5,16 @@
 #include <application/remote_devices/remote_devices_controller.h>
 #include <application/properties/properties_controller.h>
 #include <application/settings/settings_controller.h>
+#include <application/presets/presets_controllers.h>
 
 class ControllersContainer
 {
 private:
     MainMenuController main_controller;
     RemoteDevicesController remote_devices_controller;
-    // ConfigureDevicesController configuration_controller;
     PropertiesController properties_controller;
     SettingsController settings_controller;
+    PresetsController presets_controller;
 
 public:
     explicit ControllersContainer(InputsContainer &inputs, UIContainer &ui) : main_controller(
@@ -24,11 +25,6 @@ public:
                                                                                   ui.get_remote_devices_menu(),
                                                                                   ui.get_remote_devices_connected_modal(),
                                                                                   ui.get_remote_devices_disconnected_modal()),
-                                                                              /*configuration_controller(
-                                                                                  inputs.get_input_buttons(),
-                                                                                  ui.get_devices_configuration_menu(),
-                                                                                  ui.get_values_configuration_menu(),
-                                                                                  ui.get_configuration_modal()),*/
                                                                               properties_controller(
                                                                                   inputs.get_input_buttons(),
                                                                                   ui.get_properties_menu()),
@@ -40,14 +36,21 @@ public:
                                                                                   ui.get_date_modal(),
                                                                                   ui.get_reset_modal(),
                                                                                   ui.get_physical_activation_modal(),
-                                                                                  ui.get_remote_activation_modal(),
-                                                                                  ui.get_device_boot_modal())
+                                                                                  ui.get_remote_activation_modal()),
+                                                                              presets_controller(
+                                                                                  inputs.get_input_buttons(),
+                                                                                  ui.get_presets_menu(),
+                                                                                  ui.get_presets_option_selector(),
+                                                                                  ui.get_presets_voltages_list_modal(),
+                                                                                  ui.get_presets_voltage_selector_modal(),
+                                                                                  ui.get_presets_device_boot_modal(),
+                                                                                  ui.get_presets_device_activation_modal())
     {
     }
 
     MainMenuController &get_main_controller() { return main_controller; }
     RemoteDevicesController &get_remote_devices_controller() { return remote_devices_controller; }
-    // ConfigureDevicesController &get_configuration_controller() { return configuration_controller; }
     PropertiesController &get_properties_controller() { return properties_controller; }
     SettingsController &get_settings_controller() { return settings_controller; }
+    PresetsController &get_presets_controller() { return presets_controller; }
 };

@@ -23,7 +23,7 @@ public:
 
         else if (option == 1 && resolve_state_controller(option))
         {
-            // controllers.get_configuration_controller().execute();
+            controllers.get_presets_controller().execute();
             end_process(option);
         }
 
@@ -60,8 +60,8 @@ private:
         if (option == 0)
             controllers.get_remote_devices_controller().show();
 
-        // else if (option == 1)
-        //     controllers.get_configuration_controller().show();
+        else if (option == 1)
+            controllers.get_presets_controller().show();
 
         else if (option == 2)
             controllers.get_properties_controller().show();
@@ -78,7 +78,7 @@ private:
             return controllers.get_remote_devices_controller().getState() == InterfaceState::VISIBLE;
             break;
         case 1:
-            return false;
+            return controllers.get_presets_controller().getState() == InterfaceState::VISIBLE;
             break;
         case 2:
             return controllers.get_properties_controller().getState() == InterfaceState::VISIBLE;

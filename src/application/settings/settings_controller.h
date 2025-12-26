@@ -22,7 +22,6 @@ private:
 
     IPopupController<SettingsSelectors> &pedal_dev_f_modal;
     IPopupController<SettingsSelectors> &pedal_dev_r_modal;
-    IPopupController<SettingsSelectors> &device_boot_modal;
 
     Selector selector;
     InterfaceState state = InterfaceState::HIDDEN;
@@ -37,8 +36,7 @@ public:
         IPopupController<SettingsSelectors> &_date_modal,
         IPopupController<SettingsSelectors> &_reset_modal,
         IPopupController<SettingsSelectors> &_pedal_dev_f_modal,
-        IPopupController<SettingsSelectors> &_pedal_dev_r_modal,
-        IPopupController<SettingsSelectors> &_device_boot_modal) : input(_input),
+        IPopupController<SettingsSelectors> &_pedal_dev_r_modal) : input(_input),
                                                                    menu(_menu),
                                                                    sound_modal(_sound_modal),
                                                                    clock_modal(_clock_modal),
@@ -46,7 +44,6 @@ public:
                                                                    reset_modal(_reset_modal),
                                                                    pedal_dev_f_modal(_pedal_dev_f_modal),
                                                                    pedal_dev_r_modal(_pedal_dev_r_modal),
-                                                                   device_boot_modal(_device_boot_modal),
                                                                    selector(2) {}
 
     void execute()
@@ -153,18 +150,7 @@ public:
                 pedal_dev_r_modal.right();
             pedal_dev_r_modal.render();
         }
-        else if (device_boot_modal.getState() == InterfaceState::VISIBLE && menu.getSelector() == 2 && selector.getSelector() == 1)
-        {
-            if (input.isPressed(BACK))
-                resolveBack(selector.getSelector(), menu.getSelector());
-            if (input.isPressed(ENTER))
-                resolveSave(selector.getSelector(), menu.getSelector());
-            if (input.isPressed(LEFT))
-                device_boot_modal.left();
-            if (input.isPressed(RIGHT))
-                device_boot_modal.right();
-            device_boot_modal.render();
-        }
+
     }
     void show() { state = InterfaceState::VISIBLE; }
     void hide() { state = InterfaceState::HIDDEN; }
@@ -195,8 +181,7 @@ private:
             enterExecuter(pedal_dev_f_modal);
         else if (side_selector == 1 && value_selector == 1)
             enterExecuter(pedal_dev_r_modal);
-        else if (side_selector == 1 && value_selector == 2)
-            enterExecuter(device_boot_modal);
+
     }
 
     void resolveBack(int side_selector, int value_selector)
@@ -213,8 +198,7 @@ private:
             backExecuter(pedal_dev_f_modal);
         else if (side_selector == 1 && value_selector == 1)
             backExecuter(pedal_dev_r_modal);
-        else if (side_selector == 1 && value_selector == 2)
-            backExecuter(device_boot_modal);
+
     }
     void resolveSave(int side_selector, int value_selector)
     {
@@ -230,8 +214,7 @@ private:
             saveExecuter(pedal_dev_f_modal);
         else if (side_selector == 1 && value_selector == 1)
             saveExecuter(pedal_dev_r_modal);
-        else if (side_selector == 1 && value_selector == 2)
-            saveExecuter(device_boot_modal);
+
     }
     void enterExecuter(IPopupController<SettingsSelectors> &interface)
     {

@@ -1,15 +1,15 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/presets/view/presets_selector.h>
+#include <core/presets/views/presets_selector.h>
 #include <core/presets/data_transfer_objects/selectors.h>
 
-class PresetsVoltageSelectorModal : public PresetsSelector
+class VoltageSelectorModal : public PresetsSelector
 {
 private:
     Display &display;
 
 public:
-    explicit PresetsVoltageSelectorModal(Display &_display) : PresetsSelector(_display), display(_display) {};
+    explicit VoltageSelectorModal(Display &_display) : PresetsSelector(_display), display(_display) {};
     void show(float value, int devices_selector = 0, int options_selector = 0, int unid_selector = 0)
     {
         PresetsSelector::show(devices_selector, options_selector);

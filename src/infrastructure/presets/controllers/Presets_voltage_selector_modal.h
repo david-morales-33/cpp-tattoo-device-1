@@ -1,6 +1,6 @@
 #pragma once
 #include <infrastructure/display.h>
-#include <core/presets/view/presets_voltage_selector_modal.h>
+#include <core/presets/views/voltage_selector_modal.h>
 #include <core/shared/data_transfer_objects/selector.h>
 #include <core/shared/interfaces/popup_controller.h>
 #include <core/presets/interfaces/presets_repository.h>
@@ -8,19 +8,19 @@
 #include <core/presets/data_transfer_objects/voltage_selector.h>
 #include <core/presets/data_transfer_objects/voltage_list.h>
 
-class VoltageSelectorModal : public IPopupController<PresetsSelectors>
+class PresetsVoltageSelectorModal : public IPopupController<PresetsSelectors>
 {
 private:
     Display &display;
     IPresetsRepository &repository;
-    PresetsVoltageSelectorModal view;
+    VoltageSelectorModal view;
 
     VoltageSelector voltage_selector;
     PresetsSelectors selectors;
     InterfaceState state = InterfaceState::HIDDEN;
 
 public:
-    explicit VoltageSelectorModal(
+    explicit PresetsVoltageSelectorModal(
         Display &_display,
         IPresetsRepository &_repository) : display(_display), repository(_repository), view(_display) {}
 
