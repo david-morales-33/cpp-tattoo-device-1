@@ -1,6 +1,7 @@
 #pragma once
 #include <core/main/views/main_view.h>
 #include <infrastructure/display.h>
+#include <core/performance/data_transfer_objects/performance.h>
 
 class PerformanceView
 {
@@ -29,7 +30,7 @@ public:
         display.drawBox(96, 45, 3, 15);
     }
 
-    void show()
+    void show(const Performance &performance)
     {
         display.setColor(1);
         display.setFontMode(1);

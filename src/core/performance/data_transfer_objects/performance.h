@@ -12,6 +12,7 @@ private:
     PerformanceTime device_time{TimeType::DEVICE};
 
 public:
+    Performance() {}
     Performance(
         PerformanceRecord _record,
         PerformanceTime _start_time,
@@ -24,8 +25,8 @@ public:
                                         device_time(_device_time) {}
 
     PerformanceRecord getRecord() { return record; }
-    PerformanceTime getStartTime() { return start_time; }
-    PerformanceTime getEndTime() { return end_time; }
-    PerformanceTime getTotalTime() { return total_time; }
-    PerformanceTime getDeviceTime() { return device_time; }
+    PerformanceTime &getStartTime() { return start_time; }
+    PerformanceTime &getEndTime() { return end_time; }
+    PerformanceTime &getTotalTime() { return total_time; }
+    PerformanceTime &getDeviceTime() { return device_time; }
 };

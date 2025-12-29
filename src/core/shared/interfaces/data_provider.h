@@ -5,9 +5,9 @@ class IDataProvider
 {
 public:
     virtual void persist(const D &data) = 0;
-    virtual void load() = 0;
-    virtual void reset() = 0;
-    virtual void remove(const D &data) = 0;
+    virtual void load() {}
+    virtual void reset() {}
+    virtual void remove(const D &data) {}
     virtual const R &get() const = 0;
     virtual ~IDataProvider() {};
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include <infrastructure/display.h>
 #include <core/performance/views/performance_view.h>
+#include <core/performance/interfaces/performance_respository.h>
 #include <core/shared/data_transfer_objects/selector.h>
 #include <core/shared/interfaces/menu_controller_void.h>
 
@@ -8,21 +9,26 @@ class PerformanceMenu : public IMenuControllerVoid
 {
 private:
     Display &display;
+    IPerformanceRepository &repository;
     PerformanceView view;
     Selector selector;
+    Performance performance;
+
     InterfaceState state = InterfaceState::VISIBLE;
 
 public:
-    explicit PerformanceMenu(Display &disp) : display(disp), view(disp) {}
+    explicit PerformanceMenu(Display &_display, IPerformanceRepository &_repository) : display(_display),
+                                                                                       view(_display), repository(_repository) {}
 
     void render() override
     {
         display.firstPage();
         do
         {
-            view.show();
+            view.show(performance);
         } while (display.nextPage());
     }
+    void load() override { performance = repository.find(); }
     void previous() override { selector.decrement(); }
     void next() override { selector.increment(); }
     void show() override { state = InterfaceState::VISIBLE; }
