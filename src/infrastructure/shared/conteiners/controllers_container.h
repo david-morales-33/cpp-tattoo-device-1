@@ -3,7 +3,6 @@
 #include <infrastructure/shared/conteiners/inputs_conteiner.h>
 #include <application/main/main_menu_controller.h>
 #include <application/remote_devices/remote_devices_controller.h>
-#include <application/properties/properties_controller.h>
 #include <application/settings/settings_controller.h>
 #include <application/presets/presets_controllers.h>
 
@@ -12,7 +11,6 @@ class ControllersContainer
 private:
     MainMenuController main_controller;
     RemoteDevicesController remote_devices_controller;
-    PropertiesController properties_controller;
     SettingsController settings_controller;
     PresetsController presets_controller;
 
@@ -25,9 +23,6 @@ public:
                                                                                   ui.get_remote_devices_menu(),
                                                                                   ui.get_remote_devices_connected_modal(),
                                                                                   ui.get_remote_devices_disconnected_modal()),
-                                                                              properties_controller(
-                                                                                  inputs.get_input_buttons(),
-                                                                                  ui.get_properties_menu()),
                                                                               settings_controller(
                                                                                   inputs.get_input_buttons(),
                                                                                   ui.get_settings_menu(),
@@ -50,7 +45,6 @@ public:
 
     MainMenuController &get_main_controller() { return main_controller; }
     RemoteDevicesController &get_remote_devices_controller() { return remote_devices_controller; }
-    PropertiesController &get_properties_controller() { return properties_controller; }
     SettingsController &get_settings_controller() { return settings_controller; }
     PresetsController &get_presets_controller() { return presets_controller; }
 };

@@ -2,7 +2,6 @@
 #include <infrastructure/display.h>
 #include <infrastructure/shared/conteiners/repositories_container.h>
 #include <infrastructure/main/controllers/main_menu.h>
-#include <infrastructure/properties/controllers/properties_menu.h>
 #include <infrastructure/remote_devices/controllers/remote_devices_menu.h>
 #include <infrastructure/remote_devices/controllers/remote_devices_connected_modal.h>
 #include <infrastructure/remote_devices/controllers/remote_devices_disconnected_modal.h>
@@ -25,8 +24,6 @@ class UIContainer
 private:
     MainMenu main_menu;
 
-    PropertiesMenu properties_menu;
-
     RemoteDevicesMenu remote_devices_menu;
     RemoteDevicesConnectedDeviceModal remote_devices_connected_modal;
     RemoteDevicesDisconnectedDevicesModal remote_devices_disconnected_modal;
@@ -48,7 +45,6 @@ private:
 
 public:
     explicit UIContainer(Display &display, RepositoriesContainer &repositories) : main_menu(display, repositories.get_main_repository()),
-                                                                                  properties_menu(display, repositories.get_properties_repository()),
                                                                                   remote_devices_menu(display, repositories.get_remote_devices_repository()),
                                                                                   remote_devices_connected_modal(display, repositories.get_remote_devices_repository()),
                                                                                   remote_devices_disconnected_modal(display, repositories.get_remote_devices_repository()),
@@ -69,7 +65,6 @@ public:
     }
 
     MainMenu &get_main_menu() { return main_menu; }
-    PropertiesMenu &get_properties_menu() { return properties_menu; }
     RemoteDevicesMenu &get_remote_devices_menu() { return remote_devices_menu; }
     RemoteDevicesConnectedDeviceModal &get_remote_devices_connected_modal() { return remote_devices_connected_modal; }
     RemoteDevicesDisconnectedDevicesModal &get_remote_devices_disconnected_modal() { return remote_devices_disconnected_modal; }

@@ -1,12 +1,9 @@
 #pragma once
 #include <string>
-#include <core/properties/interfaces/time_type.h>
 
-class Time
+class Timer
 {
 private:
-    const char *time;
-    TimeType type;
     int secs = 0;
 
     int hours() const { return secs / 3600; }
@@ -14,16 +11,8 @@ private:
     int seconds() const { return secs % 60; }
 
 public:
-    Time() {}
-    Time(int _secs)
-        : secs(_secs), type(TimeType::NONE) {}
-
-    Time(const char *_time, TimeType _type)
-        : time(_time), secs(0), type(_type) {}
-
-    const char *getTime() const { return time; }
-    const TimeType getType() const { return type; }
-    void setTime(const char *_time) { time = _time; }
+    Timer(int _secs)
+        : secs(_secs) {}
 
     const std::string getFormat() const
     {
@@ -33,13 +22,13 @@ public:
         return h + m + s;
     }
 
-    Time sum(Time _time) const { return Time(secs + _time.secs); }
+    Timer sum(Timer _time) const { return Timer(secs + _time.secs); }
 
-    Time subt(Time _time) const
+    Timer subt(Timer _time) const
     {
         int result = secs - _time.secs;
         if (result < 0)
             result = 0;
-        return Time(result);
+        return Timer(result);
     }
 };

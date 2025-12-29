@@ -29,8 +29,6 @@ public:
 
         else if (option == 2 && resolve_state_controller(option))
         {
-            controllers.get_properties_controller().execute();
-            end_process(option);
         }
 
         else if (option == 3 && false)
@@ -63,9 +61,6 @@ private:
         else if (option == 1)
             controllers.get_presets_controller().show();
 
-        else if (option == 2)
-            controllers.get_properties_controller().show();
-
         else if (option == 5)
             controllers.get_settings_controller().show();
     }
@@ -81,7 +76,7 @@ private:
             return controllers.get_presets_controller().getState() == InterfaceState::VISIBLE;
             break;
         case 2:
-            return controllers.get_properties_controller().getState() == InterfaceState::VISIBLE;
+            return false;
             break;
         case 3:
             return false;
