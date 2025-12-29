@@ -24,9 +24,15 @@ public:
                                         total_time(_total_time),
                                         device_time(_device_time) {}
 
-    PerformanceRecord getRecord() { return record; }
-    PerformanceTime &getStartTime() { return start_time; }
-    PerformanceTime &getEndTime() { return end_time; }
-    PerformanceTime &getTotalTime() { return total_time; }
-    PerformanceTime &getDeviceTime() { return device_time; }
+    void setRecord(PerformanceRecord _record) { record = _record; }
+    void setStartTime(const char *time) { start_time.setTime(time); }
+    void setEndTime(const char *time) { end_time.setTime(time); }
+    void setTotalTime(const char *time) { total_time.setTime(time); }
+    void setDeviceTime(const char *time) { device_time.setTime(time); }
+
+    const PerformanceRecord getRecord() const { return record; }
+    const PerformanceTime &getStartTime() const { return start_time; }
+    const PerformanceTime &getEndTime() const { return end_time; }
+    const PerformanceTime &getTotalTime() const { return total_time; }
+    const PerformanceTime &getDeviceTime() const { return device_time; }
 };

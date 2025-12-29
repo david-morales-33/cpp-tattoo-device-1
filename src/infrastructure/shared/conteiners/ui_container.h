@@ -18,6 +18,8 @@
 #include <infrastructure/presets/controllers/Presets_device_boot_modal.h>
 #include <infrastructure/presets/controllers/Presets_voltages_list_modal.h>
 #include <infrastructure/presets/controllers/Presets_voltage_selector_modal.h>
+#include <infrastructure/performance/controllers/performance_menu.h>
+#include <infrastructure/performance/controllers/records_modal.h>
 
 class UIContainer
 {
@@ -43,6 +45,9 @@ private:
     PresetsVoltagesListModal presets_voltages_list_modal;
     PresetsVoltageSelectorModal presets_voltage_selector_modal;
 
+    PerformanceMenu performance_menu;
+    RecordsModal records_modal;
+
 public:
     explicit UIContainer(Display &display, RepositoriesContainer &repositories) : main_menu(display, repositories.get_main_repository()),
                                                                                   remote_devices_menu(display, repositories.get_remote_devices_repository()),
@@ -60,7 +65,9 @@ public:
                                                                                   presets_device_boot_modal(display, repositories.get_presets_repository()),
                                                                                   presets_device_activation_modal(display, repositories.get_presets_repository()),
                                                                                   presets_voltages_list_modal(display, repositories.get_presets_repository()),
-                                                                                  presets_voltage_selector_modal(display, repositories.get_presets_repository())
+                                                                                  presets_voltage_selector_modal(display, repositories.get_presets_repository()),
+                                                                                  performance_menu(display, repositories.get_performance_repository()),
+                                                                                  records_modal(display, repositories.get_performance_repository())
     {
     }
 
@@ -81,4 +88,6 @@ public:
     PresetsDeviceActivationModal &get_presets_device_activation_modal() { return presets_device_activation_modal; }
     PresetsVoltagesListModal &get_presets_voltages_list_modal() { return presets_voltages_list_modal; }
     PresetsVoltageSelectorModal &get_presets_voltage_selector_modal() { return presets_voltage_selector_modal; }
+    PerformanceMenu &get_performance_menu() { return performance_menu; }
+    RecordsModal &get_records_modal() { return records_modal; }
 };

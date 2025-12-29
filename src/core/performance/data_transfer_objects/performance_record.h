@@ -4,15 +4,16 @@ class PerformanceRecord
 {
 private:
     const char *date;
-    int total_time = 0;
-    int device_time = 0;
+    float total_time = 0.0f;
+    float device_time = 0.0f;
+    float performance = 0.0f;
 
 public:
     PerformanceRecord() {}
-    PerformanceRecord(const char *_date, int _total_time, int _device_time) : date(_date), total_time(_total_time), device_time(_device_time) {}
-    float getPerformance() { return ((device_time / total_time) * 100); }
+    PerformanceRecord(const char *_date, float _total_time, float _device_time) : date(_date), total_time(_total_time), device_time(_device_time), performance((_device_time / _total_time) * 100) {}
+    const float getPerformance() const { return performance; }
 
     const char *getDate() { return date; }
-    int getTotalTime() { return total_time; }
-    int getDeviceTime() { return device_time; }
+    const float getTotalTime() const { return total_time; }
+    const float getDeviceTime() const { return device_time; }
 };

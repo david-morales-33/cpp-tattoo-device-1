@@ -14,6 +14,6 @@ public:
                                        IDataProvider<PerformanceRecord, std::vector<PerformanceRecord>> &_record_list_provider) : performance_provider(_performance_provider),
                                                                                                                                   record_list_provider(_record_list_provider) {}
     void save(Performance performance) { performance_provider.get(); }
-    const Performance &find() const { performance_provider.get(); }
+    const Performance &find() const { return performance_provider.get(); }
     const std::vector<PerformanceRecord> &searchRecords() const { return record_list_provider.get(); }
 };

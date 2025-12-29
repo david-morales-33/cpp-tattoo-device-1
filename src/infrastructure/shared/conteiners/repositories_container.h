@@ -6,6 +6,7 @@
 #include <infrastructure/settings/persistence/settings_device_boot_repository_impl.h>
 #include <infrastructure/settings/persistence/settings_device_activation_repository_impl.h>
 #include <infrastructure/presets/persitence/presets_repository_impl.h>
+#include <infrastructure/performance/persistence/performance_repository_impl.h>
 
 class RepositoriesContainer
 {
@@ -16,6 +17,7 @@ private:
     SettingsDeviceBootRepositoryImpl settings_device_boot_repository;
     SettingsDeviceActivationRepositoryImpl settings_device_activation_repository;
     PresetsRepositoryImpl presets_repository;
+    PerformanceRepositoryImpl performance_repository;
 
 public:
     explicit RepositoriesContainer(ProvidersContainerTest &providers_container) : main_repository(providers_container.get_main_provider()),
@@ -28,7 +30,10 @@ public:
                                                                                   presets_repository(
                                                                                       providers_container.get_presets_device_boot_provider(),
                                                                                       providers_container.get_presets_device_activation_provider(),
-                                                                                      providers_container.get_presets_device_voltages_provider())
+                                                                                      providers_container.get_presets_device_voltages_provider()),
+                                                                                  performance_repository(
+                                                                                      providers_container.get_performance_perovider(),
+                                                                                      providers_container.get_record_provider())
 
     {
     }
@@ -38,4 +43,5 @@ public:
     SettingsDeviceBootRepositoryImpl &get_settings_device_boot_repository() { return settings_device_boot_repository; }
     SettingsDeviceActivationRepositoryImpl &get_settings_device_activation_repository() { return settings_device_activation_repository; }
     PresetsRepositoryImpl &get_presets_repository() { return presets_repository; }
+    PerformanceRepositoryImpl &get_performance_repository() { return performance_repository; }
 };

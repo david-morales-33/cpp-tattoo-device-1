@@ -5,6 +5,7 @@
 #include <application/remote_devices/remote_devices_controller.h>
 #include <application/settings/settings_controller.h>
 #include <application/presets/presets_controllers.h>
+#include <application/performance/performance_controller.h>
 
 class ControllersContainer
 {
@@ -13,6 +14,7 @@ private:
     RemoteDevicesController remote_devices_controller;
     SettingsController settings_controller;
     PresetsController presets_controller;
+    PerformanceController performance_controller;
 
 public:
     explicit ControllersContainer(InputsContainer &inputs, UIContainer &ui) : main_controller(
@@ -39,7 +41,11 @@ public:
                                                                                   ui.get_presets_voltages_list_modal(),
                                                                                   ui.get_presets_voltage_selector_modal(),
                                                                                   ui.get_presets_device_boot_modal(),
-                                                                                  ui.get_presets_device_activation_modal())
+                                                                                  ui.get_presets_device_activation_modal()),
+                                                                              performance_controller(
+                                                                                  inputs.get_input_buttons(),
+                                                                                  ui.get_performance_menu(),
+                                                                                  ui.get_records_modal())
     {
     }
 
@@ -47,4 +53,5 @@ public:
     RemoteDevicesController &get_remote_devices_controller() { return remote_devices_controller; }
     SettingsController &get_settings_controller() { return settings_controller; }
     PresetsController &get_presets_controller() { return presets_controller; }
+    PerformanceController &get_performance_controller() { return performance_controller; }
 };

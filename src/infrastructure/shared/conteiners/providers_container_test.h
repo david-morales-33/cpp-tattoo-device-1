@@ -8,6 +8,8 @@
 #include <infrastructure/presets/persitence/presets_activation_test_provider.h>
 #include <infrastructure/presets/persitence/presets_boot_test_provider.h>
 #include <infrastructure/presets/persitence/presets_voltages_test_provider.h>
+#include <infrastructure/performance/persistence/performance_test_provider.h>
+#include <infrastructure/performance/persistence/records_test_provider.h>
 
 class ProvidersContainerTest
 {
@@ -21,6 +23,8 @@ private:
     PresetsBootTestProvider presets_device_boot_provider;
     PresetsActivationTestProvider presets_device_activation_provider;
     PresetsVoltageTestProvider presets_device_voltages_provider;
+    PerformanceTestProvider performance_perovider;
+    RecordTestProvider record_provider;
 
 public:
     MainDateTimeProviderTest &get_main_provider() { return main_provider; }
@@ -32,4 +36,6 @@ public:
     PresetsBootTestProvider &get_presets_device_boot_provider() { return presets_device_boot_provider; }
     PresetsActivationTestProvider &get_presets_device_activation_provider() { return presets_device_activation_provider; }
     PresetsVoltageTestProvider &get_presets_device_voltages_provider() { return presets_device_voltages_provider; }
+    PerformanceTestProvider &get_performance_perovider() { return performance_perovider; }
+    RecordTestProvider &get_record_provider() { return record_provider; }
 };

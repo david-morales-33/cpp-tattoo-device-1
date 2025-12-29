@@ -11,6 +11,9 @@ private:
         PerformanceRecord{"30-12-2025-16:14", 1200, 900},
         PerformanceRecord{"31-12-2025-12:14", 958, 745},
         PerformanceRecord{"01-01-2026-10:14", 1423, 1245},
+        PerformanceRecord{"02-01-2026-10:14", 1423, 1045},
+        PerformanceRecord{"02-02-2026-10:14", 1523, 945},
+        PerformanceRecord{"03-10-2026-10:14", 1240, 545},
     };
 
 public:

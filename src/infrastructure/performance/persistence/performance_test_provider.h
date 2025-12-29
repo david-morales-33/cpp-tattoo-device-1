@@ -11,10 +11,10 @@ public:
     void persist(const Performance &_performance) { performance = _performance; }
     void load()
     {
-        performance.getStartTime().setTime("02:21:23");
-        performance.getEndTime().setTime("03:28:00");
-        performance.getTotalTime().setTime("01:07:00");
-        performance.getDeviceTime().setTime("00:52:14");
+        performance.setStartTime("02:21:23");
+        performance.setEndTime("03:28:00");
+        performance.setTotalTime("01:07:00");
+        performance.setDeviceTime("00:52:14");
     }
     const Performance &get() const { return performance; }
 };

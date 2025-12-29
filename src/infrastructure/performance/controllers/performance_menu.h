@@ -13,6 +13,7 @@ private:
     PerformanceView view;
     Selector selector;
     Performance performance;
+    std::vector<PerformanceRecord> records_list;
 
     InterfaceState state = InterfaceState::VISIBLE;
 
@@ -25,10 +26,14 @@ public:
         display.firstPage();
         do
         {
-            view.show(performance);
+            view.show(performance, records_list);
         } while (display.nextPage());
     }
-    void load() override { performance = repository.find(); }
+    void load() override
+    {
+        performance = repository.find();
+        records_list = repository.searchRecords();
+    }
     void previous() override { selector.decrement(); }
     void next() override { selector.increment(); }
     void show() override { state = InterfaceState::VISIBLE; }

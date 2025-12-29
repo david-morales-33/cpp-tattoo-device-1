@@ -5,7 +5,7 @@
 #include <core/performance/interfaces/performance_respository.h>
 #include <core/shared/data_transfer_objects/selector.h>
 
-class RecordsModalModal : public IPopupController<int>
+class RecordsModal : public IPopupController<int>
 {
 private:
     Display &display;
@@ -14,7 +14,7 @@ private:
     Selector selector;
 
 public:
-    explicit RecordsModalModal(
+    explicit RecordsModal(
         Display &_display,
         IPerformanceRepository &_repository) : display(_display),
                                                repository(_repository) {}

@@ -20,6 +20,8 @@ public:
         if (view.getState() == InterfaceState::VISIBLE)
         {
             view.render();
+            if (input.isPressed(BACK))
+                hide();
             if (input.isPressed(ENTER))
                 enterToModal();
         }
