@@ -6,25 +6,24 @@
 #include <application/settings/settings_controller.h>
 #include <application/presets/presets_controllers.h>
 #include <application/performance/performance_controller.h>
+#include <application/operation/operation_controller.h>
+#include <application/shared/controller.h>
 
 class ControllersContainer
 {
 private:
     MainMenuController main_controller;
-    RemoteDevicesController remote_devices_controller;
     SettingsController settings_controller;
     PresetsController presets_controller;
     PerformanceController performance_controller;
+    OperationController operation_controller;
+
+    IController *controllers[4];
 
 public:
     explicit ControllersContainer(InputsContainer &inputs, UIContainer &ui) : main_controller(
                                                                                   inputs.get_input_buttons(),
                                                                                   ui.get_main_menu()),
-                                                                              remote_devices_controller(
-                                                                                  inputs.get_input_buttons(),
-                                                                                  ui.get_remote_devices_menu(),
-                                                                                  ui.get_remote_devices_connected_modal(),
-                                                                                  ui.get_remote_devices_disconnected_modal()),
                                                                               settings_controller(
                                                                                   inputs.get_input_buttons(),
                                                                                   ui.get_settings_menu(),
@@ -47,11 +46,12 @@ public:
                                                                                   ui.get_performance_menu(),
                                                                                   ui.get_records_modal())
     {
+        controllers[0] = &presets_controller;
+        controllers[1] = &operation_controller;
+        controllers[2] = &performance_controller;
+        controllers[3] = &settings_controller;
     }
 
     MainMenuController &get_main_controller() { return main_controller; }
-    RemoteDevicesController &get_remote_devices_controller() { return remote_devices_controller; }
-    SettingsController &get_settings_controller() { return settings_controller; }
-    PresetsController &get_presets_controller() { return presets_controller; }
-    PerformanceController &get_performance_controller() { return performance_controller; }
+    IController *const *get_controllers() const { return controllers; }
 };

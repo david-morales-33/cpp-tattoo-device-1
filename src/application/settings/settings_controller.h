@@ -8,8 +8,9 @@
 #include <core/main/data_transfer_objects/slider.h>
 #include <core/shared/data_transfer_objects/selector.h>
 #include <core/settings/data_transfer_objects/settings_selectors.h>
+#include <application/shared/controller.h>
 
-class SettingsController
+class SettingsController : public IController
 {
 private:
     IInput &input;
@@ -46,7 +47,7 @@ public:
                                                                    pedal_dev_r_modal(_pedal_dev_r_modal),
                                                                    selector(2) {}
 
-    void execute()
+    void execute() override
     {
         if (menu.getState() == InterfaceState::VISIBLE)
         {
@@ -150,11 +151,10 @@ public:
                 pedal_dev_r_modal.right();
             pedal_dev_r_modal.render();
         }
-
     }
-    void show() { state = InterfaceState::VISIBLE; }
-    void hide() { state = InterfaceState::HIDDEN; }
-    InterfaceState getState() { return state; }
+    void show() override { state = InterfaceState::VISIBLE; }
+    void hide() override { state = InterfaceState::HIDDEN; }
+    InterfaceState getState() const override { return state; }
 
 private:
     void right()
@@ -181,7 +181,6 @@ private:
             enterExecuter(pedal_dev_f_modal);
         else if (side_selector == 1 && value_selector == 1)
             enterExecuter(pedal_dev_r_modal);
-
     }
 
     void resolveBack(int side_selector, int value_selector)
@@ -198,7 +197,6 @@ private:
             backExecuter(pedal_dev_f_modal);
         else if (side_selector == 1 && value_selector == 1)
             backExecuter(pedal_dev_r_modal);
-
     }
     void resolveSave(int side_selector, int value_selector)
     {
@@ -214,7 +212,6 @@ private:
             saveExecuter(pedal_dev_f_modal);
         else if (side_selector == 1 && value_selector == 1)
             saveExecuter(pedal_dev_r_modal);
-
     }
     void enterExecuter(IPopupController<SettingsSelectors> &interface)
     {

@@ -5,8 +5,9 @@
 #include <core/shared/interfaces/menu_controller_params.h>
 #include <core/shared/interfaces/popup_controller.h>
 #include <core/presets/data_transfer_objects/selectors.h>
+#include <application/shared/controller.h>
 
-class PresetsController
+class PresetsController : public IController
 {
 private:
     IInput &input;
@@ -38,7 +39,7 @@ public:
                                                                           modal_activation_selector(_modal_activation_selector)
     {
     }
-    void execute()
+    void execute() override
     {
         if (devices_menu.getState() == InterfaceState::VISIBLE)
         {
@@ -117,9 +118,9 @@ public:
             modal_voltage_selector.render();
         }
     }
-    void show() { state = InterfaceState::VISIBLE; }
-    void hide() { state = InterfaceState::HIDDEN; }
-    InterfaceState getState() { return state; }
+    void show() override { state = InterfaceState::VISIBLE; }
+    void hide() override { state = InterfaceState::HIDDEN; }
+    InterfaceState getState() const override { return state; }
 
 private:
     void resolveEnter(int option)

@@ -1,11 +1,10 @@
 #pragma once
-
 #include <infrastructure/shared/interfaces/input.h>
 #include <infrastructure/shared/pins.h>
 #include <core/shared/interfaces/menu_controller_void.h>
-#include <core/shared/interfaces/interface_state.h>
+#include <application/shared/controller.h>
 
-class MainMenuController
+class MainMenuController : public IController
 {
 private:
     IInput &input;
@@ -15,7 +14,7 @@ private:
 public:
     explicit MainMenuController(IInput &_input, IMenuControllerVoid &_menu) : input(_input), menu(_menu) {}
 
-    void execute()
+    void execute() override
     {
         if (input.isPressed(LEFT))
             menu.previous();
@@ -27,8 +26,8 @@ public:
             menu.render();
     }
 
-    void hide() { state = InterfaceState::HIDDEN; }
-    void show() { state = InterfaceState::VISIBLE; }
-    InterfaceState getState() { return state; }
-    int getSelector() { return menu.getSelector(); }
+    void hide() override { state = InterfaceState::HIDDEN; }
+    void show() override { state = InterfaceState::VISIBLE; }
+    InterfaceState getState() const override { return state; }
+    const int getSelector() const { return menu.getSelector(); }
 };

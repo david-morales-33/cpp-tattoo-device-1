@@ -3,11 +3,8 @@
 #include <infrastructure/display.h>
 #include <core/main/data_transfer_objects/slider.h>
 #include <infrastructure/icons_size.h>
-#include <core/main/icons/bluethooth.h>
 #include <core/main/icons/device.h>
-#include <core/main/icons/properties.h>
 #include <core/main/icons/operation.h>
-#include <core/main/icons/reset.h>
 #include <core/main/icons/settings.h>
 #include <core/main/icons/performance.h>
 #include <core/main/data_transfer_objects/date_time_format.h>
@@ -18,19 +15,19 @@ private:
     Display &display; // referencia para no copiar el objeto
 
 public:
-    explicit MainView(Display &disp) : display(disp) {}
+    explicit MainView(Display &_display) : display(_display) {}
 
-    void show(const Slider &slider, const DateTimeFormat &data)
+    void show(const DateTimeFormat &data, int selector = 0)
     {
-        
+
         // --- Dibujo de íconos principales ---
         display.setColor(1);
-        display.drawBitmap(slider.getIconsSlider()[0], 35, WIDTH, HEIGHT, BLUETOOTH_BITS);
-        display.drawBitmap(slider.getIconsSlider()[1], 35, WIDTH, HEIGHT, DEVICE_BITS);
-        display.drawBitmap(slider.getIconsSlider()[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
-        display.drawBitmap(slider.getIconsSlider()[3], 35, WIDTH, HEIGHT, OPERATION_BITS);
-        display.drawBitmap(slider.getIconsSlider()[4], 35, WIDTH, HEIGHT, PERFORMANCE_BITS);
-        display.drawBitmap(slider.getIconsSlider()[5], 35, WIDTH, HEIGHT, SETTINGS_BITS);
+        // display.drawBitmap(slider.getIconsSlider()[0], 35, WIDTH, HEIGHT, BLUETOOTH_BITS);
+        display.drawBitmap(3, 35, WIDTH, HEIGHT, DEVICE_BITS);
+        display.drawBitmap(35, 35, WIDTH, HEIGHT, OPERATION_BITS);
+        display.drawBitmap(67, 35, WIDTH, HEIGHT, PERFORMANCE_BITS);
+        display.drawBitmap(99, 35, WIDTH, HEIGHT, SETTINGS_BITS);
+        // display.drawBitmap(slider.getIconsSlider()[2], 35, WIDTH, HEIGHT, PROPERTIES_BITS);
 
         // --- Recuadros principales ---
         display.drawFrame(2, 34, 28, 28, 3);
@@ -60,6 +57,6 @@ public:
         display.drawGlyph(68, 18, u8g2_font_open_iconic_all_2x_t, 0x0103);
 
         // --- Selector de íconos ---
-        display.highlightBox((slider.getIconsSelector() * 32), 32, 32, 32);
+        display.highlightBox((selector * 32), 32, 32, 32);
     }
 };

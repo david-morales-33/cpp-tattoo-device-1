@@ -3,8 +3,9 @@
 #include <infrastructure/display.h>
 #include <core/shared/interfaces/popup_controller.h>
 #include <core/shared/interfaces/menu_controller_void.h>
+#include <application/shared/controller.h>
 
-class PerformanceController
+class PerformanceController : public IController
 {
 private:
     IInput &input;
@@ -15,7 +16,7 @@ private:
 public:
     explicit PerformanceController(IInput &_input, IMenuControllerVoid &_view, IPopupController<int> &_records_modal) : input(_input), view(_view), records_modal(_records_modal) {}
 
-    void execute()
+    void execute() override
     {
         if (view.getState() == InterfaceState::VISIBLE)
         {
@@ -32,9 +33,9 @@ public:
                 backToView();
         }
     }
-    void show() { state = InterfaceState::VISIBLE; }
-    void hide() { state = InterfaceState::HIDDEN; }
-    InterfaceState getState() { return state; }
+    void show() override { state = InterfaceState::VISIBLE; }
+    void hide() override { state = InterfaceState::HIDDEN; }
+    InterfaceState getState() const override { return state; }
 
 private:
     void enterToModal()

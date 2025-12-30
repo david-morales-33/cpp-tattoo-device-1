@@ -18,8 +18,7 @@ private:
     IMainDateTimeRepository &repository;
     MainView main_view;
     LetterView modal_view;
-    ModalData modal_data[6] = {{"DEVICES", 45}, {"SET", 55}, {"PROPERTIES", 38}, {"OPERATION", 38}, {"PERFORMANCE", 33}, {"SETTINGS", 42}};
-    Slider slider;
+    ModalData modal_data[4] = {{"SET", 55}, {"OPERATION", 38}, {"PERFORMANCE", 33}, {"SETTINGS", 42}};
     Selector selector;
     InterfaceState state = InterfaceState::VISIBLE;
     Counter counter;
@@ -29,7 +28,7 @@ public:
                                                                              main_view(disp),
                                                                              modal_view(disp),
                                                                              repository(_repository),
-                                                                             selector(6, 1),
+                                                                             selector(4),
                                                                              counter(15, 15) {}
 
     void render() override
@@ -47,14 +46,12 @@ public:
     {
         counter.reset();
         selector.decrement();
-        slider.left();
     }
 
     void next() override
     {
         counter.reset();
         selector.increment();
-        slider.right();
     }
 
     void hide() override { state = InterfaceState::HIDDEN; }
@@ -70,7 +67,7 @@ private:
         display.firstPage();
         do
         {
-            modal_view.show(slider, modal_data[selector.getSelector()], repository.get());
+            modal_view.show(modal_data[selector.getSelector()], repository.get(), selector.getSelector());
         } while (display.nextPage());
     }
 
@@ -79,7 +76,7 @@ private:
         display.firstPage();
         do
         {
-            main_view.show(slider, repository.get());
+            main_view.show(repository.get(), selector.getSelector());
         } while (display.nextPage());
     }
 };

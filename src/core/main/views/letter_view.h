@@ -27,9 +27,9 @@ private:
 public:
     LetterView(Display &disp) : MainView(disp), display(disp) {}
 
-    void show(const Slider &slider, const ModalData &data, const DateTimeFormat &date_time)
+    void show(const ModalData &data, const DateTimeFormat &date_time, int selector = 0)
     {
-        MainView::show(slider, date_time);
+        MainView::show(date_time, selector);
         setLetter(data.getPosition(), data.getText());
     }
 };

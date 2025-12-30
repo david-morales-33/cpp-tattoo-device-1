@@ -18,16 +18,12 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
-PerformanceView view(display);
-Performance performance;
-std::vector<PerformanceRecord> records_list;
 void setup()
 {
     display.begin();
     inputs.begin();
     providers.get_performance_perovider().load();
     ui.get_performance_menu().load();
-
 }
 void loop()
 {
