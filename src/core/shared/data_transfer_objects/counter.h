@@ -14,6 +14,7 @@ public:
         if (counter < limit)
             counter++;
     }
+    int getCount() { return counter; }
     void reset() { counter = 0; }
     bool isFinished() { return counter == limit; }
 };

@@ -184,7 +184,7 @@ private:
 
 public:
     explicit OperationView(Display &disp) : display(disp) {}
-    void show(int device_iter, int value_iter, int pedal_iter, int window_iter, int type_device_iter)
+    void show(int device_iter = 0, int value_iter = 0, int pedal_iter = 0, int window_iter = 0, int type_device_iter = 0)
     {
         display.clear();
 
