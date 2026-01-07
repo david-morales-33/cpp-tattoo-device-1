@@ -13,6 +13,7 @@ public:
     virtual void hide() = 0;
     virtual void show() = 0;
     virtual void load(const D &data) {};
+    virtual void listener() {};
     virtual void render() = 0;
     virtual InterfaceState getState() const = 0;
     virtual const int &getSelector() const = 0;

@@ -10,6 +10,7 @@
 #include <infrastructure/presets/persitence/presets_voltages_test_provider.h>
 #include <infrastructure/performance/persistence/performance_test_provider.h>
 #include <infrastructure/performance/persistence/records_test_provider.h>
+#include <infrastructure/presets/persitence/presets_remote_devices_test_provider.h>
 
 class ProvidersContainerTest
 {
@@ -23,6 +24,7 @@ private:
     PresetsBootTestProvider presets_device_boot_provider;
     PresetsActivationTestProvider presets_device_activation_provider;
     PresetsVoltageTestProvider presets_device_voltages_provider;
+    PresetsRemoteDevicesTestProvider presets_remote_devices_provider;
     PerformanceTestProvider performance_perovider;
     RecordTestProvider record_provider;
 
@@ -36,6 +38,7 @@ public:
     PresetsBootTestProvider &get_presets_device_boot_provider() { return presets_device_boot_provider; }
     PresetsActivationTestProvider &get_presets_device_activation_provider() { return presets_device_activation_provider; }
     PresetsVoltageTestProvider &get_presets_device_voltages_provider() { return presets_device_voltages_provider; }
+    PresetsRemoteDevicesTestProvider &get_presets_remote_devices_provider() { return presets_remote_devices_provider; }
     PerformanceTestProvider &get_performance_perovider() { return performance_perovider; }
     RecordTestProvider &get_record_provider() { return record_provider; }
 };

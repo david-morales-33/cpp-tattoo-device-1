@@ -1,5 +1,6 @@
 #pragma once
 #include <infrastructure/shared/conteiners/providers_container_test.h>
+#include <infrastructure/shared/conteiners/listeners_container_test.h>
 #include <infrastructure/main/persistence/main_date_time_repository_impl.h>
 #include <infrastructure/remote_devices/persistence/remote_devices_repository_test_impl.h>
 #include <infrastructure/settings/persistence/settings_sound_repository_impl.h>
@@ -20,20 +21,22 @@ private:
     PerformanceRepositoryImpl performance_repository;
 
 public:
-    explicit RepositoriesContainer(ProvidersContainerTest &providers_container) : main_repository(providers_container.get_main_provider()),
-                                                                                  remote_devices_repository(providers_container.get_remote_devices_provider()),
-                                                                                  settings_sound_repository(providers_container.get_settings_sound_provider()),
-                                                                                  settings_device_boot_repository(providers_container.get_settings_device_boot_provider()),
-                                                                                  settings_device_activation_repository(
-                                                                                      providers_container.get_settings_remote_activation_provider(),
-                                                                                      providers_container.get_settings_physical_activation_provider()),
-                                                                                  presets_repository(
-                                                                                      providers_container.get_presets_device_boot_provider(),
-                                                                                      providers_container.get_presets_device_activation_provider(),
-                                                                                      providers_container.get_presets_device_voltages_provider()),
-                                                                                  performance_repository(
-                                                                                      providers_container.get_performance_perovider(),
-                                                                                      providers_container.get_record_provider())
+    explicit RepositoriesContainer(ProvidersContainerTest &providers_container, ListenerContainerTest &listeners_container) : main_repository(providers_container.get_main_provider()),
+                                                                                                                              remote_devices_repository(providers_container.get_remote_devices_provider()),
+                                                                                                                              settings_sound_repository(providers_container.get_settings_sound_provider()),
+                                                                                                                              settings_device_boot_repository(providers_container.get_settings_device_boot_provider()),
+                                                                                                                              settings_device_activation_repository(
+                                                                                                                                  providers_container.get_settings_remote_activation_provider(),
+                                                                                                                                  providers_container.get_settings_physical_activation_provider()),
+                                                                                                                              presets_repository(
+                                                                                                                                  providers_container.get_presets_device_boot_provider(),
+                                                                                                                                  providers_container.get_presets_device_activation_provider(),
+                                                                                                                                  providers_container.get_presets_device_voltages_provider(),
+                                                                                                                                  providers_container.get_presets_remote_devices_provider(),
+                                                                                                                                  listeners_container.get_remote_devices_listener()),
+                                                                                                                              performance_repository(
+                                                                                                                                  providers_container.get_performance_perovider(),
+                                                                                                                                  providers_container.get_record_provider())
 
     {
     }
