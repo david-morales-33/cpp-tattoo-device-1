@@ -18,6 +18,7 @@ private:
     IPopupController<PresetsSelectors> &modal_voltage_selector;
     IPopupController<PresetsSelectors> &modal_boot_selector;
     IPopupController<PresetsSelectors> &modal_activation_selector;
+    IPopupController<PresetsSelectors> &modal_remote_devices;
 
     InterfaceState state = InterfaceState::HIDDEN;
     PresetsSelectors selectors;
@@ -30,13 +31,15 @@ public:
         IPopupController<PresetsSelectors> &_modal_values,
         IPopupController<PresetsSelectors> &_modal_voltage_selector,
         IPopupController<PresetsSelectors> &_modal_boot_selector,
-        IPopupController<PresetsSelectors> &_modal_activation_selector) : input(_input),
-                                                                          devices_menu(_devices_menu),
-                                                                          options_menu(_options_menu),
-                                                                          modal_values(_modal_values),
-                                                                          modal_voltage_selector(_modal_voltage_selector),
-                                                                          modal_boot_selector(_modal_boot_selector),
-                                                                          modal_activation_selector(_modal_activation_selector)
+        IPopupController<PresetsSelectors> &_modal_activation_selector,
+        IPopupController<PresetsSelectors> &_modal_remote_devices) : input(_input),
+                                                                     devices_menu(_devices_menu),
+                                                                     options_menu(_options_menu),
+                                                                     modal_values(_modal_values),
+                                                                     modal_voltage_selector(_modal_voltage_selector),
+                                                                     modal_boot_selector(_modal_boot_selector),
+                                                                     modal_activation_selector(_modal_activation_selector),
+                                                                     modal_remote_devices(_modal_remote_devices)
     {
     }
     void execute() override
@@ -101,6 +104,16 @@ public:
                 resolveEnter(4);
             modal_activation_selector.render();
         }
+        else if (modal_remote_devices.getState() == InterfaceState::VISIBLE && options_menu.getSelector() == 3)
+        {
+            if (input.isPressed(UP))
+                modal_remote_devices.up();
+            if (input.isPressed(DOWN))
+                modal_remote_devices.down();
+            if (input.isPressed(BACK))
+                resolveBack(2);
+            modal_remote_devices.render();
+        }
         else if (modal_voltage_selector.getState() == InterfaceState::VISIBLE)
         {
             if (input.isPressed(LEFT))
@@ -151,6 +164,12 @@ private:
             modal_activation_selector.load(selectors);
             options_menu.hide();
             modal_activation_selector.show();
+        }
+        else if (option == 1 && options_menu.getSelector() == 3)
+        {
+            modal_remote_devices.load(selectors);
+            options_menu.hide();
+            modal_remote_devices.show();
         }
         else if (option == 2)
         {

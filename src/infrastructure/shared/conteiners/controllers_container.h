@@ -40,7 +40,8 @@ public:
                                                                                   ui.get_presets_voltages_list_modal(),
                                                                                   ui.get_presets_voltage_selector_modal(),
                                                                                   ui.get_presets_device_boot_modal(),
-                                                                                  ui.get_presets_device_activation_modal()),
+                                                                                  ui.get_presets_device_activation_modal(),
+                                                                                  ui.get_presets_remote_devices_modal()),
                                                                               performance_controller(
                                                                                   inputs.get_input_buttons(),
                                                                                   ui.get_performance_menu(),

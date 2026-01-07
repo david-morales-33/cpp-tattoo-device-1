@@ -14,7 +14,7 @@ private:
     int devices_selector = 0;
 
 public:
-    explicit PresetsOptionsSelectorMenu(Display &_display) : view(_display), display(_display), options_selector(3) {}
+    explicit PresetsOptionsSelectorMenu(Display &_display) : view(_display), display(_display), options_selector(4) {}
     void render() override
     {
         display.firstPage();

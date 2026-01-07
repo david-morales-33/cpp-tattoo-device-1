@@ -21,6 +21,7 @@ static ControllersContainer controllers(inputs, ui);
 
 static App app(controllers);
 
+Counter counter{30};
 
 PresetsRemoteDevicesModal modal(display, repositories.get_presets_repository());
 
@@ -33,5 +34,5 @@ void setup()
 }
 void loop()
 {
-
+    app.run();
 }

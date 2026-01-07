@@ -56,8 +56,7 @@ private:
         display.drawText(69, 11, "VOLTAGES");
         display.drawText(69, 27, "DEVICE BOOT");
         display.drawText(69, 43, "ACTIVATION");
-        // display.drawText(69, 43, "VAL3");
-        // display.drawText(69, 59, "VAL4");
+        display.drawText(69, 59, "REMOTE DEV");
     }
 
 public:

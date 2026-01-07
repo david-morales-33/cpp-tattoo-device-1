@@ -18,6 +18,7 @@
 #include <infrastructure/presets/controllers/Presets_device_boot_modal.h>
 #include <infrastructure/presets/controllers/Presets_voltages_list_modal.h>
 #include <infrastructure/presets/controllers/Presets_voltage_selector_modal.h>
+#include <infrastructure/presets/controllers/presets_remote_devices_modal.h>
 #include <infrastructure/performance/controllers/performance_menu.h>
 #include <infrastructure/performance/controllers/records_modal.h>
 
@@ -44,6 +45,7 @@ private:
     PresetsDeviceActivationModal presets_device_activation_modal;
     PresetsVoltagesListModal presets_voltages_list_modal;
     PresetsVoltageSelectorModal presets_voltage_selector_modal;
+    PresetsRemoteDevicesModal presets_remote_devices_modal;
 
     PerformanceMenu performance_menu;
     RecordsModal records_modal;
@@ -66,6 +68,7 @@ public:
                                                                                   presets_device_activation_modal(display, repositories.get_presets_repository()),
                                                                                   presets_voltages_list_modal(display, repositories.get_presets_repository()),
                                                                                   presets_voltage_selector_modal(display, repositories.get_presets_repository()),
+                                                                                  presets_remote_devices_modal(display, repositories.get_presets_repository()),
                                                                                   performance_menu(display, repositories.get_performance_repository()),
                                                                                   records_modal(display, repositories.get_performance_repository())
     {
@@ -88,6 +91,8 @@ public:
     PresetsDeviceActivationModal &get_presets_device_activation_modal() { return presets_device_activation_modal; }
     PresetsVoltagesListModal &get_presets_voltages_list_modal() { return presets_voltages_list_modal; }
     PresetsVoltageSelectorModal &get_presets_voltage_selector_modal() { return presets_voltage_selector_modal; }
+    PresetsRemoteDevicesModal &get_presets_remote_devices_modal() { return presets_remote_devices_modal; }
+
     PerformanceMenu &get_performance_menu() { return performance_menu; }
     RecordsModal &get_records_modal() { return records_modal; }
 };
