@@ -2,9 +2,6 @@
 #include <infrastructure/display.h>
 #include <infrastructure/shared/conteiners/repositories_container.h>
 #include <infrastructure/main/controllers/main_menu.h>
-#include <infrastructure/remote_devices/controllers/remote_devices_menu.h>
-#include <infrastructure/remote_devices/controllers/remote_devices_connected_modal.h>
-#include <infrastructure/remote_devices/controllers/remote_devices_disconnected_modal.h>
 #include <infrastructure/settings/controllers/settings_menu.h>
 #include <infrastructure/settings/controllers/settings_sound_modal.h>
 #include <infrastructure/settings/controllers/settings_clock_modal.h>
@@ -27,10 +24,6 @@ class UIContainer
 private:
     MainMenu main_menu;
 
-    RemoteDevicesMenu remote_devices_menu;
-    RemoteDevicesConnectedDeviceModal remote_devices_connected_modal;
-    RemoteDevicesDisconnectedDevicesModal remote_devices_disconnected_modal;
-
     SettingsMenu settings_menu;
     SettingsSoundModal sound_modal;
     SettingsClockModal clock_modal;
@@ -52,9 +45,6 @@ private:
 
 public:
     explicit UIContainer(Display &display, RepositoriesContainer &repositories) : main_menu(display, repositories.get_main_repository()),
-                                                                                  remote_devices_menu(display, repositories.get_remote_devices_repository()),
-                                                                                  remote_devices_connected_modal(display, repositories.get_remote_devices_repository()),
-                                                                                  remote_devices_disconnected_modal(display, repositories.get_remote_devices_repository()),
                                                                                   settings_menu(display),
                                                                                   sound_modal(display, repositories.get_settings_sound_repository()),
                                                                                   clock_modal(display, repositories.get_main_repository()),
@@ -75,9 +65,6 @@ public:
     }
 
     MainMenu &get_main_menu() { return main_menu; }
-    RemoteDevicesMenu &get_remote_devices_menu() { return remote_devices_menu; }
-    RemoteDevicesConnectedDeviceModal &get_remote_devices_connected_modal() { return remote_devices_connected_modal; }
-    RemoteDevicesDisconnectedDevicesModal &get_remote_devices_disconnected_modal() { return remote_devices_disconnected_modal; }
     SettingsMenu &get_settings_menu() { return settings_menu; }
     SettingsSoundModal &get_sound_modal() { return sound_modal; }
     SettingsClockModal &get_clock_modal() { return clock_modal; }

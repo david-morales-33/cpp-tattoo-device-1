@@ -2,7 +2,6 @@
 #include <infrastructure/shared/conteiners/ui_container.h>
 #include <infrastructure/shared/conteiners/inputs_conteiner.h>
 #include <application/main/main_menu_controller.h>
-#include <application/remote_devices/remote_devices_controller.h>
 #include <application/settings/settings_controller.h>
 #include <application/presets/presets_controllers.h>
 #include <application/performance/performance_controller.h>
