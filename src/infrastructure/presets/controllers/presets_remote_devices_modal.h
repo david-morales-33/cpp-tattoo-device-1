@@ -18,7 +18,7 @@ private:
     PresetsSelectors selectors;
     Selector selector;
     std::vector<RemoteDevice> remote_devices_list;
-    std::vector<RemoteDeviceMachine> remote_device_connected;
+    std::vector<RemoteDevice> remote_device_connected;
 
 public:
     explicit PresetsRemoteDevicesModal(
@@ -53,9 +53,7 @@ public:
     void load(const PresetsSelectors &_selectors) override
     {
         selectors = _selectors;
-        _selectors.devices_selector == 0 ? //
-            remote_device_connected = repository.getConnectedDevices().getLineDevice()
-                                         : remote_device_connected = repository.getConnectedDevices().getShadeDevice();
+        remote_device_connected = repository.getPresets().getPresetsList()[_selectors.devices_selector]->getRemoteDevices();
     }
 
     void up() override { selector.decrement(); }

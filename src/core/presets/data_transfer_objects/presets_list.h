@@ -2,6 +2,7 @@
 #include <core/presets/data_transfer_objects/presets.h>
 #include <core/presets/data_transfer_objects/device_boot_presets.h>
 #include <core/presets/data_transfer_objects/device_activation_presets.h>
+#include <core/presets/data_transfer_objects/remote_device_machine.h>
 
 class PresetsList
 {
@@ -30,6 +31,15 @@ public:
     bool updateDeviceActivation(DeviceActivationPresets device_activation)
     {
         return presets_list[getIndex(device_activation.getType())]->setActivation(device_activation.getActivation());
+    }
+    bool connectRemoteDevice(RemoteDeviceMachine remote_device)
+    {
+        RemoteDevice new_remote_device{remote_device.getName(), remote_device.getMacAddressId()};
+        return presets_list[getIndex(remote_device.getDeviceType())]->connectRemoteDevice(new_remote_device);
+    }
+    bool disconnectRemoteDevice(RemoteDeviceMachine remote_device)
+    {
+        return presets_list[getIndex(remote_device.getDeviceType())]->disconnectRemoteDevice();
     }
 
 private:

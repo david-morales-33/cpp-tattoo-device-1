@@ -16,7 +16,7 @@ public:
 
     void show(
         const std::vector<RemoteDevice> &remote_device_list,
-        const std::vector<RemoteDeviceMachine> &remote_device_connected,
+        const std::vector<RemoteDevice> &remote_device_connected,
         int device_selector = 0,
         int option_selector = 0,
         int remote_devices_selector = 0)
