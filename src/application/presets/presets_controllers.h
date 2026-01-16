@@ -112,6 +112,8 @@ public:
                 modal_remote_devices.down();
             if (input.isPressed(BACK))
                 resolveBack(2);
+            if (input.isPressed(ENTER))
+                resolveEnter(5);
             modal_remote_devices.render();
         }
         else if (modal_voltage_selector.getState() == InterfaceState::VISIBLE)
@@ -127,7 +129,7 @@ public:
             if (input.isPressed(BACK))
                 resolveBack(3);
             if (input.isPressed(ENTER))
-                resolveEnter(5);
+                resolveEnter(6);
             modal_voltage_selector.render();
         }
     }
@@ -191,6 +193,12 @@ private:
             options_menu.show();
         }
         else if (option == 5)
+        {
+            modal_remote_devices.enter();// hide encapsulado en enter
+            modal_remote_devices.load(selectors);
+            options_menu.show();
+        }
+        else if (option == 6)
         {
             modal_voltage_selector.enter();
             modal_values.load(selectors);

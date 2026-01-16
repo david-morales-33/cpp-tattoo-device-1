@@ -42,7 +42,30 @@ public:
         } while (display.nextPage());
     }
 
-    void enter() override {}
+    void enter() override
+    {
+        hide();
+        if (remote_device_connected.empty() && !remote_devices_list.empty())
+        {
+            RemoteDeviceMachine remote_device{
+                remote_devices_list[selector.getSelector()].getName(),
+                remote_devices_list[selector.getSelector()].getMacAddressId(),
+                static_cast<MachineType>(selectors.devices_selector)
+
+            };
+            repository.connect(remote_device);
+        }
+        else if (!remote_device_connected.empty())
+        {
+            RemoteDeviceMachine remote_device{
+                remote_device_connected[0].getName(),
+                remote_device_connected[0].getMacAddressId(),
+                static_cast<MachineType>(selectors.devices_selector)
+
+            };
+            repository.disconnect(remote_device);
+        }
+    }
 
     void listener() override
     {
